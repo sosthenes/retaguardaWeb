@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xml:lang="pt-BR" lang="pt-BR"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+<h:outputStylesheet name="estilo.css" library="css" />
+</h:head> 
+<body> 
+
+<ui:composition template="/commonLayout.xhtml">
+ <ui:define name="content">
+ 
+	 <h:form id="principal">
+
+				<p:panel header="GASTO DO CAIXA" id="painel_cadastro" style="margin-bottom:10px;" >
+					<p:messages id="messages" autoUpdate="true" closable="true" />
+					
+					<p:panelGrid columns="2" style="width:100%" >
+						
+						<p:outputLabel value=" Caixas :" />
+						<p:selectOneMenu value="#{gastoCaixaMB.idCaixa}" id="idCaixa">
+							<f:selectItem itemLabel="Selecione um Caixa" />
+							<f:selectItems value="#{gastoCaixaMB.listaCaixa}" var="prod" itemLabel="#{prod.descricao}" itemValue="#{prod.id}" />
+						</p:selectOneMenu>
+
+
+						<p:outputLabel value=" Tipo de gasto :" />
+						<p:selectOneMenu value="#{gastoCaixaMB.idTipoGasto}" id="idTipoGasto">
+							<f:selectItem itemLabel="Selecione um Gasto" />
+							<f:selectItems value="#{gastoCaixaMB.listaTipoGasto}" var="prod" itemLabel="#{prod.descricao}" itemValue="#{prod.id}" />
+						</p:selectOneMenu>
+						
+						<p:outputLabel value=" Funcionário :" />
+						<p:selectOneMenu value="#{gastoCaixaMB.idFuncionario}" id="idFuncionario">
+							<f:selectItem itemLabel="Selecione um Funcionário" />
+							<f:selectItems value="#{gastoCaixaMB.funcionarioes}" var="prod" itemLabel="#{prod.nome}" itemValue="#{prod.id}" />
+						</p:selectOneMenu>
+					</p:panelGrid>
+					
+
+					<p:panelGrid columns="2"  style="width:100%">
+						<p:outputLabel value=" Valor :" />
+						<p:outputLabel value=" Data :" />
+						<h:inputText value="#{gastoCaixaMB.gastoCaixa.valor}" />
+						
+<p:calendar value="#{gastoCaixaMB.data}" id="data" 	required="true" pattern="dd/MM/yyyy"	requiredMessage="Campo Data do Fechamento é obrigatório." />
+					</p:panelGrid>
+					<f:facet name="footer">
+                        <p:commandButton action="#{gastoCaixaMB.adiciona()}" value=" Salvar " update=":principal:painel_cadastro listaGasto" />
+                    </f:facet>
+
+
+				</p:panel>
+						
+
+
+	 <p:dataTable value ="#{gastoCaixaMB.listaGastoCaixa}" var ="gasto" id="listaGasto">
+	 	<f:facet name="header">  
+            Lista de Gasto
+        </f:facet> 
+        
+		 <p:column headerText="Data do Gasto">
+		 	<p:outputLabel value ="#{gasto.myFormattedDate}" />
+		 </p:column>
+		 <p:column headerText="Caixa">
+		 	<p:outputLabel value ="#{gasto.caixa.descricao}"/>
+		 </p:column>
+		 <p:column headerText="Descrição do gasto">
+		 	<p:outputLabel value ="#{gasto.tipoGasto.descricao}"/>
+		 </p:column>
+		 <p:column headerText="Funcionário">
+		   <p:outputLabel value ="#{gasto.funcionario.nome}"/>
+		 </p:column>
+		 <p:column headerText="Valor">
+		   <p:outputLabel value ="#{gasto.valor}"/>
+		 </p:column>
+		 <p:column headerText="Autorizado por">
+		   <p:outputLabel value ="#{gasto.usuario.nome}"/>
+		 </p:column>
+		 <p:column headerText="Ação" >
+					 <p:commandLink title="Excluir" update=":formExcluir:Excluir"
+                                oncomplete="confirmation.show()" immediate="true" value="excluir" >                                                    
+                                <f:setPropertyActionListener target="#{gastoCaixaMB.gastoCaixa}"  value="#{gasto}"  />
+                        </p:commandLink>
+					
+				</p:column>
+	<p:columnGroup type="footer">  
+            <p:row>  
+                <p:column colspan="4" footerText="Total:"     style="text-align:right"  />  
+  
+                <p:column footerText="#{gastoCaixaMB.totalGasto}" />  
+   <p:column    />  
+   <p:column    />  
+            </p:row>  
+        </p:columnGroup>  
+	 </p:dataTable>
+
+	 </h:form>
+	 
+	 
+			<h:form id="formExcluir">
+                
+            <p:dialog header="Excluir" widgetVar="confirmation" modal="true" id="Excluir">      
+                                  
+                <h:outputText value="Você gostaria de Deletar o(a) #{gastoCaixaMB.gastoCaixa.tipoGasto.descricao}?" />                
+                
+                <br/>
+                <br/>
+                
+                <p:commandButton id="confirm" value="Sim"
+                        actionListener="#{gastoCaixaMB.remover()}"
+                        update=":principal:listaGasto"
+                        oncomplete="confirmation.hide()" />
+                
+                 &nbsp;
+                 
+                <p:commandButton id="decline" value="Não"
+                        onclick="confirmation.hide()" type="button" />
+                        
+            </p:dialog>
+                
+        </h:form>     
+	 
+	 
+	 
+</ui:define>
+ 
+  
+    	</ui:composition>
+
+
+</body> 
+</html>

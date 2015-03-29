@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xml:lang="pt-BR" lang="pt-BR"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<h:outputStylesheet name="estilo.css" library="css" />
+</h:head>
+<body>
+
+	<ui:composition template="/commonLayout.xhtml">
+		<ui:define name="content">
+			<h:form id="principal">
+
+				<p:panel header="Cadastro de Contas" id="painel_cadastro" style="margin-bottom:10px;">
+					<p:messages id="messages" autoUpdate="true" closable="true" />
+
+	<p:panelGrid columns="4">
+	
+						<p:outputLabel value=" Descrição :" />
+						<p:outputLabel value=" Adicionar" />
+						<p:outputLabel value=" Tipo de conta :" />
+						<p:outputLabel value=" Periodicidade :" />
+						
+						
+						<p:selectOneMenu value="#{pagamentoMB.idDescricaoConta}" id="idDescricaoConta">
+							<f:selectItem itemLabel="Selecione uma descrição" />
+							<f:selectItems value="#{pagamentoMB.listaDescricaoPagamento}" var="prod" itemLabel="#{prod.descricaogasto}" itemValue="#{prod.id}" />
+						</p:selectOneMenu>
+						<p:commandLink title="Adicionar" update=":formAdicionar:Adicionar" oncomplete="confirmation.show()" immediate="true" value="Adicionar" />
+						
+						<p:selectOneMenu value="#{pagamentoMB.idTipoPagamento}" id="idCaixa">
+							<f:selectItem itemLabel="Selecione um tipo de conta" />
+							<f:selectItems value="#{pagamentoMB.listaTipoConta}" var="prod" itemLabel="#{prod.descricao}" itemValue="#{prod.id}" />
+						</p:selectOneMenu>
+						
+						<p:selectOneMenu value="#{pagamentoMB.idPeriodicidade}" id="idPeriodicidade">
+							<f:selectItem itemLabel="Selecione uma periodicidade" />
+							<f:selectItems value="#{pagamentoMB.listaPeriodicidade}" var="prod" itemLabel="#{prod.descricao}" itemValue="#{prod.id}" />
+						</p:selectOneMenu>
+						
+						
+						
+	
+	</p:panelGrid>
+	<p:panelGrid columns="4">
+						<p:outputLabel value=" Valor :" />
+						<p:outputLabel value=" Qtd. parcelas :" />
+						<p:outputLabel value=" Data do primeiro pagamento:" />
+						<p:outputLabel value=" Dia do pagamento :" />
+						
+						
+						<p:inputText value="#{pagamentoMB.conta.valor}" />
+						<p:inputText value="#{pagamentoMB.conta.quantidade}" />
+						<p:calendar value="#{pagamentoMB.dataInicio}" id="dataInicio" 	required="true" pattern="dd/MM/yyyy"	requiredMessage="Campo Data de início é obrigatório." />
+						<p:inputText value="#{pagamentoMB.conta.diaPgto}" />
+						
+</p:panelGrid>
+
+					<p:panelGrid columns="1">
+					</p:panelGrid>
+					
+					<p:panelGrid columns="4"  style="width:100%">
+						<p:outputLabel value=" Pago :" />
+						<h:selectOneRadio value="#{pagamentoMB.pago}" >
+							<f:selectItem  itemValue="#{true}" itemLabel="Sim"/>
+							<f:selectItem  itemLabel="Não" itemValue="#{false}"/>
+						</h:selectOneRadio>
+						
+						<p:outputLabel value="Forma de pagamento :" />
+						<p:selectOneMenu value="#{pagamentoMB.formapagamento}" id="idFormapagamento" required="true" requiredMessage="Campo obrigatório">
+							<f:selectItem itemLabel="Selecione uma foma de pagamento" />
+							<f:selectItems value="#{pagamentoMB.listaFormapagamento}" var="prod" itemLabel="#{prod.descricao}" itemValue="#{prod}" />
+						</p:selectOneMenu>
+						<h:message for="idFormapagamento"/>
+					</p:panelGrid>
+					
+					
+				<f:facet name="footer">
+                      <p:commandButton action="#{pagamentoMB.adiciona()}" value=" Salvar " update="lista principal"/>
+                  </f:facet>
+				</p:panel>
+
+
+				<p:dataTable value="#{pagamentoMB.listaConta}" var="vale" id="lista">
+					<f:facet name="header">  
+			            Lista de Gasto
+			        </f:facet>
+
+					<p:column headerText="Data da compra">
+						<p:outputLabel value="#{vale.myFormattedDate}" />
+					</p:column>
+					<p:column headerText="Descrição">
+						<p:outputLabel value="#{vale.descricaoPagamento.descricaogasto}" />
+					</p:column>
+					<p:column headerText="Valor">
+						<p:outputLabel value="#{vale.valor}" />
+					</p:column>
+					<p:column headerText="Qtd. parcelas">
+						<p:outputLabel value="#{vale.quantidade}" />
+					</p:column>
+					<p:columnGroup type="footer">
+						<p:row>
+							<p:column colspan="4" footerText="Total:"
+								style="text-align:right" />
+						</p:row>
+					</p:columnGroup>
+				</p:dataTable>
+
+
+
+			</h:form>
+			
+			
+			
+		<h:form id="formAdicionar">
+				<p:dialog header="Adicionar" widgetVar="confirmation" modal="true" id="Adicionar">
+					<p:inputText value="#{pagamentoMB.descricaoPagamento.descricaogasto}" required="true" />
+					<br />
+					<br />
+					<p:commandButton id="confirm" value="Incluir" actionListener="#{pagamentoMB.adicionaDescriocaoGasto()}" update=":principal:idDescricaoConta" oncomplete="confirmation.hide()" />
+					<p:commandButton id="decline" value="Cancelar" onclick="confirmation.hide()" type="button" />
+				</p:dialog>
+			</h:form>		
+			
+			
+			
+			
+			
+			
+			
+			
+		</ui:define>
+
+
+	</ui:composition>
+
+
+</body>
+</html>

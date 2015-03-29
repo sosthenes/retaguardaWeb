@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xml:lang="pt-BR" lang="pt-BR"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+<h:outputStylesheet name="estilo.css" library="css" />
+
+
+</h:head> 
+<body> 
+
+<ui:composition template="/commonLayout.xhtml">
+ <ui:define name="content">
+ 
+    <script type="text/javascript" src="/retaguardaWeb/jquery/jquery.maskedinput-1.1.4.pack.js"/>
+    
+    
+ 
+	 <h:form id="principal">
+
+				<p:panel header="Emitir Advertências" id="painel_cadastro" style="margin-bottom:10px;" >
+					
+					<p:messages id="messages" autoUpdate="true" closable="true" />
+					
+					
+					
+					
+					<p:panelGrid columns="1" style="width:100%" >
+						
+						<p:outputLabel value=" Funcionários :" />
+
+						<p:selectOneMenu value="#{advertenciaMB.idFuncionario}" id="idFuncionario">
+							<f:selectItem itemLabel="Selecione um Funcionário" />
+							<f:selectItems value="#{advertenciaMB.funcionarioes}" var="prod" itemLabel="#{prod.nome}" itemValue="#{prod.id}" />
+						</p:selectOneMenu>
+						
+						
+					</p:panelGrid>
+					
+					<p:panelGrid columns="1" style="width:100%" >
+						
+						<p:outputLabel value=" Motivos :" />
+
+						<p:selectManyCheckbox value="#{advertenciaMB.idMotivo}" id="idMotivo"  layout="pageDirection">
+							<f:selectItems value="#{advertenciaMB.listaMotivo}" var="prod" itemLabel="#{prod.descricao}" itemValue="#{prod.id}" />
+						</p:selectManyCheckbox>
+					</p:panelGrid>
+
+					<p:panelGrid columns="2" style="width:100%">
+
+						<p:outputLabel value=" Descrição dos Fatos :" />
+
+						<p:outputLabel value=" Data dos Fatos :" />
+
+						<p:inputTextarea value="#{advertenciaMB.adv.descricao}" cols="50"
+							rows="4" />
+
+						<p:calendar value="#{advertenciaMB.dataFato}" id="data"
+							required="true" pattern="dd/MM/yyyy"
+							requiredMessage="Campo Data do Fechamento é obrigatório." />
+					
+					</p:panelGrid>
+
+
+					<f:facet name="footer">
+                        <p:commandButton action="#{advertenciaMB.adiciona()}" value=" Salvar " update=":principal:painel_cadastro listaAdver"  rendered="#{advertenciaMB.funcionario.id==null}" />
+                        <p:commandButton action="#{advertenciaMB.editar()}" value=" Alterar " id="alterar" update=":principal:painel_cadastro listaAdver" rendered="#{advertenciaMB.funcionario.id!=null}" />
+                    </f:facet>
+
+
+				</p:panel>
+						
+
+
+				<h1>Lista de Advertências</h1>
+	 <p:dataTable value ="#{advertenciaMB.listaAdv}" var ="adv" id="listaAdver">
+		 <p:column headerText="Data da advertência">
+		   <p:outputLabel value ="#{adv.myFormattedDate}"/>
+		 </p:column>
+		 <p:column headerText="Funcionário advertido">
+		 	<p:outputLabel value ="#{adv.funcionario.nome}"/>
+		 </p:column>
+		 <p:column headerText="Ação" >
+					 <h:commandLink title="Imprimir Advertência" value="Imprimir Advertência" action="#{advertenciaMB.gerarAdv()}" immediate="true">                                                    
+                                <f:setPropertyActionListener target="#{advertenciaMB.adv}"  value="#{adv}"  />
+                        </h:commandLink>
+                         - 
+					 <p:commandLink title="Excluir" update=":formExcluir:Excluir"  oncomplete="confirmation.show()" immediate="true" value="excluir" >                                                    
+                                <f:setPropertyActionListener target="#{advertenciaMB.adv}"  value="#{adv}"  />
+                        </p:commandLink>
+					
+				</p:column>
+	 </p:dataTable>
+
+	 </h:form>
+	 
+	 
+			<h:form id="formExcluir">
+                
+            <p:dialog header="Excluir" widgetVar="confirmation" modal="true" id="Excluir">      
+                                  
+                <h:outputText value="Você gostaria de Deletar o #{advertenciaMB.adv.funcionario.nome}?" />                
+                
+                <br/>
+                <br/>
+                
+                <p:commandButton id="confirm" value="Sim"
+                        actionListener="#{advertenciaMB.remover()}"
+                        update=":principal:listaAdver"
+                        oncomplete="confirmation.hide()" />
+                
+                 &nbsp;
+                 
+                <p:commandButton id="decline" value="Não"
+                        onclick="confirmation.hide()" type="button" />
+                        
+            </p:dialog>
+                
+        </h:form>     
+	 
+	 
+	 
+</ui:define>
+ 
+  
+    	</ui:composition>
+
+
+</body> 
+</html>

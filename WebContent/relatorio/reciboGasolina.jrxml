@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorio" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="221"/>
+	<parameter name="tituloRelatorio" class="java.lang.String"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[".\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="periodo" class="java.lang.String"/>
+	<field name="nomeFuncionario" class="java.lang.String"/>
+	<field name="cargo" class="java.lang.String"/>
+	<field name="departamento" class="java.lang.String"/>
+	<field name="cpf" class="java.lang.String"/>
+	<field name="valorPago" class="java.lang.String"/>
+	<field name="valorPagoExtenso" class="java.lang.String"/>
+	<field name="dataPagamento" class="java.lang.String"/>
+	<field name="kmInicial" class="java.lang.String"/>
+	<field name="kmFinal" class="java.lang.String"/>
+	<field name="valorGasolina" class="java.lang.String"/>
+	<field name="kmTotal" class="java.lang.String"/>
+	<field name="moto" class="java.lang.String"/>
+	<field name="placa" class="java.lang.String"/>
+	<field name="renavam" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="39">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="0" y="0" width="549" height="32"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="13" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{tituloRelatorio}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="389">
+			<rectangle>
+				<reportElement x="2" y="4" width="550" height="137"/>
+			</rectangle>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="387" y="6" width="163" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="9" y="25" width="119" height="20"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nome do Empregado: ]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="131" y="25" width="419" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{nomeFuncionario}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="9" y="65" width="119" height="20"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Departamento: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="9" y="85" width="119" height="20"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cargo: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="9" y="45" width="119" height="20"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CPF: ]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="2" y="152" width="548" height="233"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="15" y="263" width="123" height="20"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data do reembolso: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="15" y="359" width="203" height="20"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Valor reembolsado do combustível: ]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="218" y="359" width="323" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA["R$ "+$F{valorPago}+" ("+$F{valorPagoExtenso}+")"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="9" y="211" width="540" height="44"/>
+				<textElement/>
+				<textFieldExpression><![CDATA["PARÁGRAFO TERCEIRO. O locatário compromete-se a reembolsar o combustível utilizado na motocicleta, motoneta, ciclomotor ou triciclo, inclusive no trecho entre a residência do locador e o local onde a mesma deverá ser utilizada, na proporção de 1 (um) litro de combustível comum para cada 35 (trinta e cinco) kilômetros rodados."]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="138" y="263" width="238" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{dataPagamento}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="8" y="161" width="541" height="20"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Ajuda de Custo conforme ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="9" y="181" width="540" height="20"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[CONVENÇÃO COLETIVA DE TRABALHO]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="131" y="45" width="419" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{cpf}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="131" y="65" width="419" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{departamento}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="131" y="85" width="419" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{cargo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="26" y="285" width="65" height="20"/>
+				<textElement/>
+				<text><![CDATA[KM inicial:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="305" y="285" width="65" height="20"/>
+				<textElement/>
+				<text><![CDATA[KM final:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="26" y="325" width="65" height="20"/>
+				<textElement/>
+				<text><![CDATA[KM total:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="305" y="325" width="109" height="20"/>
+				<textElement/>
+				<text><![CDATA[Valor do combustível:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="91" y="285" width="127" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{kmInicial}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="370" y="285" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{kmFinal}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="91" y="325" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{kmTotal}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="414" y="325" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA["R$ "+$F{valorGasolina}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="8" y="105" width="57" height="20"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Moto: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="235" y="105" width="33" height="20"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Placa: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="370" y="105" width="57" height="20"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Renavam: ]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="65" y="105" width="153" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{moto}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="270" y="105" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{placa}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="427" y="105" width="114" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{renavam}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="120" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="15" width="550" height="90"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="8" y="23" width="146" height="15"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ciente do(a) Empregado(a):]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="8" y="55" width="170" height="20"/>
+				<textElement/>
+				<text><![CDATA[Em: _____/_____/________]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="370" y="55" width="153" height="20"/>
+				<textElement/>
+				<text><![CDATA[Assinatura do(a) Empregado(a)]]></text>
+			</staticText>
+			<line>
+				<reportElement x="254" y="54" width="287" height="1"/>
+			</line>
+		</band>
+	</pageFooter>
+</jasperReport>

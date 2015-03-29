@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xml:lang="pt-BR" lang="pt-BR"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+<h:outputStylesheet name="estilo.css" library="css" />
+</h:head> 
+<body> 
+
+<ui:composition template="/commonLayout.xhtml">
+ <ui:define name="content">
+	 <h:form>
+	 
+	 	<p:panel header="Cadastro de Receita" id="painel_cadastro" style="margin-bottom:10px;">
+					<p:messages id="messages" autoUpdate="true" closable="true" />
+				
+					<p:panelGrid columns="1">
+	 	 
+		
+		 <p:dataTable value ="#{vendaManualInteirasMB.listaProduto}" var ="produto" id="listaProduto"  >
+			 <p:column headerText="Produto">
+			 	<p:outputLabel value ="#{produto.descricao}"/>
+			 </p:column>
+			 <p:column headerText="Quantidade vendida">
+			 	<input type="text" name="listaQuatidade" size="5" value="0"/> 
+			 </p:column>
+		 </p:dataTable>
+		 	
+		
+		<p:commandButton action ="#{vendaManualInteirasMB.atualizaEstoque()}" value =" Salvar " immediate="true"  />
+		</p:panelGrid>
+		</p:panel>
+	</h:form>
+</ui:define>
+ 
+  
+    	</ui:composition>
+
+
+</body> 
+</html>

@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xml:lang="pt-BR" lang="pt-BR"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<h:outputStylesheet name="estilo.css" library="css" />
+
+
+</h:head>
+<body>
+
+	<ui:composition template="/commonLayout.xhtml">
+		<ui:define name="content">
+
+			<script type="text/javascript"
+				src="/retaguardaWeb/jquery/jquery.maskedinput-1.1.4.pack.js" />
+
+
+			<script type="text/javascript">
+	$(document).ready(function(){
+		$("#telefone").mask("9999-9999");
+		$("#telefone1").mask("9999-9999");
+		$("#telefone2").mask("9999-9999");
+		$("#telefone3").mask("9999-9999");
+		$("#cpf").mask("999.999.999-99");
+		$("#cep").mask("99999-999");
+		$("#data").mask("99/99/9999");
+	});
+</script>
+
+			<h:form id="principal">
+
+				<p:panel header="Cadastro de Administrador da Empresa"
+					id="painel_cadastro" style="margin-bottom:10px;">
+
+					<p:messages id="messages" autoUpdate="true" closable="true" />
+					
+					
+					
+					<p:panelGrid columns="1">
+						<p:outputLabel value=" Lojas :" for="idLoja"/>
+						
+						<p:selectOneMenu value="#{usuarioMB.lojaSelecao}" id="idLoja" >
+							<f:selectItem itemLabel="Selecione uma Loja" />
+							<f:selectItems 
+							value="#{usuarioMB.lojas}" 
+							var="prod" 
+							itemLabel="#{prod.descricao}" 
+							itemValue="#{prod}" />
+						</p:selectOneMenu>
+					
+					
+					</p:panelGrid>
+
+					<p:panelGrid columns="3" style="width:100%">
+
+						<p:outputLabel value=" Nome :"  for="nome"/>
+						<p:outputLabel value=" Login :" />
+						<p:outputLabel value=" Senha :" />
+
+						<p:inputText value="#{usuarioMB.usuariosNovo.nome}" size="50" id="nome"
+							required="true" />
+						<p:inputText value="#{usuarioMB.usuariosNovo.login}" size="20"
+							required="true" />
+						<h:inputSecret value="#{usuarioMB.usuariosNovo.senha}" size="20"
+							required="true"  />
+
+					</p:panelGrid>
+
+
+					<p:panelGrid columns="3" style="width:100%">
+						<p:outputLabel value=" Endereço :" />
+						<p:outputLabel value=" Telefone :" />
+						<p:outputLabel value=" E-mail :" />
+
+						<p:inputText value="#{usuarioMB.usuariosNovo.endereco}" size="50"  />
+						<p:inputText value="#{usuarioMB.usuariosNovo.telefone}" size="20"  id="telefone3" />
+						<p:inputText value="#{usuarioMB.usuariosNovo.email}" size="20"  />
+					</p:panelGrid>
+
+					
+					<f:facet name="footer">
+						<p:commandButton action="#{usuarioMB.adiciona()}"
+							value=" Salvar "
+							update=":principal:painel_cadastro listaUsuario"
+							rendered="#{usuarioMB.usuariosNovo.id==null}" />
+						<p:commandButton action="#{usuarioMB.editar()}"
+							value=" Alterar " id="alterar"
+							update=":principal:painel_cadastro listaUsuario"
+							rendered="#{usuarioMB.usuariosNovo.id!=null}" />
+					</f:facet>
+
+
+				</p:panel>
+
+
+
+				<h1>Lista de Funcionários</h1>
+				<p:dataTable value="#{usuarioMB.listaUsuarios}"
+					var="usuario" id="listaUsuario">
+					<p:column headerText="Nome do Responsável">
+						<p:outputLabel value="#{usuario.nome}" />
+					</p:column>
+					<p:column headerText="Loja">
+						<p:outputLabel value="#{usuario.loja.descricao}" />
+					</p:column>
+					<p:column headerText="Telefone">
+						<p:outputLabel value="#{usuario.loja.telefone}" />
+					</p:column>
+					<p:column headerText="Ação">
+						<p:commandLink title="Editar" update=":principal:painel_cadastro" value="Editar" immediate="true">
+							<f:setPropertyActionListener
+								target="#{usuarioMB.usuariosNovo}" value="#{usuario}" />
+						</p:commandLink>
+                         - 
+					 <p:commandLink title="Excluir" update=":formExcluir:Excluir"
+							oncomplete="confirmation.show()" immediate="true" value="excluir">
+							<f:setPropertyActionListener
+								target="#{usuarioMB.usuariosNovo}" value="#{usuario}" />
+						</p:commandLink>
+
+					</p:column>
+				</p:dataTable>
+
+			</h:form>
+
+
+			<h:form id="formExcluir">
+
+				<p:dialog header="Excluir" widgetVar="confirmation" modal="true"
+					id="Excluir">
+
+					<h:outputText
+						value="Você gostaria de Deletar o #{usuarioMB.usuariosNovo.nome}?" />
+
+					<br />
+					<br />
+
+					<p:commandButton id="confirm" value="Sim"
+						actionListener="#{usuarioMB.remover()}"
+						update=":principal:listaUsuario"
+						oncomplete="confirmation.hide()" />
+                
+                 &nbsp;
+                 
+                <p:commandButton id="decline" value="Não"
+						onclick="confirmation.hide()" type="button" />
+
+				</p:dialog>
+
+			</h:form>
+
+
+
+		</ui:define>
+
+
+	</ui:composition>
+
+
+</body>
+</html>

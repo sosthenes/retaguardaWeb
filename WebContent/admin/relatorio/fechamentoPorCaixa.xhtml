@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xml:lang="pt-BR" lang="pt-BR"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head></h:head> 
+<body> 
+
+<ui:composition template="/commonLayout.xhtml">
+ <ui:define name="content">
+ 
+	 <h:form>
+	 <p:panel header="Cadastro de Unidade de Medida" id="painel_cadastro" style="margin-bottom:10px;">
+			<p:messages id="messages" autoUpdate="true" closable="true" />
+
+			<p:panelGrid columns="2">
+				<p:outputLabel value=" Date Início :" for="dataInicio" />
+				<p:outputLabel value=" Caixas :" />
+				
+				<p:calendar value="#{relatorioMB.dataInicio}" id="dataInicio" 	required="true" pattern="dd/MM/yyyy" />
+				<p:selectOneMenu value="#{relatorioMB.idCaixa}" id="idCaixa">
+					<f:selectItem itemLabel="Selecione um Caixa" />
+					<f:selectItems value="#{fechamentocaixaMB.listaCaixa}" var="prod" itemLabel="#{prod.descricao}" itemValue="#{prod.id}" />
+				</p:selectOneMenu>				
+				
+			</p:panelGrid>
+
+					<p:panelGrid columns="1">
+						<h:commandButton action="#{relatorioMB.fechamentoPorCaixa()}"
+							value=" Fechamento por caixa " />
+					</p:panelGrid>
+				</p:panel>
+	
+	 </h:form>
+	
+ 
+
+</ui:define>
+ 
+  
+    	</ui:composition>
+
+
+</body> 
+</html>

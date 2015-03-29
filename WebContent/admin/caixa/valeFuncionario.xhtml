@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xml:lang="pt-BR" lang="pt-BR"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition template="/commonLayout.xhtml" >
+ <ui:define name="content" >
+ 
+ 
+ 
+ 
+ 
+ 
+	 <h:form id="principal">
+
+				<p:panel header="Vale para Funcionario" id="painel_cadastro" style="margin-bottom:10px;" >
+					<p:messages id="messages" autoUpdate="true" closable="true" />
+					
+				
+
+					<p:panelGrid columns="2" style="width:100%" >
+						
+						<p:outputLabel value=" Caixas :" />
+						<p:selectOneMenu value="#{valeFuncionarioMB.idCaixa}" id="idCaixa">
+							<f:selectItem itemLabel="Selecione um Caixa" />
+							<f:selectItems value="#{gastoCaixaMB.listaCaixa}" var="prod" itemLabel="#{prod.descricao}" itemValue="#{prod.id}" />
+						</p:selectOneMenu>
+						
+						
+						<p:outputLabel value=" Funcionário :" />
+						<p:selectOneMenu value="#{valeFuncionarioMB.idFuncionario}" id="idFuncionario">
+							<f:selectItem itemLabel="Selecione um Funcionário" />
+							<f:ajax event="change" render="permitido utilizado disponivel lista" listener="#{valeFuncionarioMB.atualizaValorFuncionario()}" />
+							<f:selectItems value="#{valeFuncionarioMB.funcionarioes}" var="prod" itemLabel="#{prod.nome}" itemValue="#{prod.id}" />
+						</p:selectOneMenu>
+					</p:panelGrid>
+
+					<p:panelGrid columns="5"  style="width:100%">
+						<p:outputLabel value=" Valor Permitido por mês" />
+						<p:outputLabel value=" Valor utilizado:" />
+						<p:outputLabel value=" Valor disponível:" />
+						<p:outputLabel value=" Valor do vale:" />
+						<p:outputLabel value=" Data do vale:" />
+						<h:outputLabel value="#{valeFuncionarioMB.vale.valorPermitido}" id="permitido"/>
+						<h:outputLabel value="#{valeFuncionarioMB.vale.valorUtilizado}" id="utilizado"/>
+						<h:outputLabel value="#{valeFuncionarioMB.vale.valorDispivel}" id="disponivel" />
+						<h:inputText value="#{valeFuncionarioMB.vale.valor}" id="valor" />
+						<p:calendar value="#{valeFuncionarioMB.dataFato}" id="data" 	required="true" pattern="dd/MM/yyyy"	requiredMessage="Campo Data do Fechamento é obrigatório." />
+						<h:message for="data"/>
+					</p:panelGrid>
+
+	<p:panelGrid columns="3" style="width:100%" >
+					<p:commandButton action="#{valeFuncionarioMB.mesAnterior()}" 
+					value="Mês anterior" 
+					immediate="true" 
+					ajax="true" 
+					update="permitido utilizado disponivel dataConsulta lista" />
+
+					<h:outputText value="#{valeFuncionarioMB.dataConsulta}" styleClass="date"  id="dataConsulta" style="">
+						<f:convertDateTime type="date" pattern="dd-MM-yyyy"/>
+					</h:outputText>
+					
+					<p:commandButton action="#{valeFuncionarioMB.proximoMes()}" value="Próximo mês" immediate="true" ajax="true" update="permitido utilizado disponivel dataConsulta lista"/>
+					
+
+					</p:panelGrid>
+
+					<f:facet name="footer">
+                        <p:commandButton action="#{valeFuncionarioMB.adiciona()}" value=" Salvar " update="permitido utilizado disponivel lista" />
+                    </f:facet>
+
+
+				</p:panel>
+						
+
+
+	  <p:dataTable value ="#{valeFuncionarioMB.lista}" var ="vale" id="lista">
+	 	<f:facet name="header">  
+            Lista de Antecipações
+        </f:facet> 
+        
+		 <p:column headerText="Data do vale">
+		 	<p:outputLabel value ="#{vale.myFormattedDate}" />
+		 </p:column>
+		 <p:column headerText="Funcionário">
+		   <p:outputLabel value ="#{vale.funcionario.nome}"/>
+		 </p:column>
+		 <p:column headerText="Valor">
+		   <p:outputLabel value ="#{vale.valor}"/>
+		 </p:column>
+		 <p:column headerText="Autorizado por">
+		   <p:outputLabel value ="#{vale.usuario.nome}"/>
+		 </p:column>
+		 <p:column headerText="Ação" >
+		  <h:commandLink title="Imprimir recibo" value="Imprimir recibo" action="#{valeFuncionarioMB.gerarRecibo()}" immediate="true">                                                    
+                                <f:setPropertyActionListener target="#{valeFuncionarioMB.vale}"  value="#{vale}"  />
+                        </h:commandLink>
+                         - 
+					 <p:commandLink title="Excluir" update=":formExcluir:Excluir"
+                                oncomplete="confirmation.show()" immediate="true" value="excluir" >                                                    
+                                <f:setPropertyActionListener target="#{valeFuncionarioMB.vale}"  value="#{vale}"  />
+                        </p:commandLink>
+					
+				</p:column>
+	<p:columnGroup type="footer">  
+            <p:row>  
+                <p:column colspan="4" footerText="Total:"     style="text-align:right"  />  
+  
+                <p:column footerText="#{valeFuncionarioMB.vale.valorUtilizado}" />  
+            </p:row>  
+        </p:columnGroup>  
+	 </p:dataTable>
+
+	 </h:form>
+	 
+	 
+			<h:form id="formExcluir">
+                
+            <p:dialog header="Excluir" widgetVar="confirmation" modal="true" id="Excluir">      
+                                  
+                <h:outputText value="Você gostaria de Deletar o vale de  #{valeFuncionarioMB.vale.valor}?" />                
+                
+                <br/>
+                <br/>
+                
+                <p:commandButton id="confirm" value="Sim"
+                        actionListener="#{valeFuncionarioMB.remover()}"
+                        update=":principal:lista :principal:permitido :principal:utilizado :principal:disponivel"
+                        oncomplete="confirmation.hide()" />
+                
+                 &nbsp;
+                 
+                <p:commandButton id="decline" value="Não"
+                        onclick="confirmation.hide()" type="button" />
+                        
+            </p:dialog>
+                
+        </h:form>     
+	 
+	 
+	 
+</ui:define>
+ 
+  
+    	</ui:composition>
+
+
+</html>

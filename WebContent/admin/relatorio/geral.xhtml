@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xml:lang="pt-BR" lang="pt-BR"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head></h:head> 
+<body> 
+
+<ui:composition template="/commonLayout.xhtml">
+ <ui:define name="content">
+ 
+	 <h:form>
+	 <p:panel header="RELATÓRIOS GERENCIAIS" id="painel_cadastro" style="margin-bottom:10px;">
+			<p:messages id="messages" autoUpdate="true" closable="true" />
+
+			<p:panelGrid columns="2">
+				<p:outputLabel value=" Date Início :" for="dataInicio" />
+				<p:calendar value="#{relatorioMB.dataInicio}" id="dataInicio" 	required="true" pattern="dd/MM/yyyy" />
+				
+				<p:outputLabel value=" Date Fim :" for="dataFim" />
+				<p:calendar value="#{relatorioMB.dataFim}" id="dataFim" 	required="true" pattern="dd/MM/yyyy" />
+			</p:panelGrid>
+
+					<p:panelGrid columns="1">
+						<h:commandButton action="#{relatorioMB.relatorioEstoqueAtual()}"
+							value=" Estoque Atual " />
+
+						<h:commandButton
+							action="#{relatorioMB.relatorioFuncionariosAtivos()}"
+							value=" Funcionários Ativos " />
+
+						<h:commandButton action="#{relatorioMB.relatorioGastosCaixa()}"
+							value=" Gastos dos Caixas " />
+						
+						<h:commandButton action="#{relatorioMB.caixaConcolidado()}"
+							value=" Fechamento consolidado " />
+							
+						<h:commandButton action="#{relatorioMB.relatorioGastosNoMes()}"
+							value=" Gastos categorizados " />
+							
+						<h:commandButton action="#{relatorioMB.relatorioGastosNoMesDetalhada()}"
+							value=" Gastos categorizados Detalhada" />
+							
+					</p:panelGrid>
+				</p:panel>
+	
+	 </h:form>
+	
+ 
+
+</ui:define>
+ 
+  
+    	</ui:composition>
+
+
+</body> 
+</html>

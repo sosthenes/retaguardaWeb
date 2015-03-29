@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xml:lang="pt-BR" lang="pt-BR"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+<h:outputStylesheet name="estilo.css" library="css" />
+</h:head> 
+<body> 
+
+<ui:composition template="/commonLayout.xhtml">
+ <ui:define name="content">
+	 <h:form>
+	 
+	 	<p:panel header="Cadastro de Receita" id="painel_cadastro" style="margin-bottom:10px;">
+					<p:messages id="messages" autoUpdate="true" closable="true" />
+				
+					<p:panelGrid columns="2">
+	 	 
+		<p:outputLabel value=" Etoque :" />
+		<p:inputText value="#{manterEstoqueMB.estadoEstoque.dataEstoque}"  readonly="true" id="data">
+			<f:convertDateTime pattern="dd/MM/yyyy HH:mm" timeZone="GMT-03:00"/>
+		</p:inputText>
+		
+		<p:outputLabel value=" Produto :" />
+		<h:selectOneMenu value="#{manterEstoqueMB.idEstoque}"	 id="idEstoque">
+			<f:selectItem itemLabel="Selecione um Estoque"/>
+			<f:ajax event="change" render="data listaEst" listener="#{manterEstoqueMB.listaEstadoEstoque()}" />
+			<f:selectItems value="#{manterEstoqueMB.listaEstoque}" var="prod"	itemLabel="#{prod.nomeEstoque}" itemValue="#{prod.id}" />
+		</h:selectOneMenu>
+		
+		</p:panelGrid>
+		<p:panelGrid columns="1">
+		 <p:dataTable value ="#{manterEstoqueMB.listaEstoqueAtualUtil}" var ="estoque" id="listaEst"  >
+			 <p:column headerText="Ingrediente">
+			 	<p:outputLabel value ="#{estoque.listaIngrediente.ingrediente.nome}"/>
+			 </p:column>
+			 <p:column headerText="Quantidade mínima">
+			 	<p:outputLabel value ="#{estoque.listaIngrediente.quantidade}"/> - <p:outputLabel value ="#{estoque.listaIngrediente.ingrediente.idUnidadeMedida.sigla}"/>
+			 </p:column>
+			  <p:column headerText="Quantidade Atual">
+			  	<p:outputLabel value ="#{estoque.estoqueAtual.quantidade}"/> - <p:outputLabel value ="#{estoque.listaIngrediente.ingrediente.idUnidadeMedida.sigla}"/>
+			  </p:column>
+			  <p:column headerText="Quantidade a Acrescentar">
+			  	<p:outputLabel value ="#{estoque.qtdReposicao}"/> - <p:outputLabel value ="#{estoque.listaIngrediente.ingrediente.idUnidadeMedida.sigla}"/>
+			  </p:column>
+			 <p:column headerText="Quantidade Atual">
+				 <input type="text" name="listaQuatidade" value=""/> -  <p:outputLabel value ="#{estoque.listaIngrediente.ingrediente.idUnidadeMedida.sigla}"/>
+			 </p:column>
+		 </p:dataTable>
+		</p:panelGrid>
+		
+		<p:commandButton action ="#{manterEstoqueMB.atualizaEstoque()}" value =" Salvar " immediate="true" update="listaEst" />
+		</p:panel>
+	</h:form>
+</ui:define>
+ 
+  
+    	</ui:composition>
+
+
+</body> 
+</html>

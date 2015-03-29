@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xml:lang="pt-BR" lang="pt-BR"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+<h:outputStylesheet name="estilo.css" library="css" />
+</h:head> 
+<body> 
+
+<ui:composition template="/commonLayout.xhtml">
+ <ui:define name="content">
+ 
+
+ 
+	 <h:form id="principal">
+
+				<p:panel header="Cadastro de Estoque" id="painel_cadastro"
+					style="margin-bottom:10px;">
+					<p:messages id="messages" autoUpdate="true" closable="true" />
+					<p:panelGrid columns="2">
+						<p:outputLabel value=" Produto :" />
+
+						<p:selectOneMenu value="#{manterEstoqueMB.idEstoque}" id="idEstoque">
+							<f:selectItem itemLabel="Selecione um Estoque" />
+							<f:ajax event="change" render="listaIngrEstoque" listener="#{manterEstoqueMB.listaIngredientesMinimosPEstoque()}" />
+							<f:selectItems value="#{manterEstoqueMB.listaEstoque}" var="prod" itemLabel="#{prod.nomeEstoque}" itemValue="#{prod.id}" />
+						</p:selectOneMenu>
+
+
+						<p:outputLabel value=" Ingrediente :" />
+						<p:selectOneMenu value="#{manterEstoqueMB.idIngrediente}" id="ingrediente">
+							<f:selectItem itemLabel="Selecione um Ingrediente" />
+							<f:selectItems value="#{receitaMB.ingredientes}" var="medida" itemLabel="#{medida.nome}" itemValue="#{medida.id}" />
+						</p:selectOneMenu>
+
+						<h:outputLabel value=" Quantidade mínima :" />
+						<h:inputText value="#{manterEstoqueMB.minEstoque.quantidade}" />
+
+						<p:commandButton action="#{manterEstoqueMB.adiciona()}" value=" Salvar " update="listaIngrEstoque" />
+					</p:panelGrid>
+				</p:panel>
+
+
+				<h1>Lista de Ingredientes do estoque</h1>
+	 <p:dataTable value ="#{manterEstoqueMB.minimoEstoque}" var ="ing" id="listaIngrEstoque">
+		 <p:column headerText="Ingrediente">
+		 	<p:outputLabel value ="#{ing.ingrediente.nome}"/>
+		 </p:column>
+		 <p:column headerText="Mínimo no estoque">
+			<p:outputLabel value ="#{ing.quantidade}"/> - <p:outputLabel value ="#{ing.ingrediente.idUnidadeMedida.sigla}"/>
+		 </p:column>
+		 <p:column headerText="Ação" >
+					 <p:commandLink title="Excluir" update=":formExcluir:Excluir"
+                                oncomplete="confirmation.show()" immediate="true" value="excluir" >                                                    
+                                <f:setPropertyActionListener target="#{manterEstoqueMB.minEstoque}"  value="#{ing}"  />
+                        </p:commandLink>
+					
+				</p:column>
+	 </p:dataTable>
+
+	 </h:form>
+	 
+	 
+			<h:form id="formExcluir">
+                
+            <p:dialog header="Excluir" widgetVar="confirmation" modal="true" id="Excluir">      
+                                  
+                <h:outputText value="Você gostaria de Deletar o #{manterEstoqueMB.minEstoque.ingrediente.nome}?" />                
+                
+                <br/>
+                <br/>
+                
+                <p:commandButton id="confirm" value="Sim"
+                        actionListener="#{manterEstoqueMB.excluir()}"
+                        update=":principal:listaIngrEstoque"
+                        oncomplete="confirmation.hide()" />
+                
+                 &nbsp;
+                 
+                <p:commandButton id="decline" value="Não"
+                        onclick="confirmation.hide()" type="button" />
+                        
+            </p:dialog>
+                
+        </h:form>     
+	 
+	 
+	 
+</ui:define>
+ 
+  
+    	</ui:composition>
+
+
+</body> 
+</html>

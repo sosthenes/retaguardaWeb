@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorio" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="171"/>
+	<parameter name="tituloRelatorio" class="java.lang.String"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[".\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="periodo" class="java.lang.String"/>
+	<field name="diariaFuncionario.funcionario.nome" class="java.lang.String"/>
+	<field name="diariaFuncionario.funcionario.cpf" class="java.lang.String"/>
+	<field name="diariaFuncionario.funcionario.cargo.descricao" class="java.lang.String"/>
+	<field name="diariaFuncionario.funcionario.setor.descricao" class="java.lang.String"/>
+	<field name="diariaFuncionario.valor" class="java.lang.String"/>
+	<field name="diariaFuncionario.myFormattedDate" class="java.lang.String"/>
+	<field name="valorPorExtenso" class="java.lang.String"/>
+	<field name="dataDebito" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="39">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="0" y="0" width="549" height="32"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="13" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{tituloRelatorio}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="393">
+			<rectangle>
+				<reportElement x="2" y="4" width="550" height="137"/>
+			</rectangle>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="387" y="9" width="163" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="9" y="28" width="129" height="20"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nome do Empregado: ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="138" y="28" width="378" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{diariaFuncionario.funcionario.nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="138" y="48" width="378" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{diariaFuncionario.funcionario.cpf}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="9" y="68" width="129" height="20"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Departamento: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="9" y="88" width="129" height="20"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cargo: ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="138" y="88" width="378" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{diariaFuncionario.funcionario.cargo.descricao}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="9" y="48" width="129" height="20"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CPF: ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="138" y="68" width="378" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{diariaFuncionario.funcionario.setor.descricao}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="2" y="152" width="548" height="233"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="15" y="163" width="206" height="20"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Adiantamento Salarial realizado em: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="15" y="195" width="50" height="20"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Valor: ]]></text>
+			</staticText>
+			<textField>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="65" y="195" width="476" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA["R$ "+$F{diariaFuncionario.valor}+" ("+$F{valorPorExtenso}+")"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="15" y="227" width="526" height="38"/>
+				<textElement/>
+				<textFieldExpression><![CDATA["Declaro, para todos os efeitos, ter recebido a título de 'Pagamento', a importância de R$ "+$F{diariaFuncionario.valor}+" ("+$F{valorPorExtenso}+")."]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="221" y="163" width="238" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{diariaFuncionario.myFormattedDate}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="15" y="269" width="526" height="43"/>
+				<textElement/>
+				<text><![CDATA[Declaro também que o valor recebido refere-se a serviços esporádicos que prestei a esta empresa, na condição de autônomo, sem habitualidade e freqüência, não caracterizando, em hipótese alguma, vínculo empregatício.
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="15" y="316" width="526" height="49"/>
+				<textElement/>
+				<text><![CDATA[Dou plena e geral quitação pelos serviços que prestei e declaro que nada mais tenho a receber desta empresa, seja a qual título for.
+Sem mais e para que esta seja interpretada como verdadeira, firmo. ]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="120" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="15" width="550" height="90"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="8" y="23" width="146" height="15"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ciente do(a) Empregado(a):]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="8" y="55" width="170" height="20"/>
+				<textElement/>
+				<text><![CDATA[Em: _____/_____/________]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="370" y="55" width="153" height="20"/>
+				<textElement/>
+				<text><![CDATA[Assinatura do(a) Empregado(a)]]></text>
+			</staticText>
+			<line>
+				<reportElement x="254" y="54" width="287" height="1"/>
+			</line>
+		</band>
+	</pageFooter>
+</jasperReport>

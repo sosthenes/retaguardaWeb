@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xml:lang="pt-BR" lang="pt-BR"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition template="/commonLayout.xhtml" >
+ <ui:define name="content" >
+ 
+ 
+ 
+ 
+ 
+ 
+	 <h:form id="principal">
+
+				<p:panel header="Antecipação de pagamento" id="painel_cadastro" style="margin-bottom:10px;" >
+					<p:messages id="messages" autoUpdate="true" closable="true" />
+					
+					<p:panelGrid columns="1" style="width:100%" >
+						<p:row>
+						<p:outputLabel value=" Funcionário :" />
+							#{valeFuncionarioMB.usuario.funcionario.nome}
+							</p:row>
+					</p:panelGrid>
+
+					<p:panelGrid columns="3"  style="width:100%">
+						<p:outputLabel value=" Valor Permitido por mês" />
+						<p:outputLabel value=" Valor utilizado:" />
+						<p:outputLabel value=" Valor disponível:" />
+						<h:outputLabel value="#{valeFuncionarioMB.vale.valorPermitido}" id="permitido"/>
+						<h:outputLabel value="#{valeFuncionarioMB.vale.valorUtilizado}" id="utilizado"/>
+						<h:outputLabel value="#{valeFuncionarioMB.vale.valorDispivel}" id="disponivel" />
+					</p:panelGrid>
+
+				</p:panel>
+						
+
+
+	  <p:dataTable value ="#{valeFuncionarioMB.lista}" var ="vale" id="lista">
+	 	<f:facet name="header">  
+            Lista dos vales	
+        </f:facet> 
+        
+		 <p:column headerText="Data do vale">
+		 	<p:outputLabel value ="#{vale.myFormattedDate}" />
+		 </p:column>
+		 <p:column headerText="Funcionário">
+		   <p:outputLabel value ="#{vale.funcionario.nome}"/>
+		 </p:column>
+		 <p:column headerText="Valor">
+		   <p:outputLabel value ="#{vale.valor}"/>
+		 </p:column>
+		 <p:column headerText="Autorizado por">
+		   <p:outputLabel value ="#{vale.usuario.nome}"/>
+		 </p:column>
+	<p:columnGroup type="footer">  
+            <p:row>  
+                <p:column colspan="2" footerText="Total:"     style="text-align:right"  />  
+  
+                <p:column footerText="#{valeFuncionarioMB.vale.valorUtilizado}" style="text-align:left"/>  
+                <p:column></p:column>
+            </p:row>  
+        </p:columnGroup>  
+	 </p:dataTable>
+
+	 </h:form>
+	 
+	 
+			<h:form id="formExcluir">
+                
+            <p:dialog header="Excluir" widgetVar="confirmation" modal="true" id="Excluir">      
+                                  
+                <h:outputText value="Você gostaria de Deletar o vale de  #{valeFuncionarioMB.vale.valor}?" />                
+                
+                <br/>
+                <br/>
+                
+                <p:commandButton id="confirm" value="Sim"
+                        actionListener="#{valeFuncionarioMB.remover()}"
+                        update=":principal:lista :principal:permitido :principal:utilizado :principal:disponivel"
+                        oncomplete="confirmation.hide()" />
+                
+                 &nbsp;
+                 
+                <p:commandButton id="decline" value="Não"
+                        onclick="confirmation.hide()" type="button" />
+                        
+            </p:dialog>
+                
+        </h:form>     
+	 
+	 
+	 
+</ui:define>
+ 
+  
+    	</ui:composition>
+
+
+</html>

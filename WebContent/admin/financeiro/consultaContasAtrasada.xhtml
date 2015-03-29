@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xml:lang="pt-BR" lang="pt-BR"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<h:outputStylesheet name="estilo.css" library="css" />
+</h:head>
+<body>
+
+	<ui:composition template="/commonLayout.xhtml">
+		<ui:define name="content">
+			<h:form id="principal">
+
+		<p:panel header="Consultas" id="painel_cadastro" style="margin-bottom:10px;">
+					<p:messages id="messages" autoUpdate="true" closable="true" />
+
+					<p:panelGrid columns="2">
+
+						<p:outputLabel value=" Descrição de conta :" />
+						<p:outputLabel value=" Tipo de conta :" />
+
+
+						<p:selectOneMenu value="#{pagamentoMB.conta.descricaoPagamento}"
+							id="idDescricaoConta">
+							<f:selectItem itemLabel="Selecione uma descrição" />
+							<f:selectItems value="#{pagamentoMB.listaDescricaoPagamento}"
+								var="prod" itemLabel="#{prod.descricaogasto}"
+								itemValue="#{prod}" />
+						</p:selectOneMenu>
+
+						<p:selectOneMenu value="#{pagamentoMB.conta.tipoPagamento}"
+							id="idCaixa">
+							<f:selectItem itemLabel="Selecione um tipo de conta" />
+							<f:selectItems value="#{pagamentoMB.listaTipoConta}" var="prod"
+								itemLabel="#{prod.descricao}" itemValue="#{prod}" />
+						</p:selectOneMenu>
+
+
+					</p:panelGrid>
+
+
+					<f:facet name="footer">
+						<p:commandButton action="#{pagamentoMB.pesquisarAtrasados()}"
+							value=" Pesquisar " update="lista principal" />
+					</f:facet>
+				</p:panel>
+
+
+				<p:dataTable value="#{pagamentoMB.listaParcelaAtrasada}" var="vale" id="lista">
+					<f:facet name="header">  
+			            Lista de contas em atraso
+			        </f:facet>
+
+					<p:column headerText="Data da compra" sortBy="#{vale.myFormattedDate}">
+						<p:outputLabel value="#{vale.myFormattedDate}" />
+					</p:column>
+					<p:column headerText="Tipo de conta" sortBy="#{vale.pagamento.tipoPagamento.descricao}">
+						<p:outputLabel value="#{vale.pagamento.tipoPagamento.descricao}" />
+					</p:column>					
+					<p:column headerText="Descrição">
+						<p:outputLabel value="#{vale.pagamento.descricaoPagamento.descricaogasto}" />
+					</p:column>
+					<p:column headerText="Valor" sortBy="#{vale.valorParcela}">
+						<p:outputLabel value="#{vale.valorParcela}" />
+					</p:column>
+					<p:column headerText="Forma de Pgto." sortBy="#{vale.pagamento.formaPagamento.descricao}">
+						<p:outputLabel value="#{vale.pagamento.formaPagamento.descricao}" />
+					</p:column>
+					<p:column headerText="Parcela nº" >
+						<p:outputLabel value="#{vale.numParcela}" />
+					</p:column>
+					<p:column headerText="Pago" rendered="#{vale.pago}">
+						Sim
+					</p:column>
+					<p:column headerText="Pago" rendered="#{!vale.pago}">
+						Não
+					</p:column>
+					<p:column headerText="Ação">
+						<p:commandLink title="- Pagar -"
+							update=":formParcelas:Parcelas :formParcelas:listaDetalhada"
+							oncomplete="confirmation.show()" value=" PAGAR "
+							rendered="#{!vale.pago}" action="#{pagamentoMB.listaParcelasDetalhadas()}">
+							<f:setPropertyActionListener target="#{pagamentoMB.parcela}"
+								value="#{vale}" />
+						</p:commandLink>
+						
+						|
+						
+						<p:commandLink title="- Excluir -"
+							value=" Excluir "
+							 update=":formExcluir:Excluir"
+							oncomplete="confirmationExclusao.show()"
+							>
+							<f:setPropertyActionListener target="#{pagamentoMB.parcela}" value="#{vale}" />
+						</p:commandLink>
+						
+						
+					</p:column>
+					<p:columnGroup type="footer">
+						<p:row>
+							<p:column colspan="3" footerText="Total pago:" style="text-align:right" />
+							<p:column>
+								<p:outputLabel value="#{pagamentoMB.valorTotalConsultaPago}" />
+							</p:column>
+							
+							<p:column  footerText="Total a pagar:" style="text-align:right" />
+							<p:column>
+								<p:outputLabel value="#{pagamentoMB.valorTotalConsultaAPagar}" />
+							</p:column>
+						</p:row>
+					</p:columnGroup>
+				</p:dataTable>
+
+
+
+			</h:form>
+
+
+			<h:form id="formParcelas">
+				<p:dialog header="Parcelas" widgetVar="confirmation" modal="true"
+					id="Parcelas" >
+
+					<br />
+
+					<p:dataTable value="#{pagamentoMB.listaParcelaDetalhada}"
+						var="vale" id="listaDetalhada">
+						<f:facet name="header">  
+			            	<p:outputLabel value="#{vale.pagamento.descricaoPagamento.descricaogasto}" />
+			        	</f:facet>
+						<p:column headerText="Parcela nº">
+							<p:outputLabel value="#{vale.numParcela}" />
+						</p:column>
+						<p:column headerText="Data pgto. Parcela">
+							<p:outputLabel value="#{vale.myFormattedDate}" />
+						</p:column>
+						<p:column headerText="Descrição">
+							<p:outputLabel
+								value="#{vale.pagamento.descricaoPagamento.descricaogasto}" />
+						</p:column>
+						<p:column headerText="Valor">
+							<p:outputLabel value="#{vale.valorParcela}" />
+						</p:column>
+						<p:column headerText="Data do pagamento">
+							<p:outputLabel value="#{vale.myFormattedDataPagamento}"
+								rendered="#{vale.pago}" />
+						</p:column>
+						<p:column headerText="Valor do pagamento">
+							<p:outputLabel value="#{vale.valorPago}" rendered="#{vale.pago}" />
+						</p:column>
+						<p:column headerText="Pago" rendered="#{vale.pago}">
+							Sim
+						</p:column>
+						<p:column headerText="Pago" rendered="#{!vale.pago}">
+							Não
+						</p:column>
+						<p:column headerText="Ação">
+							<p:commandLink title="Pagar" update=":formPagar:Pagamento"
+								oncomplete="confirmacao.show()" value=" PAGAR "
+								rendered="#{!vale.pago}">
+								<f:setPropertyActionListener target="#{pagamentoMB.parcela}"
+									value="#{vale}" />
+							</p:commandLink>
+						</p:column>
+						<p:columnGroup type="footer">
+						<p:row>
+							<p:column colspan="3" footerText="Total pago:" style="text-align:right" />
+							<p:column>
+								<p:outputLabel value="#{pagamentoMB.valorTotalConsultaPagoParcelas}" />
+							</p:column>
+							
+							<p:column  footerText="Total a pagar:" style="text-align:right" />
+							<p:column>
+								<p:outputLabel value="#{pagamentoMB.valorTotalConsultaAPagarParcelas}" />
+							</p:column>
+						</p:row>
+					</p:columnGroup>
+					</p:dataTable>
+					<br />
+					<p:commandButton id="decline" value="Cancelar" onclick="confirmation.hide()" type="button" >
+					<f:setPropertyActionListener target="#{pagamentoMB.carregaLista}"
+									value="false" />
+					</p:commandButton>
+				</p:dialog>
+
+			</h:form>
+
+
+
+			<h:form id="formPagar">
+				<p:dialog header="Pagamento" widgetVar="confirmacao" modal="true"
+					id="Pagamento">
+					<br />
+					<p:panel header="Pagar parcela" id="painel_pagamento"
+						style="margin-bottom:10px;">
+
+						<p:panelGrid columns="3">
+
+							<p:outputLabel value=" Valor da parcela" />
+							<p:outputLabel value=" Data Pagamento" />
+							<p:outputLabel value=" Valor pago" />
+
+							<p:outputLabel value="#{pagamentoMB.parcela.valorParcela}" />
+							<p:calendar value="#{pagamentoMB.datapagamentoParcela}"
+								id="dataPagamentoParcela" pattern="dd/MM/yyyy" />
+							<p:inputText value="#{pagamentoMB.parcela.valorPago}" />
+						</p:panelGrid>
+
+					</p:panel>
+
+					<br />
+					<br />
+					<p:commandButton id="confirm2" value="Pagar"
+						actionListener="#{pagamentoMB.pagarParcela()}"
+						update=":formParcelas:listaDetalhada"
+						oncomplete="confirmacao.hide()" />
+
+					<p:commandButton id="decline2" value="Cancelar"
+						onclick="confirmacao.hide()" type="button" />
+				</p:dialog>
+			</h:form>
+			
+			
+			
+			
+			<h:form id="formExcluir">
+
+				<p:dialog header="Excluir" widgetVar="confirmationExclusao" modal="true" id="Excluir">
+					<h:outputText value="Você gostaria de Deletar o #{pagamentoMB.parcela.pagamento.descricaoPagamento.descricaogasto}?" />
+					<br />
+					<br />
+					<p:commandButton id="confirm" value="Sim" actionListener="#{pagamentoMB.remover()}" update=":principal:lista" oncomplete="confirmationExclusao.hide()" />
+                 &nbsp;
+                <p:commandButton id="decline" value="Não" onclick="confirmationExclusao.hide()" type="button" />
+
+				</p:dialog>
+
+			</h:form>     
+			
+			
+
+		</ui:define>
+
+
+	</ui:composition>
+
+
+</body>
+</html>

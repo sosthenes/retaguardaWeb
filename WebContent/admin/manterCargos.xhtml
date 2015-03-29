@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xml:lang="pt-BR" lang="pt-BR"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+<h:outputStylesheet name="estilo.css" library="css" />
+</h:head> 
+<body> 
+
+<ui:composition template="/commonLayout.xhtml">
+ <ui:define name="content">
+ 
+    
+	 <h:form id="principal">
+
+
+
+				<p:panel header="Cadastro de Cargo" id="painel_cadastro" style="margin-bottom:10px;">
+					<p:messages id="messages" autoUpdate="true" closable="true" />
+					<p:panelGrid columns="1">
+						<p:outputLabel value=" Nome da Cargo :" />
+						<h:inputText value="#{cargoMB.cargo.descricao}" />
+
+					</p:panelGrid>
+					<p:panelGrid columns="1">
+						<p:outputLabel value=" Salário do Cargo :" />
+						<h:inputText value="#{cargoMB.cargo.salarioBruto}" id="valor" />
+
+					</p:panelGrid>
+				</p:panel>
+						<p:commandButton action="#{cargoMB.adiciona()}" value=" Salvar " update="listaCargo" />
+
+
+				<h1>Lista de Cargos</h1>
+	 <p:dataTable value ="#{cargoMB.cargoes}" var ="cargo" id="listaCargo">
+		 <p:column headerText="Nome da cargo">
+		 	<p:outputLabel value ="#{cargo.descricao}"/>
+		 </p:column>
+		 <p:column headerText="Salário bruto">
+		 	R$ <p:outputLabel value ="#{cargo.salarioBruto}"/>
+		 </p:column>
+		 <p:column headerText="Ação" >
+					 <p:commandLink title="Excluir" update=":formExcluir:Excluir"
+                                oncomplete="confirmation.show()" immediate="true" value="excluir" >                                                    
+                                <f:setPropertyActionListener target="#{cargoMB.cargo}"  value="#{cargo}"  />
+                        </p:commandLink>
+					
+				</p:column>
+	 </p:dataTable>
+
+	 </h:form>
+	 
+	 
+			<h:form id="formExcluir">
+                
+            <p:dialog header="Excluir" widgetVar="confirmation" modal="true" id="Excluir">      
+                                  
+                <h:outputText value="Você gostaria de Deletar o #{cargoMB.cargo.descricao}?" />                
+                
+                <br/>
+                <br/>
+                
+                <p:commandButton id="confirm" value="Sim"
+                        actionListener="#{cargoMB.remover()}"
+                        update=":principal:listaCargo"
+                        oncomplete="confirmation.hide()" />
+                
+                 &nbsp;
+                 
+                <p:commandButton id="decline" value="Não"
+                        onclick="confirmation.hide()" type="button" />
+                        
+            </p:dialog>
+                
+        </h:form>     
+	 
+	 
+	 
+</ui:define>
+ 
+  
+    	</ui:composition>
+
+
+</body> 
+</html>

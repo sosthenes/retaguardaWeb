@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorio" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="186"/>
+	<parameter name="tituloRelatorio" class="java.lang.String"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[".\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="periodo" class="java.lang.String"/>
+	<field name="adv.descricao" class="java.lang.String"/>
+	<field name="adv.funcionario.nome" class="java.lang.String"/>
+	<field name="lintaMotivo" class="java.util.Collection"/>
+	<field name="adv.myFormattedDateFato" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="39">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="0" y="0" width="549" height="32"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="13" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{tituloRelatorio}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="253">
+			<rectangle>
+				<reportElement x="2" y="4" width="550" height="206"/>
+			</rectangle>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="387" y="9" width="163" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="10" y="9" width="362" height="17"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA["IImo(a) Sr(a):  "+$F{adv.funcionario.nome}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="29" y="46" width="505" height="115"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[                     Tendo em vista Vossa Senhoria ter cometido o(s) ato(s) de indisciplina previsto no dispositivo legal da letra “H” e “J” do Artigo 482 da CLT-Consolidação das Leis do Trabalho, resolvemos aplicar-lhe como medida disciplinar a presente CARTA DE ADVERTENCIA.
+                     A presente advertência tem o intuito de evitar a reincidência ou o cometido de outra(s) falta(s) de qualquer natureza prevista em lei que nos obrigará a tomar outras medidas cabíveis de acordo com a legislação em vigor.
+]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="29" y="181" width="289" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA["Data dos fatos: "+$F{adv.myFormattedDateFato}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="3" y="218" width="550" height="20" isPrintWhenDetailOverflows="true"/>
+				<box topPadding="1" leftPadding="4" bottomPadding="1" rightPadding="1">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Descrição da Advertência:  "+$F{adv.descricao}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="94">
+			<subreport>
+				<reportElement stretchType="RelativeToBandHeight" x="10" y="41" width="531" height="41" isPrintWhenDetailOverflows="true"/>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{lintaMotivo})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "relatorioMotivo_subreport.jasper"]]></subreportExpression>
+			</subreport>
+			<staticText>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="10" y="13" width="257" height="20"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Enquadramento no artigo Artigo 482 da CLT]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="224" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="25" width="550" height="149"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="8" y="33" width="146" height="15"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ciente do(a) Empregado(a):]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="8" y="65" width="130" height="20"/>
+				<textElement/>
+				<text><![CDATA[Em: ____/_____/_____]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="370" y="65" width="153" height="20"/>
+				<textElement/>
+				<text><![CDATA[Assinatura do(a) Empregado(a)]]></text>
+			</staticText>
+			<line>
+				<reportElement x="341" y="64" width="200" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="370" y="134" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Testemunha:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="341" y="133" width="200" height="1"/>
+			</line>
+			<line>
+				<reportElement x="9" y="133" width="200" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="38" y="134" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Testemunha:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="451" y="192" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

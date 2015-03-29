@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xml:lang="pt-BR" lang="pt-BR"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<h:outputStylesheet name="estilo.css" library="css" />
+</h:head>
+<body>
+
+	<ui:composition template="/commonLayout.xhtml">
+		<ui:define name="content">
+			<h:form id="principal">
+
+				<p:panel header="Cadastro de Contas" id="painel_cadastro" style="margin-bottom:10px;">
+					<p:messages id="messages" autoUpdate="true" closable="true" />
+
+					<p:panelGrid columns="3">
+						<p:outputLabel value=" Data início:" />
+						<p:outputLabel value=" Data fim" />
+						<p:calendar value="#{vendaManualInteirasMB.dataInicio}" id="dataInicio" pattern="dd/MM/yyyy" />
+						<p:calendar value="#{vendaManualInteirasMB.dataFim}" id="dataFim" pattern="dd/MM/yyyy" />
+					</p:panelGrid>
+
+
+					<f:facet name="footer">
+						<p:commandButton action="#{vendaManualInteirasMB.pesquisar()}" value=" Pesquisar " update="lista principal" />
+					</f:facet>
+				</p:panel>
+
+
+				<p:dataTable value="#{vendaManualInteirasMB.listaProdutoVendido}" var="vale" id="lista">
+					<f:facet name="header">  
+			            Lista de produtos vendidos
+			        </f:facet>
+
+					<!-- <p:column headerText="Data da compra" sortBy="#{vale.}">
+						<p:outputLabel value="#{vale.myFormattedDate}" />
+					</p:column> -->
+					<p:columnGroup type="footer">
+						<p:row>
+							<p:column colspan="3" footerText="Total pago:" style="text-align:right" />
+							<p:column>
+								<!-- <p:outputLabel value="#{vendaManualInteirasMB.valorTotalConsultaPago}" /> -->
+							</p:column>
+							
+							<p:column  footerText="Total a pagar:" style="text-align:right" />
+							<p:column>
+								<!-- <p:outputLabel value="#{vendaManualInteirasMB.valorTotalConsultaAPagar}" /> -->
+							</p:column>
+						</p:row>
+					</p:columnGroup>
+				</p:dataTable>
+
+
+
+			</h:form>
+
+
+			
+			
+
+		</ui:define>
+
+
+	</ui:composition>
+
+
+</body>
+</html>

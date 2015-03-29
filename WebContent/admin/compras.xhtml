@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xml:lang="pt-BR" lang="pt-BR"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+<h:outputStylesheet name="estilo.css" library="css" />
+</h:head> 
+<body> 
+
+<ui:composition template="/commonLayout.xhtml">
+ <ui:define name="content">
+	 <h:form>
+
+				<p:panel header="Cadastro de Receita" id="painel_cadastro"
+					style="margin-bottom:10px;">
+					<p:messages id="messages" autoUpdate="true" closable="true" />
+
+					<p:panelGrid columns="2">
+						<p:outputLabel value=" N° da Nota:" />
+						<p:outputLabel value=" Data Compra :" />
+						
+						<p:inputText value="#{comprasMB.compra.numeroNota}" id="nota" />
+						<p:calendar value="#{comprasMB.compra.dataCompra}"  id="data">
+							<f:convertDateTime pattern="dd/MM/yyyy"  />
+						</p:calendar>
+					</p:panelGrid>
+					<p:panelGrid columns="5">
+						<p:outputLabel value=" Ingrediente :" />
+						<p:outputLabel value=" Quantidade :" />
+						<p:outputLabel value=" Valor Unitário :" />
+						<p:outputLabel value=" Valor Total :" />
+						<p:outputLabel value=" Ação :" />
+						
+						<p:selectOneMenu value="#{manterEstoqueMB.idIngrediente}" id="ingrediente">
+							<f:selectItem itemLabel="Selecione um Ingrediente" />
+							<f:selectItems value="#{comprasMB.ingredientes}" var="medida" itemLabel="#{medida.nome}" itemValue="#{medida.id}" />
+						</p:selectOneMenu>
+						
+						<p:inputText value="#{comprasMB.item.quantidade}" id="quantidade" />
+
+						<p:inputText value="#{comprasMB.item.valorUnitatio}" id="valorUnitario" />
+
+						<p:inputText value="#{comprasMB.item.valorTotal}" id="valorTotal" />
+						
+						<p:commandButton action="#{comprasMB.adicionaItem()}" value=" Adicionar " immediate="true" update="listaItens" />
+						
+					</p:panelGrid>
+				</p:panel>
+				
+				
+				
+								<h1>Lista de compras</h1>
+	 <p:dataTable value ="#{comprasMB.listaItem}" var ="item" id="listaItens">
+		 <p:column headerText="Ingrediente">
+		 	<p:outputLabel value ="#{item.idIngrediente.nome}"/>
+		 </p:column>
+		 <p:column headerText="Quantidade">
+			<p:outputLabel value ="#{item.quantidade}"/> 
+		 </p:column>
+		 <p:column headerText="Ação" >
+					 <p:commandLink title="Excluir" update=":formExcluir:Excluir"
+                                oncomplete="confirmation.show()" immediate="true" value="excluir" >                                                    
+                                <f:setPropertyActionListener target="#{comprasMB.item}"  value="#{item}"  />
+                        </p:commandLink>
+					
+				</p:column>
+	 </p:dataTable>
+				
+				
+				
+			</h:form>
+</ui:define>
+ 
+  
+    	</ui:composition>
+
+
+</body> 
+</html>

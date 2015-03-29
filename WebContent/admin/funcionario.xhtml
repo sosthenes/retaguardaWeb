@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xml:lang="pt-BR" lang="pt-BR"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+<h:outputStylesheet name="estilo.css" library="css" />
+
+
+</h:head> 
+<body> 
+
+<ui:composition template="/commonLayout.xhtml">
+ <ui:define name="content">
+ 
+    <script type="text/javascript" src="/retaguardaWeb/jquery/jquery.maskedinput-1.1.4.pack.js"/>
+    
+    
+ <script type="text/javascript">
+	$(document).ready(function(){
+		$("#telefone").mask("9999-9999");
+		$("#telefone1").mask("9999-9999");
+		$("#telefone2").mask("9999-9999");
+		$("#telefone3").mask("9999-9999");
+		$("#cpf").mask("999.999.999-99");
+		$("#cep").mask("99999-999");
+		$("#data").mask("99/99/9999");
+	});
+</script>
+ 
+	 <h:form id="principal">
+
+				<p:panel header="Cadastro de Funcionario" id="painel_cadastro" style="margin-bottom:10px;" >
+					
+					<p:messages id="messages" autoUpdate="true" closable="true" />
+					
+					
+					<p:panelGrid columns="3" style="width:100%" >
+						
+						<p:outputLabel value=" Setores :" />
+						<p:outputLabel value=" Cargos :" />
+						<p:outputLabel value=" Situação Funcional :" />
+
+						<p:selectOneMenu value="#{funcionarioMB.funcionario.setor}" id="idSetor" required="true">
+							<f:selectItem itemLabel="Selecione um Setor" />
+							<f:selectItems value="#{funcionarioMB.listaSetor}" var="prod" itemLabel="#{prod.descricao}" itemValue="#{prod}" />
+						</p:selectOneMenu>
+						
+						
+						<p:selectOneMenu value="#{funcionarioMB.funcionario.cargo}" id="idCargo" required="true">
+							<f:selectItem itemLabel="Selecione um Cargo" />
+							<f:selectItems value="#{funcionarioMB.listaCargo}" var="prod" itemLabel="#{prod.descricao}" itemValue="#{prod}" />
+						</p:selectOneMenu>
+
+						<p:selectOneMenu value="#{funcionarioMB.funcionario.situacaoFuncional}" id="idSituacaoFuncional" required="true">
+							<f:selectItem itemLabel="Selecione uma situação" />
+							<f:selectItems value="#{funcionarioMB.listaSituacao}" var="prod" itemLabel="#{prod.descricao}" itemValue="#{prod}" />
+						</p:selectOneMenu>
+					</p:panelGrid>
+					
+						<p:panelGrid columns="2"  style="width:100%">
+						<p:outputLabel value=" Login :" />
+						<p:outputLabel value=" Senha :" />
+
+						<p:inputText value="#{funcionarioMB.funcionario.login}" size="50"  required="true"/>
+						<p:inputText value="#{funcionarioMB.funcionario.senha}" />
+
+					</p:panelGrid>
+					
+					<p:panelGrid columns="2"  style="width:100%">
+						<p:outputLabel value=" Nome do Funcionario :" />
+						<p:outputLabel value=" Data de nascimento :" />
+
+						<p:inputText value="#{funcionarioMB.funcionario.nome}" size="50"  required="true"/>
+						<p:inputText value="#{funcionarioMB.funcionario.data_nascimento}" id="data" >
+							<f:convertDateTime type="date" dateStyle="medium" pattern="dd/MM/yyyy"/>
+						</p:inputText>
+
+					</p:panelGrid>
+
+					<p:panelGrid columns="2"  style="width:100%">
+						<p:outputLabel value=" Nome do Pai :" />
+						<p:outputLabel value=" Nome da Mãe :" />
+
+						<p:inputText value="#{funcionarioMB.funcionario.nomePai}" size="50"/>
+						<p:inputText value="#{funcionarioMB.funcionario.nomeMae}" size="50"/>
+
+					</p:panelGrid>
+
+					<p:panelGrid columns="4"  style="width:100%">
+						<p:outputLabel value=" CPF :" />
+						<p:outputLabel value=" RG :" />
+						<p:outputLabel value=" PIS :" />
+						<p:outputLabel value=" Título de Eleitor :" />
+						
+						<p:inputText value="#{funcionarioMB.funcionario.cpf}" id="cpf"  />
+						<p:inputText value="#{funcionarioMB.funcionario.rg}" />
+						<p:inputText value="#{funcionarioMB.funcionario.pis}" />
+						<p:inputText value="#{funcionarioMB.funcionario.tituloEleitor}" />
+						
+
+					</p:panelGrid>
+
+					<p:panelGrid columns="3"  style="width:100%">
+						<p:outputLabel value=" CTPS :" />
+						<p:outputLabel value=" Endereço :" />
+						<p:outputLabel value=" Naturalidade :" />
+						<p:inputText value="#{funcionarioMB.funcionario.ctps}" size="50" />
+						<p:inputText value="#{funcionarioMB.funcionario.endereco}" size="50" />
+						<p:inputText value="#{funcionarioMB.funcionario.naturalidade}" />
+
+					</p:panelGrid>
+
+					<p:panelGrid columns="2"  style="width:100%">
+						<p:outputLabel value=" Referência 1 :" />
+						<p:outputLabel value=" Referência 2 :" />
+						
+						<p:inputText value="#{funcionarioMB.funcionario.nomeReferencia1}" size="50" />
+						<p:inputText value="#{funcionarioMB.funcionario.nomeReferencia2}" size="50" />
+						
+
+					</p:panelGrid>
+					
+					<p:panelGrid columns="2"  style="width:100%">
+						<p:outputLabel value=" Telefone Referência 1 :" />
+						<p:outputLabel value=" Telefone Referência 2 :" />
+						
+						
+						<p:inputText value="#{funcionarioMB.funcionario.telefoneReferencia1}" id="telefone" />
+						<p:inputText value="#{funcionarioMB.funcionario.telefoneReferencia2}"  id="telefone1" />
+
+					</p:panelGrid>
+					
+					
+
+					<p:panelGrid columns="4"  style="width:100%" >
+						<p:outputLabel value=" Telefone fixo :" />
+						<p:outputLabel value=" Celular :" />
+						<p:outputLabel value=" Hora Início :" />
+						<p:outputLabel value=" hora Fim :" />
+						
+						<h:inputText value="#{funcionarioMB.funcionario.telefone}"  id="telefone2" />
+						<h:inputText value="#{funcionarioMB.funcionario.celular}"  id="telefone3" />
+						<h:inputText value="#{funcionarioMB.funcionario.horarioTrabalhoInicio}"  id="horaInicio" />
+						<h:inputText value="#{funcionarioMB.funcionario.horarioTrabalhoFim}"  id="horaFim" />
+					</p:panelGrid>
+					
+					<p:panelGrid columns="3"  style="width:100%">
+						<p:outputLabel value=" Banco :" />
+						<p:outputLabel value=" Agência :" />
+						<p:outputLabel value=" Conta :" />
+						
+						<h:inputText value="#{funcionarioMB.funcionario.banco}"  id="banco" />
+						<h:inputText value="#{funcionarioMB.funcionario.agencia}"  id="agencia" />
+						<h:inputText value="#{funcionarioMB.funcionario.conta}"  id="conta" />
+					</p:panelGrid>
+					<p:panelGrid columns="3"  style="width:100%">
+						<p:outputLabel value=" Moto :" />
+						<p:outputLabel value=" Placa :" />
+						<p:outputLabel value=" Renavam :" />
+						
+						<h:inputText value="#{funcionarioMB.funcionario.moto}"  id="moto" />
+						<h:inputText value="#{funcionarioMB.funcionario.placa}"  id="placa" />
+						<h:inputText value="#{funcionarioMB.funcionario.renavam}"  id="renavam" />
+					</p:panelGrid>
+					<f:facet name="footer">
+                        <p:commandButton action="#{funcionarioMB.adiciona()}" value=" Salvar " update=":principal:painel_cadastro listaFuncionario"  rendered="#{funcionarioMB.funcionario.id==null}" />
+                        <p:commandButton action="#{funcionarioMB.editar()}" value=" Alterar " id="alterar" update=":principal:painel_cadastro listaFuncionario" rendered="#{funcionarioMB.funcionario.id!=null}" />
+                    </f:facet>
+
+
+				</p:panel>
+						
+
+
+				<h1>Lista de Funcionários</h1>
+	 <p:dataTable value ="#{funcionarioMB.funcionarioes}" var ="funcionario" id="listaFuncionario">
+		 <p:column headerText="Nome da funcionario">
+		 	<p:outputLabel value ="#{funcionario.nome}"/>
+		 </p:column>
+		 <p:column headerText="Cargo">
+		   <p:outputLabel value ="#{funcionario.cargo.descricao}"/>
+		 </p:column>
+		 <p:column headerText="Ação" >
+					 <p:commandLink title="Editar" update=":principal"   value="Editar" immediate="true">                                                    
+                                <f:setPropertyActionListener target="#{funcionarioMB.funcionario}"  value="#{funcionario}"  />
+                        </p:commandLink>
+                         - 
+					 <p:commandLink title="Excluir" update=":formExcluir:Excluir"  oncomplete="confirmation.show()" immediate="true" value="excluir" >                                                    
+                                <f:setPropertyActionListener target="#{funcionarioMB.funcionario}"  value="#{funcionario}"  />
+                        </p:commandLink>
+					
+				</p:column>
+	 </p:dataTable>
+
+	 </h:form>
+	 
+	 
+			<h:form id="formExcluir">
+                
+            <p:dialog header="Excluir" widgetVar="confirmation" modal="true" id="Excluir">      
+                                  
+                <h:outputText value="Você gostaria de Deletar o #{funcionarioMB.funcionario.nome}?" />                
+                
+                <br/>
+                <br/>
+                
+                <p:commandButton id="confirm" value="Sim"
+                        actionListener="#{funcionarioMB.remover()}"
+                        update=":principal:listaFuncionario"
+                        oncomplete="confirmation.hide()" />
+                
+                 &nbsp;
+                 
+                <p:commandButton id="decline" value="Não"
+                        onclick="confirmation.hide()" type="button" />
+                        
+            </p:dialog>
+                
+        </h:form>     
+	 
+	 
+	 
+</ui:define>
+ 
+  
+    	</ui:composition>
+
+
+</body> 
+</html>

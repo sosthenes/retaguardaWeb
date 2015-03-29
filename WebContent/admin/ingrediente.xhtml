@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xml:lang="pt-BR" lang="pt-BR"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+<h:outputStylesheet name="estilo.css" library="css" />
+</h:head> 
+<body> 
+
+<ui:composition template="/commonLayout.xhtml">
+ <ui:define name="content">
+ 
+	 <h:form>
+	 <p:panel header="Cadastro de Igrediente" id="painel_cadastro" style="margin-bottom:10px;">
+			<p:messages id="messages" autoUpdate="true" closable="true" />
+			<p:panelGrid columns="2">
+	 <h:outputLabel value =" Nome :"/>
+	 <h:inputText value ="#{ingredienteMB.ingrediente.nome}"/>
+	
+	 <h:outputLabel value =" Preço :"/>
+	 <h:selectOneMenu value="#{ingredienteMB.idUnidadeMedida}">
+	 	<f:selectItems  value="#{ingredienteMB.listaUnidadeMedida}" var="medida"
+							itemLabel="#{medida.descricao}" itemValue="#{medida.id}" />
+	 </h:selectOneMenu>
+	
+	 <h:commandButton action ="#{ingredienteMB.adiciona()}" value =" Salvar "/>
+	</p:panelGrid>
+		</p:panel>
+	
+	 </h:form>
+	
+	 <h1>Lista de Ingredientes </h1>
+	 <h:dataTable value ="#{ingredienteMB.ingredientes}" var ="ingredientes">
+	 <h:column>
+	 <h:outputText value ="#{ingredientes.nome}"/>
+	 </h:column>
+	 <h:column>
+	 <h:outputText value ="#{ingredientes.idUnidadeMedida.descricao}"/>
+	 </h:column>
+	 </h:dataTable>
+
+</ui:define>
+ 
+  
+    	</ui:composition>
+
+
+</body> 
+</html>

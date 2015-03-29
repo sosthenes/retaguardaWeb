@@ -1,0 +1,29 @@
+@CHARSET "UTF-8";
+
+.ui-panelgrid td {
+	border-width: 0px;
+	border-style: none !important;
+	border-color: white;
+}
+
+.ui-widget-content {
+	border-width: 0px;
+	border-style: none !important;
+	border-color: white;
+}
+
+.alinha-direita {
+	text-align: right;
+}
+
+.alinha-centro {
+	text-align: center;
+}
+
+.ui-datatable-even {
+	background-color: white;
+}
+
+.ui-datatable-odd {
+	background: none repeat scroll 0px 0px rgb(240, 240, 240);
+}

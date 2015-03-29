@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xml:lang="pt-BR" lang="pt-BR"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+<h:outputStylesheet name="estilo.css" library="css" />
+
+
+
+</h:head> 
+<body> 
+
+<ui:composition template="/commonLayout.xhtml">
+ <ui:define name="content">
+ 
+ 
+	 <h:form id="principal">
+
+				<p:panel header="FECHAMENTO DE CAIXA MANUAL" id="painel_cadastro" style="margin-bottom:10px;" >
+					<p:messages id="messages" autoUpdate="true" closable="true" />
+					
+					<p:panelGrid columns="2" style="width:100%" >
+						
+						<p:outputLabel value=" Caixas :" />
+						<p:selectOneMenu value="#{fechamentocaixaMB.idCaixa}" id="idCaixa">
+							<f:selectItem itemLabel="Selecione um Caixa" />
+							<f:ajax event="change" render="listaGasto gasto gasolina vale" listener="#{fechamentocaixaMB.listar}" />
+							<f:selectItems value="#{fechamentocaixaMB.listaCaixa}" var="prod" itemLabel="#{prod.descricao}" itemValue="#{prod.id}" />
+						</p:selectOneMenu>
+
+						
+						<p:outputLabel value=" Funcionário :" />
+						<p:selectOneMenu value="#{fechamentocaixaMB.idFuncionario}" id="idFuncionario" disabled="true">
+							<f:selectItem itemLabel="Selecione um Funcionário" />
+							<f:selectItems value="#{fechamentocaixaMB.funcionarioes}" var="prod" itemLabel="#{prod.nome}" itemValue="#{prod.id}" />
+						</p:selectOneMenu>
+					</p:panelGrid>
+					
+						<p:panelGrid columns="3" style="width:100%" >
+							<p:outputLabel value=" Gastos:" />
+							<p:outputLabel value=" Gasolina:" />
+							<p:outputLabel value=" Vales" />
+							
+							<p:outputLabel value="#{fechamentocaixaMB.fechamentocaixa.gasto}"  id="gasto"/>
+							<p:outputLabel value="#{fechamentocaixaMB.fechamentocaixa.gasolina}" id="gasolina" />
+							<p:outputLabel value="#{fechamentocaixaMB.fechamentocaixa.vale}" id="vale" />
+						</p:panelGrid>
+
+					<p:panelGrid columns="6"  style="width:100%">
+						<p:outputLabel value=" Data do Fechamento :" />
+						<p:outputLabel value=" Dinheiro :" />
+						<p:outputLabel value=" Débito :" />
+						<p:outputLabel value=" Crédito :" />
+						<p:outputLabel value=" Conta do cliente :" />
+						<p:outputLabel value=" Comanda recebida cancelada :" />
+						
+						<p:calendar value="#{fechamentocaixaMB.dataFechamento}" id="data" required="true" pattern="dd/MM/yyyy"   requiredMessage="Campo Data do Fechamento é obrigatório." />
+						<h:inputText value="#{fechamentocaixaMB.fechamentocaixa.dinheiro}" id="dinheiro" />
+						<h:inputText value="#{fechamentocaixaMB.fechamentocaixa.debito}" id="debito" />
+						<h:inputText value="#{fechamentocaixaMB.fechamentocaixa.credito}"  id="credito"/>
+						<h:inputText value="#{fechamentocaixaMB.fechamentocaixa.contaCliente}"  id="conta"/>
+						<h:inputText value="#{fechamentocaixaMB.fechamentocaixa.comandaRecebidaCancelada}" id="cancelada" />
+					</p:panelGrid>
+
+					<f:facet name="footer">
+                        <p:commandButton action="#{fechamentocaixaMB.adiciona()}" value=" Salvar " update=":principal:painel_cadastro listaGasto" />
+                    </f:facet>
+
+
+				</p:panel>
+						
+
+
+	 <p:dataTable value ="#{fechamentocaixaMB.listaFechamentocaixa}" var ="fechamento" id="listaGasto">
+	 	<f:facet name="header">  
+            Lista de Gasto
+        </f:facet> 
+        
+		 <p:column headerText="Data do Gasto">
+		 	<p:outputLabel value ="#{fechamento.myFormattedDate}" />
+		 </p:column>
+		 <p:column headerText="Caixa">
+		 	<p:outputLabel value ="#{fechamento.caixa.descricao}"/>
+		 </p:column>
+		 <p:column headerText="Dinheiro">
+		 	<p:outputLabel value ="#{fechamento.dinheiro}"/>
+		 </p:column>
+		 <p:column headerText="Débito">
+		   <p:outputLabel value ="#{fechamento.debito}"/>
+		 </p:column>
+		 <p:column headerText="Crédito">
+		   <p:outputLabel value ="#{fechamento.credito}"/>
+		 </p:column>
+		 <p:column headerText="Conta do cliente">
+		   <p:outputLabel value ="#{fechamento.contaCliente}"/>
+		 </p:column>
+		 <p:column headerText="Total de vendas">
+		   <p:outputLabel value ="#{fechamento.totalVenda}"/>
+		 </p:column>
+		 <p:column headerText="Cadastrado por">
+		   <p:outputLabel value ="#{fechamento.usuario.nome}" rendered="#{fechamento.usuario!=null}"/>
+		   <p:outputLabel value ="#{fechamento.funcionario.nome}" rendered="#{fechamento.usuario==null}"/>
+		 </p:column>
+		 <p:column headerText="Atendente">
+		   <p:outputLabel value ="#{fechamento.funcionario.nome}"/>
+		 </p:column>
+		 
+		 <p:column headerText="Ação" >
+					 <p:commandLink title="Excluir" update=":formExcluir:Excluir"
+                                oncomplete="confirmation.show()" immediate="true" value="excluir" >                                                    
+                                <f:setPropertyActionListener target="#{fechamentocaixaMB.fechamentocaixa}"  value="#{fechamento}"  />
+                        </p:commandLink>
+					
+				</p:column>
+	<p:columnGroup type="footer">  
+            <p:row>  
+                <p:column colspan="2" footerText="Total:"     style="text-align:right"  />  
+    <p:column   footerText="#{fechamentocaixaMB.totalDinheiro}"  />  
+  <p:column   footerText="#{fechamentocaixaMB.totalDebito}"  />  
+   <p:column   footerText="#{fechamentocaixaMB.totalCredito}"  />  
+   <p:column   footerText="#{fechamentocaixaMB.totalContaCliente}"  />  
+              <p:column colspan="2" footerText="Total Geral:"     style="text-align:right"  />      
+              <p:column footerText="#{fechamentocaixaMB.totalGasto}" />  
+              <p:column />
+            </p:row>  
+        </p:columnGroup>  
+	 </p:dataTable>
+
+	 </h:form>
+	 
+	 
+			<h:form id="formExcluir">
+                
+            <p:dialog header="Excluir" widgetVar="confirmation" modal="true" id="Excluir">      
+                                  
+                <h:outputText value="Você gostaria de Deletar o(a) #{fechamentocaixaMB.fechamentocaixa.caixa.descricao}?" />                
+                
+                <br/>
+                <br/>
+                
+                <p:commandButton id="confirm" value="Sim"
+                        actionListener="#{fechamentocaixaMB.remover()}"
+                        update=":principal:listaGasto"
+                        oncomplete="confirmation.hide()" />
+                
+                 &nbsp;
+                 
+                <p:commandButton id="decline" value="Não"
+                        onclick="confirmation.hide()" type="button" />
+                        
+            </p:dialog>
+                
+        </h:form>     
+	 
+	 
+
+
+	<script type="text/javascript">
+  
+    
+  //  $(function(){
+ //   	$("[id='principal:dinheiro']").maskMoney({symbol:'R$ ', showSymbol:true, thousands:'.', decimal:',', symbolStay: true});
+ //   	$("[id='principal:debito']").maskMoney({symbol:'R$ ', showSymbol:true, thousands:'.', decimal:',', symbolStay: true});
+  //  	$("[id='principal:credito']").maskMoney({symbol:'R$ ', showSymbol:true, thousands:'.', decimal:',', symbolStay: true});
+  //  	$("[id='principal:conta']").maskMoney({symbol:'R$ ', showSymbol:true, thousands:'.', decimal:',', symbolStay: true});
+  ///  	$("[id='principal:cancelada']").maskMoney({symbol:'R$ ', showSymbol:true, thousands:'.', decimal:',', symbolStay: true});
+// })
+
+
+    </script>
+ 
+	 
+</ui:define>
+ 
+  
+    	</ui:composition>
+
+
+</body> 
+</html>

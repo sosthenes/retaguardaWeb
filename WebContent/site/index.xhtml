@@ -1,0 +1,252 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"> 
+
+<h:head>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Império das Pizzas</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="ROBOTS" content="FOLLOW,INDEX" />
+    <meta name="author" content="Gustavo Costa - gutocostta@gmail.com" />
+    <meta name="copyright" content="© 2014 Império Pizzas" />
+    <meta http-equiv="imagetoolbar" content="no" />
+    <meta name="rating" content="general" />
+    <meta name="Custodian" content="Gustavo Costa" />
+    
+    <!-- editável  -->
+    <meta content="" name="description"/>
+    <meta content="" name="keywords"/>
+    <meta content="" name="summary"/>
+    
+    
+    <!-- editável  -->
+    
+    
+    <link rel="shortcut icon" href="favicon.ico" />
+    
+    <link rel="stylesheet" href="css/geral.css" media="all" />
+    <link rel="stylesheet" href="css/pizza.css" media="all" />
+    <link rel="stylesheet" href="css/icons.css" media="all" />
+    
+    
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.min.js"></script>
+    <![endif]-->
+    
+    <!-- SCRIPTS  -->
+	<script src="js/jquery-1.10.2.min.js"></script>
+    <script src="js/bxslider.min.js"></script>
+    <script src="js/jquery.validate.min.js"></script>
+    <script src="js/global.js"></script>
+    <!-- SCRIPTS  -->
+
+</h:head> 
+
+
+<body>
+
+
+
+
+	<!-- menu ************************************************************************** -->
+
+		<header id="header-home" class="main-header"><!-- Inicio header menu -->
+                
+            <nav id="main-nav" class="clearfix"><!-- mainnav -->                    
+                <div class="main-menu"><!-- main-menu -->                        
+                    <ul id="menu-principal"><!-- Menu principal -->                        
+                        <li>
+                            <a href="index.html" title="Home" >Home</a>
+                        </li>
+                        
+                        <li>                                
+                            <a href="cardapio.xhtml" title="Cardápio" >Cardápio</a>
+                        </li>
+                        
+                        <li>                                
+                            <a href="promocao.xhtml" title="" >Promoções</a>
+                        </li>                            
+                        
+                    </ul><!-- fim menu principal -->
+                </div><!-- fim main-menu -->        
+                
+                <div class="account visible-desktop hidden-mobile">  
+                    <a id="btn-login" href="#" title="Acessar" class="btn orange visible-desktop"><span class="icon"></span> Acessar</a>
+                    <div class="box-login row">
+                    	<form id="login" class="form-d form-vertical">
+                        	<a class="close" href="" >X</a>
+                            <p class="zeta">Já possui cadastro? <br />Efetue seu pedido on-line!</p>
+                
+                            <input type="text" name="user" class="field-d" placeholder="Usuário" data-rule-required="true" data-msg-required="Informe o nome de Usuário." />
+                            <input type="password" name="pass" class="field-d" placeholder="Senha" data-rule-required="true" data-msg-required="Informe a senha." />
+                            
+                            <div class="control-item">
+                                <button type="submit" class="btn orange"><i class="fa fa-lock"></i> Acessar</button>
+                                <span class="secondary-action access-help">
+                                	<p>Não possui cadastro?</p>
+                                    <p class="action"><a href="">Cadastra-se ›</a></p>
+                                </span>
+                            </div>
+                        </form>
+                    </div>                      
+                </div><!-- fim login -->        			
+                <!-- mobile -->
+                <div class="mobile-account hidden-desktop">
+                    <a href="#" title="" >Acesso</a>
+                </div>        
+                <div class="mobile-menu hidden-desktop">
+                    <a href="#" title="" >Menu</a>
+                </div>        
+                <div class="mobile-account-access hidden-desktop">
+                    <form id="login2" class="form-d form-vertical">
+                        	<a class="close" href="" >X</a>
+                            <p class="zeta">Já possui cadastro? <br />Efetue seu pedido on-line!</p>
+                
+                            <input type="text" name="user" class="field-d" placeholder="Usuário" data-rule-required="true" data-msg-required="Informe o nome de Usuário." />
+                            <input type="password" name="pass" class="field-d" placeholder="Senha" data-rule-required="true" data-msg-required="Informe a senha." />
+                            
+                            <div class="control-item">
+                                <button type="submit" class="btn orange"><i class="fa fa-lock"></i> Acessar</button>
+                                <span class="secondary-action access-help">
+                                	<p>Não possui cadastro?</p>
+                                    <p class="action"><a href="">Cadastra-se ›</a></p>
+                                </span>
+                            </div>
+                        </form>
+                </div>
+                <!-- fim mobile -->                    
+            	</nav><!-- mainnav -->
+                
+	</header>
+
+
+    <!-- menu ************************************************************************** -->
+    
+	<div class="wrapper">
+    
+
+        <div class="container wp-topo hero-landing ">
+            <div class="row">
+                <img src="images/Imperio das pizzas_logo.png" class="mobile-illustration visible-mobile no-shadow" />
+                <div class="hero-landing colsm-3">
+                    <h1 class="delta">Qualidade Incomparável</h1>
+                    <p class="description">Pizzas de massa fresca feita todos os dias e ingredientes de primeira qualidade é só aqui.</p>    
+                </div>
+                <div class="hero-landing-img-wrapper hidden-mobile colsm-6">
+                    <img src="images/Imperio das pizzas_logo.png" class="hero-landing-img" />
+                </div>
+                <div class="hero-landing colsm-3">
+                	<h1 class="delta">Ligue:</h1>
+                    <h2 class="landing-hero-title delta"><strong><i class="fa fa-phone"></i> 3567-2181 </strong></h2>
+                    <p class="description">Entregamos em todo o Vicente Pires e Aguas Claras.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="container wp-box section-slider hidden-mobile">
+            <div class="slider-wrapper row">
+                    
+                <ul class="slider  slider-itens">
+                    <li>
+                        <div class="row">
+                            <div class="colsm-12 slider-illustration">
+                           		<img src="images/pizza_01.jpg" alt="Imagem Ilustrativa" />
+                        	</div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="row">
+                        	<div class="colsm-12 slider-illustration">
+                           		<img src="images/pizza_02.jpg" alt="Imagem Ilustrativa" />
+                        	</div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="row">
+                        	<div class="colsm-12 slider-illustration">
+                           		<img src="images/pizza_03.jpg" alt="Imagem Ilustrativa" />
+                        	</div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="row">
+                        	<div class="colsm-12 slider-illustration">
+                           		<img src="images/pizza_04.jpg" alt="Imagem Ilustrativa" />
+                        	</div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="row">
+                        	<div class="colsm-12 slider-illustration">
+                           		<img src="images/pizza_05.jpg" alt="Imagem Ilustrativa" />
+                        	</div>
+                        </div>
+                    </li>
+                </ul>
+                    
+                    <div class="slider-nav">
+                    	<span id="prev" class="slider-prev"></span>
+                    	<span id="next" class="slider-next"></span>
+                	</div>
+                    
+                </div>
+        </div>
+        
+         <div class="container wp-box section section-vantagens">
+            <div class="row">
+            	<a href="#" title="" class="top-link visible-mobile">Topo</a>
+            	<h2 class="no-margin">Cartão Fidelidade</h2>
+            </div>
+            <div class="row paragraphy">
+                <div class="colsm-6 texto">
+                	<h4 class="zeta">
+                    Na compra de pelo menos uma PIZZA GRANDE ao dia ganhe um SELO FIDELIDADE. Juntando 10 selos fidelidade, troque por uma PIZZA PROMOCIONAL.
+                    </h4>
+                </div>
+                <div class="colsm-5 vantagens-illustration"><!-- imagem lado direito  -->
+                    <img src="images/cartao_fidelidade.png" />
+                </div>
+            </div>
+        </div>
+		
+        
+        <footer id="footer" class="row">
+        	<div class="footer-content row">
+        
+                <div class="colsm-3">
+                	<h3><strong><i class="fa fa-phone"></i> 3567-2181 </strong></h3>
+                </div>
+                <div class="colsm-6">
+                	<p class="description">Entregamos em todo o Vicente Pires e Aguas Claras.</p>
+                	<p>Todos os dias de 17h30min até às 23h15min.</p>
+					<p>*Consulte o valor da taxa de entrega.</p>
+                </div>
+                <div class="colsm-3">
+                	<ul>
+                        <li><a href="#" title=""><i class="icon twitter"></i> Twitter</a></li>
+                        <li><a href="#" title=""><i class="icon facebook"></i> Facebook</a></li>
+                        <li><a href="#" title=""><i class="icon youtube"></i> Youtube</a></li>
+                        <li><a href="#" title=""><i class="icon gplus"></i> Google+</a></li>
+                    </ul>
+                </div>
+        	
+            </div>
+        </footer>
+        
+        <div class="footer-by row">
+            <p class="btn-small">design by <a href="www.one7.com.br" title="one7">Gustavo Costa</a></p>
+        </div>
+        
+
+	</div>
+
+
+</body>
+</html>
