@@ -37,25 +37,20 @@ public class CarrinhoMB {
 	@EJB
 	private CategoriaService categoriaService;
 
-	Cliente cliente = new Cliente();
+	private Cliente cliente;
 	List<TelefoneCliente> results = new ArrayList<TelefoneCliente>();
 	List<Produto> listaProduto;
 	private boolean meia;
 	private List<CategoriaProduto> categoriaProduto;
 	private CategoriaProduto categoria;
-	
-	
-	
-	
-	
+	private Cliente clienteSelecionado;
+
 	@PostConstruct
 	private void init() {
 		categoriaProduto = this.categoriaService.getCategorias();
-	
+		setCliente(new Cliente());
 	}
-	
-	
-	
+
 	public List<TelefoneCliente> complete(String query) {
 		cliente.getTelefone().setNumero(query);
 		results = clienteService.buscaClientePorTelefone(cliente.getTelefone());
@@ -69,13 +64,12 @@ public class CarrinhoMB {
 		System.out.println(tel.getNumero());
 		cliente.getTelefone().getNumero();
 	}
-	
+
 	private Produto produto;
 
 	public List<Produto> getProdutos() {
 		return new ArrayList<Produto>(this.carrinhoBean.getProdutos());
 	}
-
 
 	public void adicionaMeia(Produto produto) {
 		try {
@@ -101,6 +95,9 @@ public class CarrinhoMB {
 		}
 	}
 
+	public void carregarEndereco() {
+		setClienteSelecionado(clienteSelecionado);
+	}
 
 	public List<Produto> getListaProduto() {
 		return listaProduto;
@@ -132,40 +129,40 @@ public class CarrinhoMB {
 		boolean verifica = false;
 		double total = 0.0;
 		double parcial = 0.0;
-			for (Produto prod : getProdutos()) {
-				PedidoProduto pedidoProduto = new PedidoProduto();
-				if (prod!=null && prod.isMeia()) {
-					if (prod.isMeia() && !verifica) {
-						verifica = true;
-						pedidoProduto.setProdutos(prod);
-						pedidoProduto.setIdPedido(pedido);
-						pedido.getPedidoProdutos().add(pedidoProduto);
-					} else {
-						pedido.getPedidoProdutos()
-								.get(pedido.getPedidoProdutos().size() - 1)
-								.setProdutosMeia(prod);
-						if (pedido.getPedidoProdutos()
-								.get(pedido.getPedidoProdutos().size() - 1)
-								.getProdutos().getPreco() > prod.getPreco()) {
-							parcial = pedido.getPedidoProdutos()
-									.get(pedido.getPedidoProdutos().size() - 1)
-									.getProdutos().getPreco();
-						} else {
-							parcial = prod.getPreco();
-						}
-						pedido.getPedidoProdutos()
-								.get(pedido.getPedidoProdutos().size() - 1)
-								.getProdutos().setPreco(parcial);
-						total += parcial;
-						verifica = false;
-					}
-				} else {
+		for (Produto prod : getProdutos()) {
+			PedidoProduto pedidoProduto = new PedidoProduto();
+			if (prod != null && prod.isMeia()) {
+				if (prod.isMeia() && !verifica) {
+					verifica = true;
 					pedidoProduto.setProdutos(prod);
 					pedidoProduto.setIdPedido(pedido);
 					pedido.getPedidoProdutos().add(pedidoProduto);
-					total += prod.getPreco();
+				} else {
+					pedido.getPedidoProdutos()
+							.get(pedido.getPedidoProdutos().size() - 1)
+							.setProdutosMeia(prod);
+					if (pedido.getPedidoProdutos()
+							.get(pedido.getPedidoProdutos().size() - 1)
+							.getProdutos().getPreco() > prod.getPreco()) {
+						parcial = pedido.getPedidoProdutos()
+								.get(pedido.getPedidoProdutos().size() - 1)
+								.getProdutos().getPreco();
+					} else {
+						parcial = prod.getPreco();
+					}
+					pedido.getPedidoProdutos()
+							.get(pedido.getPedidoProdutos().size() - 1)
+							.getProdutos().setPreco(parcial);
+					total += parcial;
+					verifica = false;
 				}
+			} else {
+				pedidoProduto.setProdutos(prod);
+				pedidoProduto.setIdPedido(pedido);
+				pedido.getPedidoProdutos().add(pedidoProduto);
+				total += prod.getPreco();
 			}
+		}
 		pedido.setTotalPedido(total);
 		// totalPedido();
 	}
@@ -198,31 +195,28 @@ public class CarrinhoMB {
 		this.results = results;
 	}
 
-
-
 	public List<CategoriaProduto> getCategoriaProduto() {
 		return categoriaProduto;
 	}
-
-
 
 	public void setCategoriaProduto(List<CategoriaProduto> categoriaProduto) {
 		this.categoriaProduto = categoriaProduto;
 	}
 
-
-
 	public CategoriaProduto getCategoria() {
 		return categoria;
 	}
 
-
-
 	public void setCategoria(CategoriaProduto categoria) {
 		this.categoria = categoria;
 	}
-	
-	
-	
+
+	public Cliente getClienteSelecionado() {
+		return clienteSelecionado;
+	}
+
+	public void setClienteSelecionado(Cliente clienteSelecionado) {
+		this.clienteSelecionado = clienteSelecionado;
+	}
 
 }

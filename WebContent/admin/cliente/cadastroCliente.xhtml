@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xml:lang="pt-BR" lang="pt-BR"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	<h:form>
+	<p:panel header="Dados Cliente" id="panelDadosCliente">
+		<h:messages />
+		<h:panelGrid columns="2">
+			<h:outputLabel value="Nome: " for="clienteNome" />
+			<h:inputText id="clienteNome" value="#{cadastroClienteMB.cliente.nome}" required="true" requiredMessage="O campo nome é obrigatório"/>
+			<h:outputLabel value="Email: " for="clienteEmail" />
+			<h:inputText id="clienteEmail" value="#{cadastroClienteMB.cliente.email}" />
+		</h:panelGrid>
+		<ui:repeat var="telefone" value="#{cadastroClienteMB.cliente.listaTelefones}">
+		<h:panelGrid columns="2">
+			<h:outputLabel value="Telefone: " for="clienteTelefone" />
+			<h:inputText id="clienteEmail" value="#{telefone.numero}" />
+		</h:panelGrid>
+		</ui:repeat>
+		<p:commandButton value="+ 1" actionListener="#{cadastroClienteMB.adicionarMaisUmTelefone()}" immediate="true" update="panelDadosCliente" ajax="true"/>
+		<p:commandButton value="Salvar Cliente" process="panelDadosCliente" update="panelDadosCliente" actionListener="#{cadastroClienteMB.salvarCliente()}" ajax="true"/>
+	</p:panel>
+</h:form>
+</html>
+

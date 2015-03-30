@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xml:lang="pt-BR" lang="pt-BR"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<p:panel id="panelPedidos">
+	<p:dataTable value="#{carrinhoMB.pedido.pedidoProdutos}" var="p">
+		<p:column headerText="Produto">
+			<h:outputLabel value="Meia " rendered="#{p.produtos.meia eq 'true'}" />
+			<h:outputText value="#{p.produtos.descricao}" />
+			<h:outputLabel value=" e Meia "
+				rendered="#{p.produtosMeia.meia eq 'true'}" />
+			<h:outputText value="#{p.produtosMeia.descricao}"
+				rendered="#{p.produtosMeia.meia  eq 'true'}" />
+		</p:column>
+		<p:column headerText="Valor">
+			<h:outputText value="#{p.produtos.preco}" />
+		</p:column>
+		<p:column headerText="Ação">
+			<h:commandLink action="#{carrinhoMB.remove(p)}" value=" remove " />
+		</p:column>
+	</p:dataTable>
+	Total do pedido:
+	<p:outputLabel value="#{carrinhoMB.pedido.totalPedido}" />
+</p:panel>
+
+</html>

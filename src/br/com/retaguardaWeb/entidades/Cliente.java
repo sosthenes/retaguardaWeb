@@ -31,6 +31,9 @@ public class Cliente {
 	
 	private String nome;
 	
+	@OneToMany(mappedBy="cliente")
+	private List<Endereco> enderecos;
+	
 	private String email;
 	
 	@OneToMany(cascade = CascadeType.ALL)
@@ -91,6 +94,15 @@ public class Cliente {
 	public void setTelefone(TelefoneCliente telefone) {
 		this.telefone = telefone;
 	}
+
+	public List<Endereco> getEnderecos() {
+		return enderecos;
+	}
+
+	public void setEnderecos(List<Endereco> enderecos) {
+		this.enderecos = enderecos;
+	}
+	
 	
 	
 }

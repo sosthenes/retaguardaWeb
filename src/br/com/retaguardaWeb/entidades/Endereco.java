@@ -10,43 +10,39 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="telefonecliente")
-public class TelefoneCliente extends EntidadeBase{
+@Table(name="endereco")
+public class Endereco extends EntidadeBase{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	public TelefoneCliente() {
+	public Endereco() {
 		// TODO Auto-generated constructor stub
 	}
-	public TelefoneCliente(Cliente cliente) {
+	public Endereco(Cliente cliente) {
 		setCliente(cliente);
 	}
 	
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="idtelefoneCliente")
+	@Column(name="idEndereco")
 	private Long id;
 	
 	@ManyToOne
-	@JoinColumn(name="idCliente")
+	@JoinColumn(name="idCliente",referencedColumnName="id",nullable=false)
 	private Cliente cliente;
-	
-	@ManyToOne
-	@JoinColumn(name="idOperadora")
-	private Operadora operadora;
-	
-	private String numero;
 
+	@Column(name="descricao")
+	private String descricao;
+	
+	@Column(name="cep")
+	private String cep;
+	
+	@Override
 	public Long getId() {
 		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	public Cliente getCliente() {
@@ -57,23 +53,25 @@ public class TelefoneCliente extends EntidadeBase{
 		this.cliente = cliente;
 	}
 
-	public Operadora getOperadora() {
-		return operadora;
+	public String getDescricao() {
+		return descricao;
 	}
 
-	public void setOperadora(Operadora operadora) {
-		this.operadora = operadora;
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 
-	public String getNumero() {
-		return numero;
+	public String getCep() {
+		return cep;
 	}
 
-	public void setNumero(String numero) {
-		this.numero = numero;
+	public void setCep(String cep) {
+		this.cep = cep;
 	}
-	
-	
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 	
 	
 	

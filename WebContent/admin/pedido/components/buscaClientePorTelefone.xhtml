@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xml:lang="pt-BR" lang="pt-BR"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<p:panel id="buscaClientePorTelefone">
+	<p:autoComplete id="autoCompleteTelefone" onblur="verificarInclusaoCliente()" value="#{buscaClientePorTelefoneMB.telefoneSelecionado}" var="telefone" itemLabel="#{telefone.numero}" itemValue="#{telefone.cliente}"
+							completeMethod="#{buscaClientePorTelefoneMB.complete}"
+							dropdown="true"  />
+	<p:remoteCommand actionListener="#{buscaClientePorTelefoneMB.verificarInclusaoCliente()}" immediate="true" name="verificarInclusaoCliente" update="buscaClientePorTelefone"/>
+	
+	<p:dialog header="Inclusão Cliente" widgetVar="modalInclusaoCliente" modal="true" > 
+	    <ui:include src="/admin/cliente/cadastroCliente.xhtml" />
+	</p:dialog> 
+	
+</p:panel>
+
+</html>

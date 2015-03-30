@@ -33,6 +33,11 @@ public class ClienteService {
 		}
 		return listaTel;
 	}
+	public List<TelefoneCliente> buscaClientePorTelefone(String telefone) {
+		TelefoneCliente telefoneTemp = new TelefoneCliente();
+		telefoneTemp.setNumero(telefone);
+		return buscaClientePorTelefone(telefoneTemp);
+	}
 
 	
 	public List<Cliente> getIClientes() {

@@ -15,107 +15,98 @@
 		<ui:define name="content">
 
 			<h:form id="principal">
-			
-<p:panel header="AutoComplete" toggleable="true" id="panel">  
-        <h:panelGrid columns="2" cellpadding="5">  
-          
-  
-            <h:outputLabel value="Telefone :" for="dd" />  
-            <p:autoComplete 
-            id="dd" 
-            value="#{carrinhoMB.cliente.telefone}"  
-            var="t"  
-            itemLabel="#{t.numero}"
-            itemValue="#{t.id}"
-            converter="telefoneConverter"
-            completeMethod="#{carrinhoMB.complete}" 
-           	forceSelection="true" 
-			dropdown="true" 
-			size="12" 
-			maxlength="10" 
-            />  
-              <p:outputLabel value="#{carrinhoMB.cliente.telefone.numero}" />
-        </h:panelGrid>  
-       
-        <h:panelGrid columns="2" cellpadding="5">  
-          
-  			Nome dos clientes cadastrados para esse telefone
-            <h:outputLabel value="Endereços :" for="dd" />  
-            <p:inputText  value="endereços" />
-        </h:panelGrid>  
-       
-        <h:panelGrid columns="2" cellpadding="5">  
-          
-  			Lista de endereços para seleção de um, se for o caso adicionar
-            <h:outputLabel value="Endereços :" for="dd" />  
-            <p:inputText  value="endereços" />
-        </h:panelGrid>  
-    </p:panel>  			
-			
-            Ao selecionar o cliente e o endereço, faz o pedido e  
-            		depois finaliza o pedido. Nesse finalizar, terei um objeto com um "cliente" entende uima lita de produtod que é o pedido!
-            			
-	<div>
-	
-	
-		<div style="width: 50px;  float: left;display: table;">
-				<p:dataTable value="#{carrinhoMB.categoriaProduto}" var="p" >
-					<p:column headerText="Categorias" >
-						
-						<p:commandLink title="- #{p.descricao} -"
-							update=":principal:produtos"
-							value=" #{p.descricao} "
-							action="#{carrinhoMB.carregaProdudos()}" >
-							<f:setPropertyActionListener target="#{carrinhoMB.categoria}"
-								value="#{p}" />
-						</p:commandLink>
-						
-						
-					</p:column>
-				</p:dataTable>
-		</div>
-		
-		
-		
-		<div style="width: 50px; float: left;display: table; ">
-				<p:dataTable value="#{carrinhoMB.pedido.pedidoProdutos}" var="p"  >
-					<p:column headerText="Produto">
-						<h:outputLabel value="Meia " rendered="#{p.produtos.meia eq 'true'}" />
-						<h:outputText value="#{p.produtos.descricao}" />
-						<h:outputLabel value=" e Meia " rendered="#{p.produtosMeia.meia eq 'true'}" />
-						<h:outputText value="#{p.produtosMeia.descricao}"  rendered="#{p.produtosMeia.meia  eq 'true'}"  />
-					</p:column>
-					<p:column headerText="Valor">
-						<h:outputText value="#{p.produtos.preco}" />
-					</p:column>
-					<p:column headerText="Ação">
-						<h:commandLink action="#{carrinhoMB.remove(p)}"
-							value=" remove " />
-					</p:column>
-				</p:dataTable> 
-				Total do pedido: <p:outputLabel value="#{carrinhoMB.pedido.totalPedido}" />
-		</div>
-		
-		<div style="width: 50px; float: left;display: table; ">
-		
-					<p:dataTable value="#{carrinhoMB.listaProduto}" var="p" id="produtos" >
-					<p:column headerText="Produto" >
-							<h:commandButton action="#{carrinhoMB.adiciona(p)}" value="#{p.descricao}" />
-							<h:commandButton action="#{carrinhoMB.adicionaMeia(p)}" value="Meia"  rendered="#{p.categoria.meia==true}"  />
-							<br />
-					</p:column>
-				</p:dataTable>
-		</div>
-	</div>
-	
 
-			
-			
-				
+				<p:panel header="AutoComplete" toggleable="true" id="panel">
+					<h:panelGrid columns="2" cellpadding="5">
+
+
+						<h:outputLabel value="Telefone :" for="dd" />
+						<p:autoComplete id="dd" value="#{carrinhoMB.cliente.telefone}"
+							var="t" itemLabel="#{t.numero}" itemValue="#{t.id}"
+							completeMethod="#{carrinhoMB.complete}" forceSelection="true"
+							dropdown="true" size="12" maxlength="10"  />
+						<p:outputLabel value="#{carrinhoMB.cliente.telefone.numero}" />
+					</h:panelGrid>
+
+					<h:panelGrid columns="2" cellpadding="5">
+
+						<h:outputLabel value="Endereços :" for="dd" />
+						<p:inputText value="endereços" />
+					</h:panelGrid>
+
+					<h:panelGrid columns="2" cellpadding="5">
+
+						<h:outputLabel value="Endereços :" for="dd" />
+						<p:inputText value="endereços" />
+					</h:panelGrid>
+				</p:panel>
+
+				<div>
+
+
+					<div style="width: 50px; float: left; display: table;">
+						<p:dataTable value="#{carrinhoMB.categoriaProduto}" var="p">
+							<p:column headerText="Categorias">
+
+								<p:commandLink title="- #{p.descricao} -"
+									update=":principal:produtos" value=" #{p.descricao} "
+									action="#{carrinhoMB.carregaProdudos()}">
+									<f:setPropertyActionListener target="#{carrinhoMB.categoria}"
+										value="#{p}" />
+								</p:commandLink>
+
+
+							</p:column>
+						</p:dataTable>
+					</div>
+
+
+
+					<div style="width: 50px; float: left; display: table;">
+						<p:dataTable value="#{carrinhoMB.pedido.pedidoProdutos}" var="p">
+							<p:column headerText="Produto">
+								<h:outputLabel value="Meia "
+									rendered="#{p.produtos.meia eq 'true'}" />
+								<h:outputText value="#{p.produtos.descricao}" />
+								<h:outputLabel value=" e Meia "
+									rendered="#{p.produtosMeia.meia eq 'true'}" />
+								<h:outputText value="#{p.produtosMeia.descricao}"
+									rendered="#{p.produtosMeia.meia  eq 'true'}" />
+							</p:column>
+							<p:column headerText="Valor">
+								<h:outputText value="#{p.produtos.preco}" />
+							</p:column>
+							<p:column headerText="Ação">
+								<h:commandLink action="#{carrinhoMB.remove(p)}" value=" remove " />
+							</p:column>
+						</p:dataTable>
+						Total do pedido:
+						<p:outputLabel value="#{carrinhoMB.pedido.totalPedido}" />
+					</div>
+
+					<div style="width: 50px; float: left; display: table;">
+
+						<p:dataTable value="#{carrinhoMB.listaProduto}" var="p"
+							id="produtos">
+							<p:column headerText="Produto">
+								<h:commandButton action="#{carrinhoMB.adiciona(p)}"
+									value="#{p.descricao}" />
+								<h:commandButton action="#{carrinhoMB.adicionaMeia(p)}"
+									value="Meia" rendered="#{p.categoria.meia==true}" />
+								<br />
+							</p:column>
+						</p:dataTable>
+					</div>
+				</div>
+
+
+
+
+
 
 				<hr />
 
-			
+
 			</h:form>
 		</ui:define>
 
