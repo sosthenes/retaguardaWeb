@@ -6,14 +6,12 @@
 	xmlns:p="http://primefaces.org/ui" xml:lang="pt-BR" lang="pt-BR"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
-	<p:panel id="panelProdutos">
-		<p:dataTable value="#{panelProdutosMB.produtosDisponiveis}" var="produto">
+		<p:dataTable id="panelProdutos" style="width:30%;" value="#{panelProdutosMB.produtosDisponiveis}" var="produto">
 			<p:column headerText="Produtos">
 				<h:outputLabel value="#{produto.descricao}" />
-				<p:commandButton actionListener="#{panelProdutosMB.adicionarProdutoAPedidos(produto,false)}" immediate="true" ajax="true" value="Inteira"/>
-				<p:commandButton actionListener="#{panelProdutosMB.adicionarProdutoAPedidos(produto,true)}" rendered="#{produto.meia == true}" immediate="true" ajax="true" value="Meia"/>
+				<p:commandButton actionListener="#{panelPedidosMB.adicionarProdutoAPedidos(produto,false)}" update=":principal:panelPedidos" immediate="true" ajax="true" value="Inteira"/>
+				<p:commandButton actionListener="#{panelPedidosMB.adicionarProdutoAPedidos(produto,true)}" update=":principal:panelPedidos" rendered="#{produto.categoria.meia}" immediate="true" ajax="true" value="Meia"/>
 			</p:column>
 		</p:dataTable>
-	</p:panel>
 
 </html>

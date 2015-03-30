@@ -13,6 +13,7 @@ import br.com.retaguardaWeb.entidades.Cliente;
 import br.com.retaguardaWeb.entidades.Endereco;
 import br.com.retaguardaWeb.entidades.TelefoneCliente;
 import br.com.retaguardaWeb.sessionbeans.ClienteService;
+import br.com.retaguardaWeb.util.Acao;
 
 @ManagedBean(name="cadastroClienteMB")
 @ViewScoped
@@ -20,6 +21,7 @@ public class CadastroClienteMB {
 	private static final String CLIENTE_SALVO_COM_SUCESSO = "Cliente salvo com sucesso";
 
 	private Cliente cliente;
+	private Acao<Cliente> callbackSalvarCliente;
 	
 	@EJB
 	private ClienteService clienteService;
@@ -30,7 +32,13 @@ public class CadastroClienteMB {
 		getCliente().setListaTelefones(new ArrayList<TelefoneCliente>());
 		getCliente().getListaTelefones().add(new TelefoneCliente(getCliente()));
 		getCliente().setEnderecos(new ArrayList<Endereco>());
-		getCliente().getEnderecos().add(new Endereco(new Cliente()));
+		setCallbackSalvarCliente(new Acao<Cliente>() {
+
+			@Override
+			public void executar(Cliente t) {
+				// TODO Auto-generated method stub
+			} 
+		});
 	}
 	public Cliente getCliente() {
 		return cliente;
@@ -46,7 +54,18 @@ public class CadastroClienteMB {
 	public void salvarCliente() {
 		clienteService.adiciona(cliente);
 		FacesContext.getCurrentInstance().addMessage("panelDadosCliente", new FacesMessage(FacesMessage.SEVERITY_INFO, CLIENTE_SALVO_COM_SUCESSO, CLIENTE_SALVO_COM_SUCESSO));
+		cliente = clienteService.obterPorId(cliente);
+		callbackSalvarCliente.executar(cliente);
+//		cliente = new Cliente();
 	}
+	public Acao<Cliente> getCallbackSalvarCliente() {
+		return callbackSalvarCliente;
+	}
+	public void setCallbackSalvarCliente(Acao<Cliente> callbackSalvarCliente) {
+		this.callbackSalvarCliente = callbackSalvarCliente;
+	}
+	
+	
 	
 	
 }

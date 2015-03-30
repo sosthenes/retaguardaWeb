@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xml:lang="pt-BR" lang="pt-BR"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	<p:panel header="Dados Endereço" id="panelDadosEndereco">
+		<h:messages />
+		<h:panelGrid columns="2">
+			<h:outputLabel value="CEP: " for="enderecoClienteNome" />
+			<h:inputText id="enderecoClienteNome" value="#{cadastroEnderecoMB.endereco.cliente.nome}" disabled="true"/>
+			<h:outputLabel value="CEP: " for="enderecoClienteCep" />
+			<h:inputText id="enderecoClienteCep" value="#{cadastroEnderecoMB.endereco.cep}"/>
+			<h:outputLabel value="Descricao: " for="enderecoClienteEmail" />
+			<h:inputText id="enderecoClienteEmail" value="#{cadastroEnderecoMB.endereco.descricao}" />
+		</h:panelGrid>
+		<p:commandButton value="Salvar Endereço" process="panelDadosEndereco" update="panelDadosEndereco" actionListener="#{cadastroEnderecoMB.salvarEndereco()}" ajax="true"/>
+	</p:panel>
+</html>
+

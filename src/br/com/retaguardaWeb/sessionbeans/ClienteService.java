@@ -51,4 +51,14 @@ public class ClienteService {
 		query.setParameter("id", cliente.getId());
 		return query.getSingleResult();
 	}
+	
+	public Cliente obterPorId(Cliente cliente) {
+		TypedQuery<Cliente> query = this.manager.createQuery("select x from Cliente x where id = :id", Cliente.class);
+		query.setParameter("id", cliente.getId());
+		return query.getSingleResult();
+	}
+	
+	public void atualizar(Cliente cliente) {
+		manager.merge(cliente);
+	}
 }

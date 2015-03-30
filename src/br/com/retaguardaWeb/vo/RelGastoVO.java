@@ -8,7 +8,7 @@ public class RelGastoVO {
 	
 	private List<GastoVO> listaGastoPorTipoConta;
 	
-	private List<GastoVO> listaGastoPorDescrição;
+	private List<GastoVO> listaGastoPorDescricao;
 	
 	private GastoVO gastoVO;
 	
@@ -51,19 +51,17 @@ public class RelGastoVO {
 		this.listaGastoPorTipoConta = listaGastoPorTipoConta;
 	}
 
-	/**
-	 * @return the listaGastoPorDescrição
-	 */
-	public List<GastoVO> getListaGastoPorDescrição() {
-		return listaGastoPorDescrição;
+	public List<GastoVO> getListaGastoPorDescricao() {
+		return listaGastoPorDescricao;
+	}
+
+	public void setListaGastoPorDescricao(List<GastoVO> listaGastoPorDescricao) {
+		this.listaGastoPorDescricao = listaGastoPorDescricao;
 	}
 
 	/**
-	 * @param listaGastoPorDescrição the listaGastoPorDescrição to set
+	 * @return the listaGastoPorDescriï¿½ï¿½o
 	 */
-	public void setListaGastoPorDescrição(List<GastoVO> listaGastoPorDescrição) {
-		this.listaGastoPorDescrição = listaGastoPorDescrição;
-	}
 	
 	
 	

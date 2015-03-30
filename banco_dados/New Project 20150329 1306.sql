@@ -10719,3 +10719,12 @@ CREATE TABLE `venda` (
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+
+DROP TABLE IF EXISTS `sosthen_imperio`.`endereco`;
+CREATE TABLE  `sosthen_imperio`.`endereco` (
+  `idendereco` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `idCliente` int(10) unsigned NOT NULL,
+  `descricao` varchar(450) DEFAULT NULL,
+  `cep` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`idendereco`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;

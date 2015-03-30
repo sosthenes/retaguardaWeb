@@ -24,6 +24,20 @@ public class PanelPedidosMB {
 		return new ArrayList<Produto>(this.carrinhoBean.getProdutos());
 	}
 	
+	public void adicionarProdutoAPedidos(Produto produto, Boolean meia) {
+		try {
+			if (meia) {
+				carrinhoBean.adicionaMeia(produto);
+			} else {
+				carrinhoBean.adiciona(produto);
+			}
+			recarregarPedido();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	public void recarregarPedido() {
 		pedido = new Pedido();
 		boolean verifica = false;
@@ -66,7 +80,9 @@ public class PanelPedidosMB {
 		pedido.setTotalPedido(total);
 		// totalPedido();
 	}
-
+	public void remove(PedidoProduto pedidoProduto) {
+		this.carrinhoBean.remove(pedidoProduto.getProdutos());
+	}
 
 	public void setPedido(Pedido pedido) {
 		this.pedido = pedido;

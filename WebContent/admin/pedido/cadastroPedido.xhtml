@@ -13,9 +13,16 @@
 
 	<ui:composition template="/commonLayout.xhtml"> 
 		<ui:define name="content">
-
+			<f:event listener="#{cadastroPedidoMB.init()}" type="preRenderView"/>
 			<h:form id="principal">
+			<ui:debug hotkey="x" />
 				<ui:include src="/admin/pedido/components/buscaClientePorTelefone.xhtml" />
+				<ui:include src="/admin/pedido/components/selecionarEndereco.xhtml" />
+				<div style="display:flex;width: 100%">
+					<ui:include src="/admin/pedido/components/panelCategorias.xhtml" />
+					<ui:include src="/admin/pedido/components/panelProdutos.xhtml" />
+					<ui:include src="/admin/pedido/components/panelPedidos.xhtml" />
+				</div>
 			</h:form>
 		</ui:define>
 

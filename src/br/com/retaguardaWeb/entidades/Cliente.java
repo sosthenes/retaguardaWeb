@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,6 +17,9 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 @Entity
 @Table(name="cliente")
@@ -31,13 +35,13 @@ public class Cliente {
 	
 	private String nome;
 	
-	@OneToMany(mappedBy="cliente")
+	@OneToMany(mappedBy="cliente",fetch=FetchType.EAGER,cascade=CascadeType.ALL)
+	@Fetch(FetchMode.SUBSELECT)
 	private List<Endereco> enderecos;
 	
 	private String email;
 	
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name="idTelefoneCliente")
+	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER,mappedBy="cliente")
 	private List<TelefoneCliente> listaTelefones = new ArrayList<TelefoneCliente>();
 
 	@Transient

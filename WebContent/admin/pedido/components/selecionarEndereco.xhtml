@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xml:lang="pt-BR" lang="pt-BR"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	<h:panelGroup id="panelSelecionarEndereco">
+		<p:panel header="Dados Cliente" rendered="#{!empty selecionarEnderecoMB.cliente}" >
+				<h:messages />
+				<h:panelGrid columns="2">
+					<h:outputText value="Nome: "/>
+					<p:inputText  value="#{selecionarEnderecoMB.cliente.nome}" readonly="true"/>
+					<h:outputText value="Email: " />
+					<p:inputText value="#{selecionarEnderecoMB.cliente.email}" readonly="true"/>
+				</h:panelGrid>
+				<ui:repeat var="telefone" value="#{selecionarEnderecoMB.cliente.listaTelefones}">
+					<h:panelGrid columns="2">
+						<h:outputLabel value="Telefone: " />
+						<p:inputText readonly="true" value="#{telefone.numero}" />
+					</h:panelGrid>
+				</ui:repeat>
+				<p:outputPanel id="selecionarEndereco">
+					<p:selectOneRadio id="customRadio" value="#{selecionarEnderecoMB.enderecoSelecionado}" layout="custom">
+						<f:selectItems value="#{selecionarEnderecoMB.cliente.enderecos}" var="endereco" />
+					</p:selectOneRadio>
+					<h:panelGrid columns="4">
+						<ui:repeat var="endereco" varStatus="status" value="#{selecionarEnderecoMB.cliente.enderecos}">
+							<p:panel>
+								<p:radioButton for=":principal:customRadio" itemIndex="#{status.index}"/>
+								CEP: #{endereco.cep}
+								DESCRICAO: #{endereco.descricao}
+							</p:panel>
+						</ui:repeat>
+					</h:panelGrid>
+				</p:outputPanel>
+				
+				<p:commandButton immediate="true" value="+ 1 Endereço" actionListener="#{selecionarEnderecoMB.abrirModalCadastroEndereco()}"/>
+		</p:panel>
+	</h:panelGroup>
+	<p:dialog id="modalInclusaoEndereco" header="Inclusão Endereco" widgetVar="modalInclusaoEndereco" modal="true" > 
+	    <ui:include src="/admin/endereco/cadastrarEndereco.xhtml" />
+	</p:dialog> 
+</html>
+

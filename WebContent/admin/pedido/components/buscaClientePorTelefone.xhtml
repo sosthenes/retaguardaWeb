@@ -6,15 +6,21 @@
 	xmlns:p="http://primefaces.org/ui" xml:lang="pt-BR" lang="pt-BR"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
+
+
 <p:panel id="buscaClientePorTelefone">
-	<p:autoComplete id="autoCompleteTelefone" onblur="verificarInclusaoCliente()" value="#{buscaClientePorTelefoneMB.telefoneSelecionado}" var="telefone" itemLabel="#{telefone.numero}" itemValue="#{telefone.cliente}"
+	<h:outputText value="Telefone Cliente:" /><p:autoComplete id="autoCompleteTelefone"  value="#{buscaClientePorTelefoneMB.telefoneSelecionado}"  oncomplete="atualizarBotaoCliente()" var="telefone" itemLabel="#{telefone.numero}" itemValue="#{telefone}"
 							completeMethod="#{buscaClientePorTelefoneMB.complete}"
-							dropdown="true"  />
-	<p:remoteCommand actionListener="#{buscaClientePorTelefoneMB.verificarInclusaoCliente()}" immediate="true" name="verificarInclusaoCliente" update="buscaClientePorTelefone"/>
-	
-	<p:dialog header="Inclusão Cliente" widgetVar="modalInclusaoCliente" modal="true" > 
-	    <ui:include src="/admin/cliente/cadastroCliente.xhtml" />
-	</p:dialog> 
+							dropdown="true">
+							<p:ajax event="itemSelect" listener="#{buscaClientePorTelefoneMB.carregarCliente()}"/>
+						</p:autoComplete>
+	<h:panelGroup id="incluirCliente">
+		<p:remoteCommand name="atualizarBotaoCliente" immediate="true" update="incluirCliente"/>
+			<p:commandButton onclick="modalInclusaoCliente.show()" value="Incluir Cliente" rendered="#{buscaClientePorTelefoneMB.botaoInclusaoClienteVisivel}"/>
+		<p:dialog header="Inclusão Cliente" widgetVar="modalInclusaoCliente" modal="true" > 
+		    <ui:include src="/admin/cliente/cadastroCliente.xhtml" />
+		</p:dialog> 
+	</h:panelGroup>
 	
 </p:panel>
 

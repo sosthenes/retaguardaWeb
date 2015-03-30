@@ -32,7 +32,7 @@ public class TelefoneCliente extends EntidadeBase{
 	private Long id;
 	
 	@ManyToOne
-	@JoinColumn(name="idCliente")
+	@JoinColumn(name="idCliente",referencedColumnName="id")
 	private Cliente cliente;
 	
 	@ManyToOne

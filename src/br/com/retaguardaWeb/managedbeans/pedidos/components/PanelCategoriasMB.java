@@ -12,6 +12,7 @@ import br.com.retaguardaWeb.entidades.CategoriaProduto;
 import br.com.retaguardaWeb.sessionbeans.CarrinhoBean;
 import br.com.retaguardaWeb.sessionbeans.CategoriaService;
 import br.com.retaguardaWeb.sessionbeans.ClienteService;
+import br.com.retaguardaWeb.sessionbeans.ProdutoService;
 
 @ManagedBean(name="panelCategoriasMB")
 @ViewScoped
@@ -24,14 +25,16 @@ public class PanelCategoriasMB {
 	private ClienteService clienteService;
 	@EJB
 	private CategoriaService categoriaService;
+	@EJB
+	private ProdutoService produtoService;
 	
 	private List<CategoriaProduto> categoriasDisponiveis;
 	
-	@ManagedProperty(value="PanelProdutosMB")
+	@ManagedProperty(value="#{panelProdutosMB}")
 	private PanelProdutosMB panelProdutosMB;
 	
 	@PostConstruct
-	public void init() {
+	private void init() {
 		setCategoriasDisponiveis(categoriaService.getCategorias());
 	}
 	
@@ -46,7 +49,7 @@ public class PanelCategoriasMB {
 	}
 	
 	public void mostrarProdutos(CategoriaProduto categoria) {
-		panelProdutosMB.setProdutosDisponiveis(categoria.getListaProduto());
+		panelProdutosMB.setProdutosDisponiveis(produtoService.listaProdudo(categoria));
 	}
 
 	public void setPanelProdutosMB(PanelProdutosMB panelProdutosMB) {
