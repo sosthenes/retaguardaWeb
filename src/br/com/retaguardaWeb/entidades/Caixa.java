@@ -11,7 +11,12 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="caixa")
-public class Caixa {
+public class Caixa extends EntidadeBase{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3447368990681683715L;
 
 	@Id
 	@GeneratedValue ( strategy = GenerationType.IDENTITY )

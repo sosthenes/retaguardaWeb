@@ -211,5 +211,7 @@ public class AdvertenciaMB extends BasicoMB{
 		this.dataFato = dataFato;
 	}
 
+
+
 	
 }

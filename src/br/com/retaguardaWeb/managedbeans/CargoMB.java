@@ -86,6 +86,7 @@ public class CargoMB extends BasicoMB{
 		
 	}
 
+
 	 
 	
 

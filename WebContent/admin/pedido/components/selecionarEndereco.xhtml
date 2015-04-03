@@ -22,7 +22,9 @@
 				</ui:repeat>
 				<p:outputPanel id="selecionarEndereco">
 					<p:selectOneRadio id="customRadio" value="#{selecionarEnderecoMB.enderecoSelecionado}" layout="custom">
-						<f:selectItems value="#{selecionarEnderecoMB.cliente.enderecos}" var="endereco" />
+						<f:selectItems value="#{selecionarEnderecoMB.cliente.enderecos}" var="endereco"  >
+						</f:selectItems>
+							 <p:ajax event="change" process="@this" update=":principal:customRadio" />
 					</p:selectOneRadio>
 					<h:panelGrid columns="4">
 						<ui:repeat var="endereco" varStatus="status" value="#{selecionarEnderecoMB.cliente.enderecos}">

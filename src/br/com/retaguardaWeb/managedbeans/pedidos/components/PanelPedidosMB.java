@@ -7,10 +7,14 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
+import org.primefaces.context.RequestContext;
+
+import br.com.retaguardaWeb.entidades.CaixaPeriodoFuncionario;
 import br.com.retaguardaWeb.entidades.Pedido;
 import br.com.retaguardaWeb.entidades.PedidoProduto;
 import br.com.retaguardaWeb.entidades.Produto;
 import br.com.retaguardaWeb.sessionbeans.CarrinhoBean;
+import br.com.retaguardaWeb.sessionbeans.PedidoService;
 
 @ManagedBean(name="panelPedidosMB")
 @ViewScoped
@@ -18,7 +22,12 @@ public class PanelPedidosMB {
 	
 	@EJB
 	private CarrinhoBean carrinhoBean;
+	@EJB
+	private PedidoService pedidoService;
+
+	
 	private Pedido pedido;
+	
 
 	public List<Produto> getProdutos() {
 		return new ArrayList<Produto>(this.carrinhoBean.getProdutos());
@@ -37,6 +46,19 @@ public class PanelPedidosMB {
 			e.printStackTrace();
 		}
 	}
+	
+	public void finalizaPedido(){
+		carrinhoBean.finalizaCompra();
+	}
+	
+
+	
+	public void abreModalTipoPedido() {
+		RequestContext.getCurrentInstance().execute("modalTipoPedido.show()");
+		RequestContext.getCurrentInstance().update("principal:modalTipoPedido");
+	}
+
+
 	
 	public void recarregarPedido() {
 		pedido = new Pedido();
@@ -82,6 +104,7 @@ public class PanelPedidosMB {
 	}
 	public void remove(PedidoProduto pedidoProduto) {
 		this.carrinhoBean.remove(pedidoProduto.getProdutos());
+		recarregarPedido();
 	}
 
 	public void setPedido(Pedido pedido) {
@@ -91,8 +114,19 @@ public class PanelPedidosMB {
 	public Pedido getPedido() {
 		return pedido;
 	}
-	
-	
+
+	public void cadastraPedido() {
+		// TODO Auto-generated method stub
+		carrinhoBean.cadastraPedido(pedido);
+		
+	}
+
+	public List<Pedido> listaPedidoPorCaixa(
+			CaixaPeriodoFuncionario caixaPeriodoFuncionario) {
+		// TODO Auto-generated method stub
+		return pedidoService.getPedidos(caixaPeriodoFuncionario, null);
+	}
+
 	
 	
 	

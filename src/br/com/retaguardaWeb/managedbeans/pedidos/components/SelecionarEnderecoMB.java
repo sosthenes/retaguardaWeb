@@ -33,6 +33,9 @@ public class SelecionarEnderecoMB {
 		this.cliente = cliente;
 	}
 
+	public void populaEndereco(Endereco end){
+		enderecoSelecionado = end;
+	}
 	public Endereco getEnderecoSelecionado() {
 		return enderecoSelecionado;
 	}
@@ -54,6 +57,11 @@ public class SelecionarEnderecoMB {
 		RequestContext.getCurrentInstance().execute("modalInclusaoEndereco.show()");
 		RequestContext.getCurrentInstance().update("principal:modalInclusaoEndereco");
 	}
+	
+	
+	
+	
+	
 	public void setCadastroEnderecoMB(CadastroEnderecoMB cadastroEnderecoMB) {
 		this.cadastroEnderecoMB = cadastroEnderecoMB;
 	}

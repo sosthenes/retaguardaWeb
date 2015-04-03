@@ -47,6 +47,10 @@ public class ValeFuncionarioMB extends BasicoMB{
 	
 	@PostConstruct
 	private void init() {
+		if(dataConsulta==null){
+			dataConsulta = new Date();
+			
+		}
 		if(getUsuario().getId()==null && getUsuario().getFuncionario().getId()!=null){
 			setIdFuncionario(getUsuario().getFuncionario().getId());
 			atualizaValorFuncionario();
@@ -55,10 +59,6 @@ public class ValeFuncionarioMB extends BasicoMB{
 			listaFuncionarioes();
 		}
 
-		if(dataConsulta==null){
-			dataConsulta = new Date();
-			
-		}
 		
 		if(lista==null || lista.isEmpty()){
 			listar();

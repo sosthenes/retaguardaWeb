@@ -4,6 +4,7 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 
 import javax.faces.application.FacesMessage;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
@@ -13,12 +14,16 @@ import br.com.retaguardaWeb.entidades.Usuario;
 
 public abstract class  BasicoMB {
 
+
+	
 	private Usuario usuario = new Usuario();
 	public abstract void adiciona ();
 	public abstract void listar() ;
 	public abstract void remover();
 	public abstract void limpar();
 	public abstract void editar();
+	
+	protected ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
 	
 	SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy"); 
 	DecimalFormat qtdeParser = new DecimalFormat( "0.00");
@@ -63,12 +68,17 @@ public abstract class  BasicoMB {
 	public Loja getLoja() {
 		if(loja==null || loja.getId()==null){
 			loja = getUsuario().getLoja();
+			if(loja==null){
+				loja = getUsuario().getFuncionario().getLoja();
+			}
 		}
 		return loja;
 	}
 	public void setLoja(Loja loja) {
 		this.loja = loja;
 	}
+	
+
 	
 	
 }

@@ -10,4 +10,6 @@ public class ConstantesSistema {
 	
 	public final static long TIPO_PAGAMENTO_DIARIAS = 2L;
 	public final static long DESCRICAO_PAGAMENTO_DIARIAS =38L;
+	
+	public final static String PAGAMENTO_COM_DINHEIRO = "Dinheiro";
 }

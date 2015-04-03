@@ -35,9 +35,6 @@ public class PeriodoTrabalho {
 	@JoinColumn(name="idFuncionario")
 	private Funcionario funcionario = new Funcionario();
 	
-	@ManyToOne
-	@JoinColumn(name="idUsuario")
-	private Usuario usuario = new Usuario();
 	
 	@ManyToOne
 	@JoinColumn(name="idLoja")
@@ -110,13 +107,5 @@ public class PeriodoTrabalho {
 	}
 
 
-	public Usuario getUsuario() {
-		return usuario;
-	}
-
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
 	
 }

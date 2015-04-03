@@ -32,9 +32,8 @@ public class LoginService {
 			query.setParameter("senha", usuario.getSenha());
 			return (Usuario)query.getSingleResult();
 		} catch (Exception e) {
-			e.printStackTrace();
+			return null;
 		}
-		return null;	
 	}
 
 	@SuppressWarnings("unchecked")

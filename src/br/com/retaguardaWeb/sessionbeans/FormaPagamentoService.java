@@ -20,7 +20,7 @@ public class FormaPagamentoService {
 	
 	public List<FormaPagamento> listaFormaPagamento() {
 		TypedQuery<FormaPagamento> query = this.manager.createQuery(
-				"select x from FormaPagamento x", FormaPagamento.class);
+				"select x from FormaPagamento x order by x.descricao", FormaPagamento.class);
 
 		return query.getResultList();
 	}

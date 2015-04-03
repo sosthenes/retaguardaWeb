@@ -2,6 +2,7 @@ package br.com.retaguardaWeb.util;
 
 import java.text.DateFormat;
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -14,7 +15,11 @@ public class Conversoes {
 	public SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");  
 	
 	public String converteDoubleToString(double valor){
-		return qtdeParser.format(valor);
+		DecimalFormatSymbols decimalFormatSymbols = new DecimalFormatSymbols();
+		decimalFormatSymbols.setDecimalSeparator(',');
+		decimalFormatSymbols.setGroupingSeparator('.');
+		DecimalFormat decimalFormat = new DecimalFormat("#,##0.00", decimalFormatSymbols);
+		return decimalFormat.format(valor); 
 	}
 	
 	

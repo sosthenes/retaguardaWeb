@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xml:lang="pt-BR" lang="pt-BR"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<h:outputStylesheet name="estilo.css" library="css" />
+</h:head>
+<body>
+
+	<ui:composition template="/commonLayout.xhtml">
+		<ui:define name="content">
+			<f:event listener="#{periodoTrabalhoMB.init()}" type="preRenderView" />
+			<h:form id="principal">
+				<p:panel header="Cadastro de Setor" id="painel_cadastro"
+					style="margin-bottom:10px;">
+					<p:messages id="messages" autoUpdate="true" closable="true" />
+					<p:panelGrid columns="1">
+						<p:commandButton id="abrirPeriodo" value=" Abrir Período "
+							actionListener="#{periodoTrabalhoMB.adiciona()}"
+							rendered="#{periodoTrabalhoMB.periodoAberto eq false}"
+							ajax="true" update=":principal" />
+						<p:commandButton id="fecharPeriodo" value=" Fechar Período "
+							actionListener="#{periodoTrabalhoMB.remover()}"
+							rendered="#{periodoTrabalhoMB.periodoAberto eq true}" ajax="true"
+							update=":principal" />
+
+					</p:panelGrid>
+				</p:panel>
+
+
+			</h:form>
+		</ui:define>
+
+
+	</ui:composition>
+
+
+</body>
+</html>

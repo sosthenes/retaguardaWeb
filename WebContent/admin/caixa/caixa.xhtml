@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xml:lang="pt-BR" lang="pt-BR"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition template="/commonLayout.xhtml">
+	<ui:define name="content">
+
+
+
+
+
+
+		<h:form id="principal">
+				<p:messages id="messages" autoUpdate="true" closable="true" />
+
+			<p:panel header="Abrir Caixa" id="painel_cadastro_abre"
+				style="margin-bottom:10px;" rendered="#{!caixaMB.caixaAberto}">
+
+				<p:panelGrid columns="2" style="width:100%" >
+
+					<p:outputLabel value=" Caixas :" />
+					<p:selectOneMenu value="#{caixaMB.caixa}" id="idCaixa">
+						<f:selectItem itemLabel="Selecione um Caixa disponível" />
+						<f:selectItems value="#{caixaMB.listaCaixaDisponivel}" var="prod" itemLabel="#{prod.descricao}" itemValue="#{prod}" />
+						 <p:ajax event="change" process="@this" update=":principal:idCaixa" />
+					</p:selectOneMenu>
+
+					<p:outputLabel value=" Valor inicial do caixa :" />
+					<p:inputText value="#{caixaMB.caixaPeriodoFuncionario.valorInicial}" >
+						<f:convertNumber pattern="#,##0.00"></f:convertNumber>  
+					</p:inputText>
+
+
+					</p:panelGrid>
+
+				<p:panelGrid columns="1" style="width:100%">
+
+						<p:commandButton id="abrirPeriodo" value=" Abrir Caixa "
+							actionListener="#{caixaMB.adiciona()}"
+							rendered="#{!caixaMB.caixaAberto}"
+							ajax="true" update=":principal" />
+						
+					</p:panelGrid>
+				
+			</p:panel>
+			
+			<p:panel header="Fechar Caixa" id="painel_cadastro" style="margin-bottom:10px;" rendered="#{caixaMB.caixaAberto}">
+
+				<p:panelGrid columns="4" style="width:100%">
+				
+					<p:outputLabel value=" Funcionário " />
+					<p:outputLabel value=" Data / Hora abertura do caixa" />
+					<p:outputLabel value=" Caixa " />
+					<p:outputLabel value=" Valor inicial " />
+					<p:outputLabel value="#{caixaMB.valoresCaixa.funcionario.nome}" />
+					<p:outputLabel value="#{caixaMB.valoresCaixa.dataHoraAberturaFormatado}" />
+					<p:outputLabel value="#{caixaMB.valoresCaixa.idCaixa.descricao}" />
+					<p:outputLabel value="#{caixaMB.valoresCaixa.valorInicialFormatado}" />
+
+				</p:panelGrid>
+
+ <p:dataTable value ="#{caixaMB.valoresCaixa.listaValoresFechamentoCaixa}" var ="vale" id="lista" rowIndexVar="loop">
+	 	<f:facet name="header">  
+            Lista dos valores consolidados	
+        </f:facet> 
+        
+		 <p:column headerText="Forma de pagamento">
+		 	<p:outputLabel value ="#{vale.idFormaPagamento.descricao}" />
+		 </p:column>
+		 <p:column headerText="Valor">
+		   <p:outputLabel value ="#{vale.valor}"/>
+		 </p:column>
+		 <p:column headerText="Valor no caixa">
+		   <p:inputText value="#{caixaMB.listaValoresFechamentoCaixa[loop].valor}" />
+		 </p:column>
+	<p:columnGroup type="footer">  
+            <p:row>  
+                <p:column colspan="1" footerText="Total:"     style="text-align:right"  />  
+                <p:column footerText="#{caixaMB.valoresCaixa.valorTotalVendidoFormatado}" style="text-align:left"/>  
+                <p:column />  
+            </p:row>  
+        </p:columnGroup>  
+	 </p:dataTable>
+
+				<p:panelGrid columns="2" style="width:100%">
+						
+						<p:commandButton id="fecharPeriodo" value=" Fechar Caixa " actionListener="#{caixaMB.remover()}"
+							rendered="#{caixaMB.caixaAberto}" ajax="true"
+							update=":principal" />
+
+					</p:panelGrid>
+				
+			</p:panel>
+		
+		</h:form>
+
+
+
+
+
+	</ui:define>
+
+
+</ui:composition>
+
+
+</html>

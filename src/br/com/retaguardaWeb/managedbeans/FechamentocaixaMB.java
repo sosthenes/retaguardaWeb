@@ -72,7 +72,7 @@ public class FechamentocaixaMB extends BasicoMB{
 	
 	
 	@PostConstruct
-	private void init() {
+	public void init() {
 		if(funcionarioes==null || funcionarioes.isEmpty()){
 			funcionarioes = funcionarioService.getFuncionarios(getLoja());
 		}

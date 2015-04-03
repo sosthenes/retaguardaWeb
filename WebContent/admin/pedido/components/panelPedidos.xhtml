@@ -6,6 +6,7 @@
 	xmlns:p="http://primefaces.org/ui" xml:lang="pt-BR" lang="pt-BR"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 	
+	<h:messages />
 	<p:panel header="Pedido" id="panelPedidos" style="width:100%;">
 		<p:dataTable style="width:100%;"  value="#{panelPedidosMB.pedido.pedidoProdutos}" var="p">
 			<p:column headerText="Produto">
@@ -20,12 +21,26 @@
 				<h:outputText value="#{p.produtos.preco}" />
 			</p:column>
 			<p:column headerText="Ação">
-				<h:commandLink  update="panelPedidos"  value=" remove " >
-					<p:ajax event="click" listener="#{panelPedidosMB.remove(p)}" ajax="true" immediate="true" ></p:ajax>
+				<h:commandLink  update=":principal:panelPedidos"  value=" remove " >
+					<p:ajax event="click" listener="#{panelPedidosMB.remove(p)}" ajax="true" immediate="true" update=":principal:panelPedidos"></p:ajax>
 				</h:commandLink>
 			</p:column>
 		</p:dataTable>
 		Total do pedido:
 	<p:outputLabel value="#{panelPedidosMB.pedido.totalPedido}" />
+	<br />
+	<p:commandButton immediate="true" value="+ Finalizar Pedido " actionListener="#{panelPedidosMB.abreModalTipoPedido()}"/>
 </p:panel>
+	<p:dialog id="modalTipoPedido" header="Seleção de tipo de venda" widgetVar="modalTipoPedido" modal="true" > 
+	    <ui:include src="/admin/tipoVenda/selecionarTipoVenda.xhtml" />
+	</p:dialog> 
+	<p:dialog id="modalFormaPagamento" header="Seleção de forma de pagamento" widgetVar="modalFormaPagamento" modal="true" > 
+	    <ui:include src="/admin/formaPagamento/selecionarFormaPagamento.xhtml" />
+	</p:dialog> 
+	<p:dialog id="modalTroco" header="Informar troco" widgetVar="modalTroco" modal="true" > 
+	    <ui:include src="/admin/pedido/modalTroco.xhtml" />
+	</p:dialog> 
+	
+	
+	
 </html>

@@ -1,6 +1,8 @@
 package br.com.retaguardaWeb.sessionbeans;
 
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.annotation.PostConstruct;
@@ -9,14 +11,19 @@ import javax.ejb.PostActivate;
 import javax.ejb.PrePassivate;
 import javax.ejb.Remove;
 import javax.ejb.Stateful;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
+import br.com.retaguardaWeb.entidades.Pedido;
 import br.com.retaguardaWeb.entidades.Produto;
 
 @Stateful
 public class CarrinhoBean  {
 
-	private LinkedHashSet<Produto> produtos = new LinkedHashSet<Produto>();
+	private List<Produto> produtos = new ArrayList<Produto>();
 	
+	@PersistenceContext
+	private EntityManager manager;
 
 	private static int contadorTotal;
 	private static int contadorAtivos;
@@ -37,7 +44,7 @@ public class CarrinhoBean  {
 	}
 	
 	
-	public Set<Produto> getProdutos() {
+	public List<Produto> getProdutos() {
 		return produtos;
 	}
 
@@ -118,6 +125,10 @@ public class CarrinhoBean  {
 	@PostActivate
 	public void ativando() {
 		System.out.println(" Mais um carrinho foi ativado ... ");
+	}
+
+	public void cadastraPedido(Pedido pedido) {
+		manager.merge(pedido);
 	}
 
 

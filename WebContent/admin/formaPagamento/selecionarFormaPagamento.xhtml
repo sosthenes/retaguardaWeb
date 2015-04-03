@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xml:lang="pt-BR" lang="pt-BR"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	<p:panel header="Tipo de Venda" id="panelDadosFormaPagamento">
+		<h:messages />
+		<h:panelGrid columns="2">
+		<p:outputLabel value=" Tipo de venda :" />
+		<h:selectOneMenu value="#{formaPagamentoMB.formaPagamento}" id="formaPagamento">
+		<f:selectItem itemLabel="Selecione uma opção" />
+			<f:selectItems value="#{formaPagamentoMB.listaFormaPagamento}" var="cat" itemLabel="#{cat.descricao}" itemValue="#{cat}" />
+			 <p:ajax event="change" process="@this" update=":principal:formaPagamento" />
+		</h:selectOneMenu>
+	</h:panelGrid>
+		<p:commandButton value="Salvar Forma de Pagamento" process="panelDadosFormaPagamento" update="panelDadosFormaPagamento" actionListener="#{cadastroPedidoMB.adicionaFormaPagamento()}" ajax="true"/>
+	</p:panel>
+
+</html>
+

@@ -6,9 +6,11 @@
 	xmlns:p="http://primefaces.org/ui" xml:lang="pt-BR" lang="pt-BR"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
+
 		<p:dataTable id="panelProdutos" style="width:30%;" value="#{panelProdutosMB.produtosDisponiveis}" var="produto">
+			
 			<p:column headerText="Produtos">
-				<h:outputLabel value="#{produto.descricao}" />
+				<h:outputLabel value="#{produto.descricao}" /><br />
 				<p:commandButton actionListener="#{panelPedidosMB.adicionarProdutoAPedidos(produto,false)}" update=":principal:panelPedidos" immediate="true" ajax="true" value="Inteira"/>
 				<p:commandButton actionListener="#{panelPedidosMB.adicionarProdutoAPedidos(produto,true)}" update=":principal:panelPedidos" rendered="#{produto.categoria.meia}" immediate="true" ajax="true" value="Meia"/>
 			</p:column>
