@@ -14,7 +14,6 @@ import br.com.retaguardaWeb.entidades.CaixaPeriodoFuncionario;
 import br.com.retaguardaWeb.entidades.FormaPagamento;
 import br.com.retaguardaWeb.entidades.Funcionario;
 import br.com.retaguardaWeb.entidades.Loja;
-import br.com.retaguardaWeb.entidades.Pedido;
 import br.com.retaguardaWeb.entidades.PeriodoTrabalho;
 import br.com.retaguardaWeb.entidades.ValoresFechamentoCaixa;
 import br.com.retaguardaWeb.util.Conversoes;
@@ -23,6 +22,7 @@ import br.com.retaguardaWeb.util.Conversoes;
 public class CaixaService {
 
 	
+
 	@PersistenceContext
 	private EntityManager manager;
 	
@@ -32,18 +32,17 @@ public class CaixaService {
 	@EJB
 	private FormaPagamentoService formaPgtoService;
 	
-	
 
 	public void adiciona(Caixa caixa) {
-		this.manager.merge(caixa);
+		//this.manager.merge(caixa);
 	}
 	
 	public void remover(Caixa caixa) {
-		this.manager.remove(caixa);
+	//	this.manager.remove(caixa);
 	}
 
 	public void alterar(Caixa caixa) {
-		this.manager.merge(caixa);
+		//this.manager.merge(caixa);
 	}
 
 	
@@ -81,6 +80,7 @@ public class CaixaService {
 		}
 		
 		return caixaPeriodo;
+		
 	}
 
 	public CaixaPeriodoFuncionario atualizaCaixa(CaixaPeriodoFuncionario caixaPeriodoFuncionario) {
@@ -123,7 +123,6 @@ public class CaixaService {
 		} catch (Exception e) {
 			return false;
 		}
-		
 	}
 
 	public CaixaPeriodoFuncionario recuperaCaixaAberto(Loja loja, PeriodoTrabalho periodo, Funcionario funcionario) {
@@ -144,7 +143,6 @@ public class CaixaService {
 		} catch (Exception e) {
 			return null;
 		}
-		
 	}
 
 	public boolean verificaCaixaAberto(Loja loja, PeriodoTrabalho periodo,

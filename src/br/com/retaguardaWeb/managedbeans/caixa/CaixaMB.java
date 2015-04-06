@@ -10,17 +10,9 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.persistence.Transient;
 
 import br.com.retaguardaWeb.entidades.Caixa;
 import br.com.retaguardaWeb.entidades.CaixaPeriodoFuncionario;
-import br.com.retaguardaWeb.entidades.Funcionario;
-import br.com.retaguardaWeb.entidades.Loja;
 import br.com.retaguardaWeb.entidades.PeriodoTrabalho;
 import br.com.retaguardaWeb.entidades.ValoresFechamentoCaixa;
 import br.com.retaguardaWeb.managedbeans.BasicoMB;

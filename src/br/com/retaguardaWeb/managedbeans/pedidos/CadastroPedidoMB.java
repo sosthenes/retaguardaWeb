@@ -1,6 +1,7 @@
 package br.com.retaguardaWeb.managedbeans.pedidos;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -12,6 +13,7 @@ import org.primefaces.context.RequestContext;
 
 import br.com.retaguardaWeb.entidades.CaixaPeriodoFuncionario;
 import br.com.retaguardaWeb.entidades.Cliente;
+import br.com.retaguardaWeb.entidades.MesaLoja;
 import br.com.retaguardaWeb.entidades.Pedido;
 import br.com.retaguardaWeb.entidades.PedidoProduto;
 import br.com.retaguardaWeb.entidades.PeriodoTrabalho;
@@ -64,8 +66,10 @@ public class CadastroPedidoMB extends BasicoMB{
 	private CaixaPeriodoFuncionario caixaPeriodoFuncionario;
 	private List<Pedido> listaPedido;
 	
+	
 	@PostConstruct
 	public String init() {
+		
 		
 		if(!periodoTrabalhoMB.isPeriodoAberto()){
 			try {
@@ -295,7 +299,10 @@ public class CadastroPedidoMB extends BasicoMB{
 
 	public void setListaPedido(List<Pedido> listaPedido) {
 		this.listaPedido = listaPedido;
-	}	
+	}
+
+
+
 	
 	
 	

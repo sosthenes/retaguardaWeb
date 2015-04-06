@@ -13,6 +13,9 @@
 			<h:outputLabel value="Email: " for="clienteEmail" />
 			<p:inputText id="clienteEmail" value="#{cadastroClienteMB.cliente.email}" />
 		</h:panelGrid>
+		
+		
+		
 		<ui:repeat varStatus="loop" var="telefone" value="#{cadastroClienteMB.cliente.listaTelefones}">
 			<h:panelGrid columns="2">
 				<h:outputLabel value="Telefone: " />

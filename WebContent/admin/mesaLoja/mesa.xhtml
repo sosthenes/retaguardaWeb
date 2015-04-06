@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xml:lang="pt-BR" lang="pt-BR"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+<h:outputStylesheet name="estilo.css" library="css" />
+</h:head> 
+<body> 
+
+<ui:composition template="/commonLayout.xhtml">
+ <ui:define name="content">
+ 
+	 <h:form  id="principal">
+	 
+	 
+	 <p:panel header="Cadastro de Mesas da loja" id="painel_cadastro"
+					style="margin-bottom:10px;">
+					<p:messages id="messages" autoUpdate="true" closable="true" />
+					<p:panelGrid columns="1">
+						<p:outputLabel value=" Nome da Mesa :" />
+						<h:inputText value="#{mesaLojaMB.mesaLoja.descricao}" id="descricao"/>
+					</p:panelGrid>
+				</p:panel>
+	 
+	<p:commandButton action="#{mesaLojaMB.adiciona()}" value=" Salvar " update="descricao listaMesa" />
+	 
+	 
+	 
+	
+	
+	
+<p:dataTable value ="#{mesaLojaMB.listaMesaLoja}" var ="mesa" id="listaMesa">
+		 <p:column headerText="Nome da loja">
+		 	<p:outputLabel value ="#{mesa.descricao}"/>
+		 </p:column>
+		 <p:column headerText="Ação" >
+					 <p:commandLink title="Excluir" update=":formExcluir:Excluir"
+                                oncomplete="confirmation.show()" immediate="true" value="excluir" >                                                    
+                                <f:setPropertyActionListener target="#{mesaLojaMB.mesaLoja}"  value="#{mesa}"  />
+                        </p:commandLink>
+					
+				</p:column>
+	 </p:dataTable>
+
+
+
+	 </h:form>
+	 
+	 
+			<h:form id="formExcluir">
+                
+            <p:dialog header="Excluir" widgetVar="confirmation" modal="true" id="Excluir">      
+                                  
+                <h:outputText value="Você gostaria de Deletar a #{mesaLojaMB.mesaLoja.descricao}?" />                
+                
+                <br/>
+                <br/>
+                
+                <p:commandButton id="confirm" value="Sim"
+                        actionListener="#{mesaLojaMB.remover()}"
+                        update=":principal:listaMesa :principal:descricao"
+                        oncomplete="confirmation.hide()" />
+                 &nbsp;
+                 
+                <p:commandButton id="decline" value="Não" onclick="confirmation.hide()" type="button" />
+                        
+            </p:dialog>
+                
+        </h:form>     
+	
+	 <h1>Lista de Ingredientes </h1>
+			<h:dataTable value="" var="mesa" id="listaMesa">
+				<h:column>
+					<h:outputText value="" />
+				</h:column>
+			</h:dataTable>
+
+		</ui:define>
+ 
+  
+    	</ui:composition>
+
+
+</body> 
+</html>

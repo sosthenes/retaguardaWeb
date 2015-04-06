@@ -22,6 +22,16 @@
 		</p:dialog> 
 	</h:panelGroup>
 	
+		<h:panelGroup id="selecionarMesa">
+			<p:commandButton onclick="modalSelecionaMesa.show()" value="Selecionar Mesas"  immediate="true"/>
+		<p:dialog header="Seleção de mesas" widgetVar="modalSelecionaMesa" modal="true" > 
+		    <ui:include src="/admin/mesaLoja/selecionaMesa.xhtml" />
+		</p:dialog> 
+	</h:panelGroup>
+
+
+
+	
 </p:panel>
 
 </html>

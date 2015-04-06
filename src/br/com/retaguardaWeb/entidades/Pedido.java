@@ -11,12 +11,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
+import javax.persistence.Transient;
 
 
 @Entity
@@ -32,6 +32,10 @@ public class Pedido  {
 	@JoinColumn(name="idPedido")
 	private List<PedidoProduto> pedidoProdutos = new ArrayList<PedidoProduto>();
 	
+	@Transient
+	private List<MesaPedido> mesas = new ArrayList<MesaPedido>();
+
+
 	private double totalPedido;
 	
 	
@@ -141,6 +145,14 @@ public class Pedido  {
 
 	public void setIdCliente(Long idCliente) {
 		this.idCliente = idCliente;
+	}
+
+	public List<MesaPedido> getMesas() {
+		return mesas;
+	}
+
+	public void setMesas(List<MesaPedido> mesas) {
+		this.mesas = mesas;
 	}
 
 
