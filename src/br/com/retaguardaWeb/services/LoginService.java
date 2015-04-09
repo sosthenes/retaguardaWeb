@@ -92,7 +92,7 @@ public class LoginService {
 				+ " order by x.descricao", PerfilUsuario.class);
 		List<PerfilUsuario> lista = (List<PerfilUsuario>) query.getResultList();
 		return lista;
-	}
+	}	
 
 	public Funcionario validaFuncionario(Usuario usuario) {
 		return crudService.findOneResultWithNamedQuery(

@@ -90,7 +90,7 @@ public class ExpedicaoMB extends BasicoMB implements Serializable{
 	
 	public void selecionaFuncionario(Pedido pedido){
 		getExpedicao().setIdPedido(pedido);
-		RequestContext.getCurrentInstance().execute("modalSelecionaFuncionario.show()");
+		RequestContext.getCurrentInstance().execute("PF('modalSelecionaFuncionario').show()");
 	}
 	
 	@Override

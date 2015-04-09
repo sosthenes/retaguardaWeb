@@ -7,11 +7,18 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="caixa")
+@NamedQueries(@NamedQuery(query="select x from Caixa x where x.idLoja=:loja",name=Caixa.OBTER_CAIXAS_POR_LOJA))
 public class Caixa extends EntidadeBase{
+	
+	
+	
+	public static final String OBTER_CAIXAS_POR_LOJA = "obterCaixasPorLoja";
 
 	/**
 	 * 

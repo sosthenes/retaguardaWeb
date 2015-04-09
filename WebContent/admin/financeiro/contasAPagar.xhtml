@@ -30,7 +30,7 @@
 							<f:selectItem itemLabel="Selecione uma descrição" />
 							<f:selectItems value="#{pagamentoMB.listaDescricaoPagamento}" var="prod" itemLabel="#{prod.descricaogasto}" itemValue="#{prod.id}" />
 						</p:selectOneMenu>
-						<p:commandLink title="Adicionar" update=":formAdicionar:Adicionar" oncomplete="confirmation.show()" immediate="true" value="Adicionar" />
+						<p:commandLink title="Adicionar" update=":formAdicionar:Adicionar" oncomplete="PF('confirmation').show()" immediate="true" value="Adicionar" />
 						
 						<p:selectOneMenu value="#{pagamentoMB.idTipoPagamento}" id="idCaixa">
 							<f:selectItem itemLabel="Selecione um tipo de conta" />

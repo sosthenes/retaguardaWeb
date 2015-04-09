@@ -53,8 +53,8 @@
 		</h:column>
 		<h:column>
 			<h:panelGroup id="historico">
-				<p:commandButton onclick="historicoCliente.show()"
-					value="Ver historico de pedidos dos cliente" immediate="true" />
+				<p:commandButton onclick="PF('historicoCliente')PF('').show()" type="button" 
+					value="Ver historico de pedidos dos cliente"  />
 				<p:dialog header="Histórico" widgetVar="historicoCliente"
 					modal="true">
 					<ui:include src="/admin/pedido/historicoPedido.xhtml" />

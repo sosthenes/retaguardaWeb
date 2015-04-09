@@ -191,7 +191,7 @@
                                 <f:setPropertyActionListener target="#{funcionarioMB.funcionario}"  value="#{funcionario}"  />
                         </p:commandLink>
                          - 
-					 <p:commandLink title="Excluir" update=":formExcluir:Excluir"  oncomplete="confirmation.show()" immediate="true" value="excluir" >                                                    
+					 <p:commandLink title="Excluir" update=":formExcluir:Excluir"  oncomplete="PF('confirmation').show()" immediate="true" value="excluir" >                                                    
                                 <f:setPropertyActionListener target="#{funcionarioMB.funcionario}"  value="#{funcionario}"  />
                         </p:commandLink>
 					

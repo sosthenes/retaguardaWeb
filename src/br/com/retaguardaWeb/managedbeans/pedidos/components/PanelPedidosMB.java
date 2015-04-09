@@ -1,7 +1,5 @@
 package br.com.retaguardaWeb.managedbeans.pedidos.components;
 
-import javax.inject.Named;
-import java.io.Serializable;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -66,7 +64,7 @@ private static final long serialVersionUID = 1L;
 
 	
 	public void abreModalTipoPedido() {
-		RequestContext.getCurrentInstance().execute("modalTipoPedido.show()");
+		RequestContext.getCurrentInstance().execute("PF('modalTipoPedido').show()");
 		RequestContext.getCurrentInstance().update("principal:modalTipoPedido");
 	}
 

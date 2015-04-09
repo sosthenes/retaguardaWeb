@@ -1,7 +1,5 @@
 package br.com.retaguardaWeb.managedbeans.pedidos;
 
-import javax.inject.Named;
-import java.io.Serializable;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -9,9 +7,6 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
-import javax.ejb.EJB;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -37,90 +32,89 @@ import br.com.retaguardaWeb.util.Acao;
 
 @Named
 @ViewScoped
-public class CadastroPedidoMB extends BasicoMB implements Serializable{
-	
+public class CadastroPedidoMB extends BasicoMB implements Serializable {
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-
-
-	private static final String ENDERECO_SALVO_COM_SUCESSO = "Endereco salvo com sucesso";
-	
 	@Inject
 	private CaixaService caixaService;
 
-	
-	
 	@Inject
 	private BuscaClientePorTelefoneMB buscaClientePorTelefoneMB;
-	
+
 	@Inject
 	private SelecionarEnderecoMB selecionarEnderecoMB;
-	
+
 	@Inject
 	private PanelPedidosMB panelPedidosMB;
-	
+
 	@Inject
 	private TipoVendaMB tipoVendaMB;
-	
+
 	@Inject
 	private FormaPagamentoMB formaPagamentoMB;
-	
+
 	@Inject
 	private PeriodoTrabalhoMB periodoTrabalhoMB;
-	
+
 	private Double valorPago;
-	
+
 	private Double valorTroco;
-	
+
 	private Pedido pedidoCliente;
-	
+
 	private PeriodoTrabalho periodo;
 	private CaixaPeriodoFuncionario caixaPeriodoFuncionario;
 	private List<Pedido> listaPedido;
 	private List<MesaPedido> listaMesasSelecionadas;
-	
-	
+
 	public void init() {
-		
-		
-		if(!periodoTrabalhoMB.isPeriodoAberto()){
+
+		if (!periodoTrabalhoMB.isPeriodoAberto()) {
 			try {
-				context.redirect(context.getRequestContextPath() + "/admin/periodo/periodoFechado.xhtml");
+				context.redirect(context.getRequestContextPath()
+						+ "/admin/periodo/periodoFechado.xhtml");
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			return ;
-		}else{
-			if(periodo==null){
+			return;
+		} else {
+			if (periodo == null) {
 				periodo = periodoTrabalhoMB.getPeriodo();
 			}
 			panelPedidosMB.getPedido();
 		}
-		
-		if(!caixaService.verificaCaixaAberto(getLoja(), periodo, getUsuario().getFuncionario())){
+
+		if (!caixaService.verificaCaixaAberto(getLoja(), periodo, getUsuario()
+				.getFuncionario())) {
 			try {
-				context.redirect(context.getRequestContextPath() + "/admin/caixa/caixa.xhtml");
+				context.redirect(context.getRequestContextPath()
+						+ "/admin/caixa/caixa.xhtml");
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-		}else{
-			caixaPeriodoFuncionario = caixaService.recuperaCaixaAberto(getLoja(), periodo, getUsuario().getFuncionario());
+		} else {
+			caixaPeriodoFuncionario = caixaService.recuperaCaixaAberto(
+					getLoja(), periodo, getUsuario().getFuncionario());
 		}
-		
-		buscaClientePorTelefoneMB.setCallbackCarregarCliente(new Acao<Cliente>() {
-			private SelecionarEnderecoMB selecionarEnderecoClosureMB = selecionarEnderecoMB;
-			@Override
-			public void executar(Cliente cliente) {
-				selecionarEnderecoClosureMB.setCliente(cliente);
-				RequestContext.getCurrentInstance().update("principal:panelSelecionarEndereco");
-			}
-		});
+
+		buscaClientePorTelefoneMB
+				.setCallbackCarregarCliente(new Acao<Cliente>() {
+					private SelecionarEnderecoMB selecionarEnderecoClosureMB = selecionarEnderecoMB;
+
+					@Override
+					public void executar(Cliente cliente) {
+						selecionarEnderecoClosureMB.setCliente(cliente);
+						RequestContext.getCurrentInstance().update(
+								"principal:panelSelecionarEndereco");
+					}
+				});
 	}
 
-	public void adicionaMesas(MesaLoja[] lista){
+	public void adicionaMesas(MesaLoja[] lista) {
 		listaMesasSelecionadas = new ArrayList<MesaPedido>();
 		Arrays.asList(lista).forEach((m) -> {
 			MesaPedido mesa = new MesaPedido();
@@ -129,82 +123,73 @@ public class CadastroPedidoMB extends BasicoMB implements Serializable{
 			listaMesasSelecionadas.add(mesa);
 		});
 		panelPedidosMB.getPedido().setMesas(listaMesasSelecionadas);
-		RequestContext.getCurrentInstance().execute("modalSelecionaMesa.hide()");
+		RequestContext.getCurrentInstance()
+				.execute("modalSelecionaMesa.hide()");
 		RequestContext.getCurrentInstance().update("principal:mesaSelecionada");
-		
-	}
-	
-	public void setSelecionarEnderecoMB(SelecionarEnderecoMB selecionarEnderecoMB) {
-		this.selecionarEnderecoMB = selecionarEnderecoMB;
+
 	}
 
-	public void setBuscaClientePorTelefoneMB(
-			BuscaClientePorTelefoneMB buscaClientePorTelefoneMB) {
-		this.buscaClientePorTelefoneMB = buscaClientePorTelefoneMB;
-	}
-	
-	
-	public void removeMesaSelecionada(MesaPedido mesa){
+	public void removeMesaSelecionada(MesaPedido mesa) {
 		listaMesasSelecionadas.remove(mesa);
 		retornaMensagemSucessoOperacao();
 		RequestContext.getCurrentInstance().update("principal:mesaSelecionada");
 	}
-	
-	
-	public void adicionaTipoVenda(){
+
+	public void adicionaTipoVenda() {
 		panelPedidosMB.getPedido().setTipoPedido(tipoVendaMB.getTipoVenda());
 		panelPedidosMB.getPedido().setExpedicao(tipoVendaMB.isExpedicao());
 		RequestContext.getCurrentInstance().execute("modalTipoPedido.hide()");
-		RequestContext.getCurrentInstance().execute("modalFormaPagamento.show()");
-		
+		RequestContext.getCurrentInstance().execute(
+				"PF('modalFormaPagamento').show()");
+
 	}
 
-	public void adicionaFormaPagamento(){
-		panelPedidosMB.getPedido().setFormaPagamento(formaPagamentoMB.getFormaPagamento());
-		RequestContext.getCurrentInstance().execute("modalFormaPagamento.hide()");
-		RequestContext.getCurrentInstance().execute("modalTroco.show()");
+	public void adicionaFormaPagamento() {
+		panelPedidosMB.getPedido().setFormaPagamento(
+				formaPagamentoMB.getFormaPagamento());
+		RequestContext.getCurrentInstance().execute(
+				"modalFormaPagamento.hide()");
+		RequestContext.getCurrentInstance().execute("PF('modalTroco').show()");
 	}
-	
-	
-	public void adicionaTroco(){
+
+	public void adicionaTroco() {
 		panelPedidosMB.getPedido().setValorPago(valorPago);
-		if(valorPago!=null && valorPago >0){
-			valorTroco = valorPago - panelPedidosMB.getPedido().getTotalPedido();
-		}else{
+		if (valorPago != null && valorPago > 0) {
+			valorTroco = valorPago
+					- panelPedidosMB.getPedido().getTotalPedido();
+		} else {
 			valorTroco = 0.00;
 			valorPago = panelPedidosMB.getPedido().getTotalPedido();
 		}
-		
+
 		panelPedidosMB.getPedido().setValorTroco(valorTroco);
 		RequestContext.getCurrentInstance().execute("modalTroco.hide()");
-		RequestContext.getCurrentInstance().execute("modalPago.show()");
+		RequestContext.getCurrentInstance().execute("PF('modalPago').show()");
 	}
-	
-	public void adicionaPagamento(boolean pago){
+
+	public void adicionaPagamento(boolean pago) {
 		panelPedidosMB.getPedido().setPago(pago);
-		panelPedidosMB.getPedido().setDataHoraPagamento(pago?new Date():null);
+		panelPedidosMB.getPedido().setDataHoraPagamento(
+				pago ? new Date() : null);
 		adiciona();
 		RequestContext.getCurrentInstance().execute("modalPago.hide()");
-		RequestContext.getCurrentInstance().execute("modalFinal.show()");
+		RequestContext.getCurrentInstance().execute("PF('modalFinal').show()");
 		RequestContext.getCurrentInstance().update("principal:panelPedidos");
 		listar();
 	}
-	
-	public void finalizaPedido(){
+
+	public void finalizaPedido() {
 		limpar();
 		try {
-			context.redirect(context.getRequestContextPath() + "/admin/pedido/cadastroPedido.xhtml");
+			context.redirect(context.getRequestContextPath()
+					+ "/admin/pedido/cadastroPedido.xhtml");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public PanelPedidosMB getPanelPedidosMB() {
 		return panelPedidosMB;
-	}
-
-	public void setPanelPedidosMB(PanelPedidosMB panelPedidosMB) {
-		this.panelPedidosMB = panelPedidosMB;
 	}
 
 	public Pedido getPedidoCliente() {
@@ -219,41 +204,45 @@ public class CadastroPedidoMB extends BasicoMB implements Serializable{
 		return tipoVendaMB;
 	}
 
-	public void setTipoVendaMB(TipoVendaMB tipoVendaMB) {
-		this.tipoVendaMB = tipoVendaMB;
-	}
-
 	@Override
 	public void adiciona() {
-		if(selecionarEnderecoMB.getEnderecoSelecionado()!=null)
-			panelPedidosMB.getPedido().setEnderecoEntrega(selecionarEnderecoMB.getEnderecoSelecionado());
-		panelPedidosMB.getPedido().setCaixaPeriodoFuncionario(caixaPeriodoFuncionario);
-		if(panelPedidosMB.getPedido().getEnderecoEntrega()!=null && panelPedidosMB.getPedido().getIdCliente()==null)
-			panelPedidosMB.getPedido().setIdCliente(panelPedidosMB.getPedido().getEnderecoEntrega().getCliente().getId());
-		
+		if (selecionarEnderecoMB.getEnderecoSelecionado() != null)
+			panelPedidosMB.getPedido().setEnderecoEntrega(
+					selecionarEnderecoMB.getEnderecoSelecionado());
+		panelPedidosMB.getPedido().setCaixaPeriodoFuncionario(
+				caixaPeriodoFuncionario);
+		if (panelPedidosMB.getPedido().getEnderecoEntrega() != null
+				&& panelPedidosMB.getPedido().getIdCliente() == null)
+			panelPedidosMB.getPedido().setIdCliente(
+					panelPedidosMB.getPedido().getEnderecoEntrega()
+							.getCliente().getId());
+
 		panelPedidosMB.cadastraPedido();
-			panelPedidosMB.finalizaPedido();
-			retornaMensagemSucesso("Pedido registrato com sucesso!");
+		panelPedidosMB.finalizaPedido();
+		retornaMensagemSucesso("Pedido registrato com sucesso!");
 	}
 
 	@Override
 	public void listar() {
-		listaPedido = panelPedidosMB.listaPedidoPorCaixa(caixaPeriodoFuncionario, null);
+		listaPedido = panelPedidosMB.listaPedidoPorCaixa(
+				caixaPeriodoFuncionario, null);
 	}
 
-	public List<Pedido> listaPedidoPorCaixaTipoVenda(CaixaPeriodoFuncionario caixaPeriodoFuncionario, TipoVenda tipoVenda){
-		return panelPedidosMB.listaPedidoPorCaixa(caixaPeriodoFuncionario, tipoVenda);
+	public List<Pedido> listaPedidoPorCaixaTipoVenda(
+			CaixaPeriodoFuncionario caixaPeriodoFuncionario, TipoVenda tipoVenda) {
+		return panelPedidosMB.listaPedidoPorCaixa(caixaPeriodoFuncionario,
+				tipoVenda);
 	}
-	
 
-	public void listaPedidosPorTipo(TipoVenda tipoVenda){
-		listaPedido = listaPedidoPorCaixaTipoVenda(caixaPeriodoFuncionario, tipoVenda);
+	public void listaPedidosPorTipo(TipoVenda tipoVenda) {
+		listaPedido = listaPedidoPorCaixaTipoVenda(caixaPeriodoFuncionario,
+				tipoVenda);
 	}
-	
+
 	@Override
 	public void remover() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -263,43 +252,32 @@ public class CadastroPedidoMB extends BasicoMB implements Serializable{
 		valorTroco = null;
 		pedidoCliente = null;
 		periodo = null;
-		caixaPeriodoFuncionario=null;
+		caixaPeriodoFuncionario = null;
 		formaPagamentoMB.setFormaPagamento(null);
 		formaPagamentoMB.setFormaPagamento(null);
 		buscaClientePorTelefoneMB.setClienteSelecionado(null);
 		selecionarEnderecoMB.setCliente(new Cliente());
 		listaMesasSelecionadas = new ArrayList<MesaPedido>();
 		listaPedido = new ArrayList<Pedido>();
-		
+
 	}
 
-	
-	public void recuperaPedido(Pedido pedido){
+	public void recuperaPedido(Pedido pedido) {
 		panelPedidosMB.setPedido(pedido);
-		RequestContext.getCurrentInstance().execute("modalPago.show()");
+		RequestContext.getCurrentInstance().execute("PF('modalPago').show()");
 	}
-	
-	
+
 	@Override
 	public void editar() {
-		
-		
+
 	}
 
 	public FormaPagamentoMB getFormaPagamentoMB() {
 		return formaPagamentoMB;
 	}
 
-	public void setFormaPagamentoMB(FormaPagamentoMB formaPagamentoMB) {
-		this.formaPagamentoMB = formaPagamentoMB;
-	}
-
 	public PeriodoTrabalhoMB getPeriodoTrabalhoMB() {
 		return periodoTrabalhoMB;
-	}
-
-	public void setPeriodoTrabalhoMB(PeriodoTrabalhoMB periodoTrabalhoMB) {
-		this.periodoTrabalhoMB = periodoTrabalhoMB;
 	}
 
 	public CaixaPeriodoFuncionario getCaixaPeriodoFuncionario() {
@@ -327,14 +305,12 @@ public class CadastroPedidoMB extends BasicoMB implements Serializable{
 		this.valorTroco = valorTroco;
 	}
 
-
 	public List<Pedido> getListaPedido() {
-		if(listaPedido==null || listaPedido.size()<1){
+		if (listaPedido == null || listaPedido.size() < 1) {
 			listar();
 		}
 		return listaPedido;
 	}
-
 
 	public void setListaPedido(List<Pedido> listaPedido) {
 		this.listaPedido = listaPedido;
@@ -344,13 +320,9 @@ public class CadastroPedidoMB extends BasicoMB implements Serializable{
 		return listaMesasSelecionadas;
 	}
 
-	public void setListaMesasSelecionadas(List<MesaPedido> listaMesasSelecionadas) {
+	public void setListaMesasSelecionadas(
+			List<MesaPedido> listaMesasSelecionadas) {
 		this.listaMesasSelecionadas = listaMesasSelecionadas;
 	}
 
-
-
-	
-	
-	
 }

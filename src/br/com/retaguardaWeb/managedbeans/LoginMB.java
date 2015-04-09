@@ -1,13 +1,13 @@
 package br.com.retaguardaWeb.managedbeans;
 
-import javax.inject.Named;
-import java.io.Serializable;
 import java.io.IOException;
+import java.io.Serializable;
 
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
+import javax.inject.Named;
 import javax.servlet.http.HttpSession;
 
 import br.com.retaguardaWeb.entidades.Funcionario;
@@ -15,6 +15,7 @@ import br.com.retaguardaWeb.entidades.Usuario;
 import br.com.retaguardaWeb.services.LoginService;
 
 @Named
+@ViewScoped
 public class LoginMB extends BasicoMB implements Serializable{
 private static final long serialVersionUID = 1L;
 

@@ -118,7 +118,7 @@
 						</p:commandLink>
                          - 
 					 <p:commandLink title="Excluir" update=":formExcluir:Excluir"
-							oncomplete="confirmation.show()" immediate="true" value="excluir">
+							oncomplete="PF('confirmation').show()" immediate="true" value="excluir">
 							<f:setPropertyActionListener
 								target="#{usuarioMB.usuariosNovo}" value="#{usuario}" />
 						</p:commandLink>

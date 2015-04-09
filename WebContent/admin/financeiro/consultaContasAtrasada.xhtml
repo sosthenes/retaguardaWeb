@@ -82,7 +82,7 @@
 					<p:column headerText="Ação">
 						<p:commandLink title="- Pagar -"
 							update=":formParcelas:Parcelas :formParcelas:listaDetalhada"
-							oncomplete="confirmation.show()" value=" PAGAR "
+							oncomplete="PF('confirmation').show()" value=" PAGAR "
 							rendered="#{!vale.pago}" action="#{pagamentoMB.listaParcelasDetalhadas()}">
 							<f:setPropertyActionListener target="#{pagamentoMB.parcela}"
 								value="#{vale}" />
@@ -93,7 +93,7 @@
 						<p:commandLink title="- Excluir -"
 							value=" Excluir "
 							 update=":formExcluir:Excluir"
-							oncomplete="confirmationExclusao.show()"
+							oncomplete="PF('confirmationExclusao').show()"
 							>
 							<f:setPropertyActionListener target="#{pagamentoMB.parcela}" value="#{vale}" />
 						</p:commandLink>
@@ -159,7 +159,7 @@
 						</p:column>
 						<p:column headerText="Ação">
 							<p:commandLink title="Pagar" update=":formPagar:Pagamento"
-								oncomplete="confirmacao.show()" value=" PAGAR "
+								oncomplete="PF('confirmacao').show()" value=" PAGAR "
 								rendered="#{!vale.pago}">
 								<f:setPropertyActionListener target="#{pagamentoMB.parcela}"
 									value="#{vale}" />

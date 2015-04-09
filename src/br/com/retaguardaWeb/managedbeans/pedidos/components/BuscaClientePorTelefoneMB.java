@@ -1,7 +1,5 @@
 package br.com.retaguardaWeb.managedbeans.pedidos.components;
 
-import javax.inject.Named;
-import java.io.Serializable;
 import java.io.Serializable;
 import java.util.List;
 
@@ -22,37 +20,41 @@ import br.com.retaguardaWeb.util.Acao;
 @Named
 @ViewScoped
 public class BuscaClientePorTelefoneMB implements Serializable {
-private static final long serialVersionUID = 1L;
-	
+	private static final long serialVersionUID = 1L;
+
 	private Cliente clienteSelecionado;
 	@EJB
 	private ClienteService clienteService;
 	private Boolean botaoInclusaoClienteVisivel;
 	private Acao<Cliente> callbackCarregarCliente;
-	
+
 	@Inject
 	private CadastroClienteMB cadastroClienteMB;
-	
+
 	@PostConstruct
 	private void init() {
 		cadastroClienteMB.setCallbackSalvarCliente(new Acao<Cliente>() {
-			
+
 			@Override
 			public void executar(Cliente cliente) {
-				RequestContext.getCurrentInstance().execute("modalInclusaoCliente.hide()");
+				RequestContext.getCurrentInstance().execute(
+						"modalInclusaoCliente.hide()");
 				setClienteSelecionado(cliente);
 				carregarCliente();
 			}
 		});
 	}
+
 	public List<TelefoneCliente> complete(String query) {
-		List<TelefoneCliente> telefones = clienteService.buscaClientePorTelefone(query);
-		
+		List<TelefoneCliente> telefones = clienteService
+				.buscaClientePorTelefone(query);
+
 		setBotaoInclusaoClienteVisivel(Boolean.FALSE);
-		
-		if(telefones.size() < 1) {
+
+		if (telefones.size() < 1) {
 			setBotaoInclusaoClienteVisivel(Boolean.TRUE);
-			cadastroClienteMB.getCliente().getListaTelefones().get(0).setNumero(query);
+			cadastroClienteMB.getCliente().getListaTelefones().get(0)
+					.setNumero(query);
 		}
 		return telefones;
 	}
@@ -70,21 +72,23 @@ private static final long serialVersionUID = 1L;
 	}
 
 	public TelefoneCliente getTelefoneSelecionado() {
-		return getClienteSelecionado() == null ? null : getClienteSelecionado().getTelefone();
+		return getClienteSelecionado() == null ? null : getClienteSelecionado()
+				.getTelefone();
 	}
 
 	public Boolean getBotaoInclusaoClienteVisivel() {
 		return botaoInclusaoClienteVisivel;
 	}
 
-	private void setBotaoInclusaoClienteVisivel(Boolean botaoInclusaoClienteVisivel) {
+	private void setBotaoInclusaoClienteVisivel(
+			Boolean botaoInclusaoClienteVisivel) {
 		this.botaoInclusaoClienteVisivel = botaoInclusaoClienteVisivel;
 	}
 
 	public void setCadastroClienteMB(CadastroClienteMB cadastroClienteMB) {
 		this.cadastroClienteMB = cadastroClienteMB;
 	}
-	
+
 	public void carregarCliente() {
 		getCallbackCarregarCliente().executar(getClienteSelecionado());
 	}
@@ -96,18 +100,5 @@ private static final long serialVersionUID = 1L;
 	public void setCallbackCarregarCliente(Acao<Cliente> callbackCarregarCliente) {
 		this.callbackCarregarCliente = callbackCarregarCliente;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 }

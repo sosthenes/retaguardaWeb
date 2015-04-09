@@ -17,7 +17,7 @@ import br.com.retaguardaWeb.util.Acao;
 
 @ViewScoped
 @Named
-public class SelecionarEnderecoMB  implements Serializable{
+public class SelecionarEnderecoMB implements Serializable {
 
 	/**
 	 * 
@@ -25,53 +25,54 @@ public class SelecionarEnderecoMB  implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private Cliente cliente;
 	private Endereco enderecoSelecionado;
-	
+
 	@Inject
 	private CadastroEnderecoMB cadastroEnderecoMB;
-	
+
 	@EJB
 	private ClienteService clienteService;
-	
+
 	public Cliente getCliente() {
 		return cliente;
 	}
+
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
 
-	public void populaEndereco(Endereco end){
+	public void populaEndereco(Endereco end) {
 		enderecoSelecionado = end;
 	}
+
 	public Endereco getEnderecoSelecionado() {
 		return enderecoSelecionado;
 	}
+
 	public void setEnderecoSelecionado(Endereco enderecoSelecionado) {
 		this.enderecoSelecionado = enderecoSelecionado;
 	}
-	
+
 	public void abrirModalCadastroEndereco() {
 		cadastroEnderecoMB.getEndereco().setCliente(getCliente());
 		cadastroEnderecoMB.setCallbackSalvarEndereco(new Acao<Endereco>() {
-			
+
 			@Override
 			public void executar(Endereco endereco) {
 				setCliente(endereco.getCliente());
-				RequestContext.getCurrentInstance().execute("modalInclusaoEndereco.hide()");
-				RequestContext.getCurrentInstance().update("principal:panelSelecionarEndereco");
+				RequestContext.getCurrentInstance().execute(
+						"modalInclusaoEndereco.hide()");
+				RequestContext.getCurrentInstance().update(
+						"principal:panelSelecionarEndereco");
 			}
 		});
-		RequestContext.getCurrentInstance().execute("modalInclusaoEndereco.show()");
-		RequestContext.getCurrentInstance().update("principal:modalInclusaoEndereco");
+		RequestContext.getCurrentInstance().execute(
+				"PF('modalInclusaoEndereco').show()");
+		RequestContext.getCurrentInstance().update(
+				"principal:modalInclusaoEndereco");
 	}
-	
-	
-	
-	
-	
+
 	public void setCadastroEnderecoMB(CadastroEnderecoMB cadastroEnderecoMB) {
 		this.cadastroEnderecoMB = cadastroEnderecoMB;
 	}
-	
-	
-	
+
 }

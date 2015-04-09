@@ -9,32 +9,43 @@
 
 
 <p:panel id="buscaClientePorTelefone">
-	<h:outputText value="Telefone Cliente:" /><p:autoComplete id="autoCompleteTelefone"  value="#{buscaClientePorTelefoneMB.telefoneSelecionado}"  oncomplete="atualizarBotaoCliente()" var="telefone" itemLabel="#{telefone.numero}" itemValue="#{telefone}"
-							completeMethod="#{buscaClientePorTelefoneMB.complete}"
-							dropdown="true">
-							<p:ajax event="itemSelect" listener="#{buscaClientePorTelefoneMB.carregarCliente()}"/>
-						</p:autoComplete>
+	<h:outputText value="Telefone Cliente:" />
+	<p:autoComplete id="autoCompleteTelefone"
+		value="#{buscaClientePorTelefoneMB.telefoneSelecionado}"
+		oncomplete="window.alert('teste')" var="telefone"
+		itemLabel="#{telefone.numero}" itemValue="#{telefone}"
+		completeMethod="#{buscaClientePorTelefoneMB.complete}" dropdown="true">
+		<p:ajax event="itemSelect"
+			listener="#{buscaClientePorTelefoneMB.carregarCliente()}" />
+		<p:ajax oncomplete="atualizarBotaoCliente()" />
+	</p:autoComplete>
 	<h:panelGroup id="incluirCliente">
-		<p:remoteCommand name="atualizarBotaoCliente" immediate="true" update="incluirCliente"/>
-			<p:commandButton onclick="modalInclusaoCliente.show()" value="Incluir Cliente" rendered="#{buscaClientePorTelefoneMB.botaoInclusaoClienteVisivel}"/>
-		<p:dialog header="Inclusão Cliente" widgetVar="modalInclusaoCliente" modal="true" > 
-		    <ui:include src="/admin/cliente/cadastroCliente.xhtml" />
-		</p:dialog> 
-	</h:panelGroup>
-	
-		<h:panelGroup id="selecionarMesa">
-			<p:commandButton onclick="modalSelecionaMesa.show()" value="Selecionar Mesas"  immediate="true"/>
-		<p:dialog header="Seleção de mesas" widgetVar="modalSelecionaMesa" modal="true" > 
-		    <ui:include src="/admin/mesaLoja/selecionaMesa.xhtml" />
-		</p:dialog> 
-		
-		 <ui:include src="/admin/pedido/components/mesasSelecionadas.xhtml" />
-		
+		<p:remoteCommand name="atualizarBotaoCliente" immediate="true"
+			update="incluirCliente" />
+		<p:commandButton onclick="PF('modalInclusaoCliente').show()"
+			value="Incluir Cliente" type="button"
+			rendered="#{buscaClientePorTelefoneMB.botaoInclusaoClienteVisivel}" />
+		<p:dialog header="Inclusão Cliente" widgetVar="modalInclusaoCliente"
+			modal="true">
+			<ui:include src="/admin/cliente/cadastroCliente.xhtml" />
+		</p:dialog>
 	</h:panelGroup>
 
+	<h:panelGroup id="selecionarMesa">
+		<p:commandButton onclick="PF('modalSelecionaMesa').show()"
+			value="Selecionar Mesas" immediate="true" />
+		<p:dialog header="Seleção de mesas" widgetVar="modalSelecionaMesa"
+			modal="true">
+			<ui:include src="/admin/mesaLoja/selecionaMesa.xhtml" />
+		</p:dialog>
+
+		<ui:include src="/admin/pedido/components/mesasSelecionadas.xhtml" />
+
+	</h:panelGroup>
 
 
-	
+
+
 </p:panel>
 
 </html>

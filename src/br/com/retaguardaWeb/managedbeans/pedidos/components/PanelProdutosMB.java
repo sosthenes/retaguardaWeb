@@ -12,8 +12,8 @@ import br.com.retaguardaWeb.entidades.Produto;
 
 @Named
 @ViewScoped
-public class PanelProdutosMB implements Serializable{
-private static final long serialVersionUID = 1L;
+public class PanelProdutosMB implements Serializable {
+	private static final long serialVersionUID = 1L;
 
 	private List<Produto> produtosDisponiveis;
 
