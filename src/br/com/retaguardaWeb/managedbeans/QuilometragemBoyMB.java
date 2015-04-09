@@ -13,8 +13,8 @@ import br.com.retaguardaWeb.entidades.Caixa;
 import br.com.retaguardaWeb.entidades.Funcionario;
 import br.com.retaguardaWeb.entidades.QuilometroMotoBoy;
 import br.com.retaguardaWeb.entidades.Setor;
-import br.com.retaguardaWeb.sessionbeans.FuncionarioService;
-import br.com.retaguardaWeb.sessionbeans.QuilometragemBoyService;
+import br.com.retaguardaWeb.services.FuncionarioService;
+import br.com.retaguardaWeb.services.QuilometragemBoyService;
 import br.com.retaguardaWeb.util.Conversoes;
 
 @ManagedBean

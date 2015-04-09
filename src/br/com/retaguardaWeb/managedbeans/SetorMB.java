@@ -10,7 +10,7 @@ import javax.faces.bean.ViewScoped;
 
 import br.com.retaguardaWeb.entidades.Loja;
 import br.com.retaguardaWeb.entidades.Setor;
-import br.com.retaguardaWeb.sessionbeans.SetorService;
+import br.com.retaguardaWeb.services.SetorService;
 
 @ManagedBean
 @ViewScoped

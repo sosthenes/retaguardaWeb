@@ -7,7 +7,7 @@ import javax.faces.bean.ViewScoped;
 import br.com.retaguardaWeb.entidades.Cargo;
 import br.com.retaguardaWeb.entidades.Loja;
 import br.com.retaguardaWeb.entidades.Motivo;
-import br.com.retaguardaWeb.sessionbeans.MotivoService;
+import br.com.retaguardaWeb.services.MotivoService;
 
 @ManagedBean
 @ViewScoped

@@ -9,7 +9,7 @@ import javax.faces.bean.ViewScoped;
 
 import br.com.retaguardaWeb.entidades.PeriodoTrabalho;
 import br.com.retaguardaWeb.managedbeans.BasicoMB;
-import br.com.retaguardaWeb.sessionbeans.PeriodoTrabalhoService;
+import br.com.retaguardaWeb.services.PeriodoTrabalhoService;
 
 @ViewScoped
 @ManagedBean(name="periodoTrabalhoMB")
@@ -30,13 +30,13 @@ public class PeriodoTrabalhoMB extends BasicoMB{
 	
 	@Override
 	public void adiciona() {
-		periodoTrabalho.setDescricao("Abrir Período");
+		periodoTrabalho.setDescricao("Abrir Perï¿½odo");
 		periodoTrabalho.setFuncionario(getUsuario().getFuncionario());
 		periodoTrabalho.setHoraInicio(new Date());
 		periodoTrabalho.setHoraFim(null);
 		periodoTrabalho.setIdLoja(getLoja());
 		periodoService.adiciona(periodoTrabalho);
-		retornaMensagemSucesso("Período aberto com sucesso!");
+		retornaMensagemSucesso("Perï¿½odo aberto com sucesso!");
 	}
 
 	@Override
@@ -50,9 +50,9 @@ public class PeriodoTrabalhoMB extends BasicoMB{
 		getPeriodo().setHoraFim(new Date());
 		if(!periodoService.verificaCaixaAberto(getLoja(),periodo, null)){
 			periodoService.alterar(getPeriodo());
-			retornaMensagemSucesso("Período fechado com sucesso!");
+			retornaMensagemSucesso("Perï¿½odo fechado com sucesso!");
 		}else{
-			retornaMensagemErro("Existe caixa aberto nesse período, feche todos os caixa antes de encerrar o período de trabalho!");
+			retornaMensagemErro("Existe caixa aberto nesse perï¿½odo, feche todos os caixa antes de encerrar o perï¿½odo de trabalho!");
 		}
 	}
 

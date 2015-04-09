@@ -7,8 +7,8 @@ import javax.faces.bean.ManagedBean;
 
 import br.com.retaguardaWeb.entidades.Ingrediente;
 import br.com.retaguardaWeb.entidades.UnidadeMedida;
-import br.com.retaguardaWeb.sessionbeans.IngredienteService;
-import br.com.retaguardaWeb.sessionbeans.UnidadeMedidaRepositorio;
+import br.com.retaguardaWeb.services.IngredienteService;
+import br.com.retaguardaWeb.services.UnidadeMedidaRepositorio;
 
 @ManagedBean
 public class IngredienteMB {

@@ -7,7 +7,7 @@ import javax.faces.bean.ViewScoped;
 
 import br.com.retaguardaWeb.entidades.CaixaPeriodoFuncionario;
 import br.com.retaguardaWeb.managedbeans.BasicoMB;
-import br.com.retaguardaWeb.sessionbeans.CaixaService;
+import br.com.retaguardaWeb.services.CaixaService;
 
 @ViewScoped
 @ManagedBean(name="caixaAuxiliarMB")

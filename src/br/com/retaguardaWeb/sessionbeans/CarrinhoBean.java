@@ -15,6 +15,7 @@ import javax.persistence.PersistenceContext;
 
 import br.com.retaguardaWeb.entidades.Pedido;
 import br.com.retaguardaWeb.entidades.Produto;
+import br.com.retaguardaWeb.services.ExpedicaoPedidoService;
 
 @Stateful
 public class CarrinhoBean  {

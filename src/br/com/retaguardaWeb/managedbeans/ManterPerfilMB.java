@@ -12,8 +12,8 @@ import br.com.retaguardaWeb.entidades.LinksMenu;
 import br.com.retaguardaWeb.entidades.Loja;
 import br.com.retaguardaWeb.entidades.Menu;
 import br.com.retaguardaWeb.entidades.PerfilUsuario;
-import br.com.retaguardaWeb.sessionbeans.FuncionarioService;
-import br.com.retaguardaWeb.sessionbeans.LoginService;
+import br.com.retaguardaWeb.services.FuncionarioService;
+import br.com.retaguardaWeb.services.LoginService;
 
 @ManagedBean
 @ViewScoped

@@ -22,8 +22,8 @@ import net.sf.jasperreports.engine.JasperRunManager;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import br.com.retaguardaWeb.entidades.Pagamento;
 import br.com.retaguardaWeb.entidades.ParcelaPagamento;
-import br.com.retaguardaWeb.sessionbeans.ContaService;
-import br.com.retaguardaWeb.sessionbeans.RelatorioService;
+import br.com.retaguardaWeb.services.ContaService;
+import br.com.retaguardaWeb.services.RelatorioService;
 import br.com.retaguardaWeb.util.Conversoes;
 import br.com.retaguardaWeb.vo.ContasAPagarVO;
 
@@ -51,7 +51,7 @@ public class Despertador {
     
 	public void relatorioFuncionariosAtivos() throws ServletException {
 		String jasper = "relatorioContasParaHoje.jasper";
-		String titulo = "Relatório de Contas a Pagar";
+		String titulo = "Relatï¿½rio de Contas a Pagar";
 		HashMap<String, Object> hm = new HashMap<String, Object>();
 		try {
 			List<ParcelaPagamento> listaConsulta = new ArrayList<ParcelaPagamento>();

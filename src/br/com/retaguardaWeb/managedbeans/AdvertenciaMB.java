@@ -21,10 +21,10 @@ import br.com.retaguardaWeb.entidades.Loja;
 import br.com.retaguardaWeb.entidades.Motivo;
 import br.com.retaguardaWeb.entidades.QuilometroMotoBoy;
 import br.com.retaguardaWeb.entidades.Setor;
-import br.com.retaguardaWeb.sessionbeans.AdvertenciaService;
-import br.com.retaguardaWeb.sessionbeans.FuncionarioService;
-import br.com.retaguardaWeb.sessionbeans.MotivoService;
-import br.com.retaguardaWeb.sessionbeans.RelatorioService;
+import br.com.retaguardaWeb.services.AdvertenciaService;
+import br.com.retaguardaWeb.services.FuncionarioService;
+import br.com.retaguardaWeb.services.MotivoService;
+import br.com.retaguardaWeb.services.RelatorioService;
 import br.com.retaguardaWeb.vo.AdvertenciaVO;
 import br.com.retaguardaWeb.vo.GastoCaixaVO;
 

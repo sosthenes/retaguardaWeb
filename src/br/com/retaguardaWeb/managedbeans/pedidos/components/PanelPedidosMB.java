@@ -15,8 +15,8 @@ import br.com.retaguardaWeb.entidades.Pedido;
 import br.com.retaguardaWeb.entidades.PedidoProduto;
 import br.com.retaguardaWeb.entidades.Produto;
 import br.com.retaguardaWeb.entidades.TipoVenda;
+import br.com.retaguardaWeb.services.PedidoService;
 import br.com.retaguardaWeb.sessionbeans.CarrinhoBean;
-import br.com.retaguardaWeb.sessionbeans.PedidoService;
 
 @ManagedBean(name="panelPedidosMB")
 @ViewScoped

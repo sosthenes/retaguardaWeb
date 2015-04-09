@@ -13,16 +13,19 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name="funcionario")
-public class Funcionario extends EntidadeBase{
+@Table(name = "funcionario")
+@NamedQueries({ @NamedQuery(query = "select x from Funcionario x where x.login = :login and x.senha = :senha", name = Funcionario.OBTER_USUARIO_POR_LOGIN_E_SENHA) })
+public class Funcionario extends EntidadeBase {
 
+	public static final String OBTER_USUARIO_POR_LOGIN_E_SENHA = "obterUsuarioPorLoginESenha";
 	/**
 	 * 
 	 */
@@ -30,12 +33,12 @@ public class Funcionario extends EntidadeBase{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="idFuncionario")
+	@Column(name = "idFuncionario")
 	private Long id;
-	
+
 	@Temporal(value = TemporalType.TIMESTAMP)
 	private Date data_nascimento;
-	
+
 	@Temporal(value = TemporalType.TIMESTAMP)
 	private Date dataAdminissao;
 	@Temporal(value = TemporalType.TIMESTAMP)
@@ -47,60 +50,57 @@ public class Funcionario extends EntidadeBase{
 	private String ctps;
 	private String login;
 	private String senha;
-	
+
 	@ManyToOne
-	@JoinColumn(name="idPerfilUsuario")
+	@JoinColumn(name = "idPerfilUsuario")
 	private PerfilUsuario idPerfilUsuario;
 
 	@ManyToOne
-	@JoinColumn(name="idCargo")
+	@JoinColumn(name = "idCargo")
 	private Cargo cargo;
 
 	@ManyToOne
-	@JoinColumn(name="idLoja")
+	@JoinColumn(name = "idLoja")
 	private Loja loja;
 
 	@ManyToOne
-	@JoinColumn(name="idSetor")
+	@JoinColumn(name = "idSetor")
 	private Setor setor;
-	
+
 	@ManyToOne
-	@JoinColumn(name="idSituacaoFuncional")
+	@JoinColumn(name = "idSituacaoFuncional")
 	private SituacaoFuncional situacaoFuncional;
-	
+
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name="idDependente")
+	@JoinColumn(name = "idDependente")
 	private List<Dependente> dependentes = new ArrayList<Dependente>();
-	
-	
-	
+
 	private String banco;
 	private String agencia;
 	private String conta;
 	private String moto;
 	private String placa;
 	private String renavam;
-	
+
 	private String nome;
-	
+
 	private String telefone;
 	private String celular;
-	
+
 	private String nomeReferencia1;
 	private String telefoneReferencia1;
-	
+
 	private String nomeReferencia2;
 	private String telefoneReferencia2;
-	
-	
+
 	private String endereco;
-	
+
 	private String cpf;
 	private String rg;
 	private String naturalidade;
 	private String pis;
 	private String tituloEleitor;
-	
+
 	@Override
 	public Long getId() {
 		return id;
@@ -123,9 +123,9 @@ public class Funcionario extends EntidadeBase{
 	}
 
 	public void setNome(String nome) {
-		if(nome!=null && !nome.equals("")){
+		if (nome != null && !nome.equals("")) {
 			this.nome = nome.toUpperCase();
-		}else{
+		} else {
 			this.nome = nome;
 		}
 	}
@@ -394,8 +394,4 @@ public class Funcionario extends EntidadeBase{
 		this.idPerfilUsuario = idPerfilUsuario;
 	}
 
-
-
-	
-	
 }

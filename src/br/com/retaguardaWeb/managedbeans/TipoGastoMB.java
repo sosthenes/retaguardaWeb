@@ -8,8 +8,8 @@ import javax.faces.bean.ViewScoped;
 
 import br.com.retaguardaWeb.entidades.TipoGasto;
 import br.com.retaguardaWeb.entidades.UnidadeMedida;
-import br.com.retaguardaWeb.sessionbeans.TipoGastoService;
-import br.com.retaguardaWeb.sessionbeans.UnidadeMedidaRepositorio;
+import br.com.retaguardaWeb.services.TipoGastoService;
+import br.com.retaguardaWeb.services.UnidadeMedidaRepositorio;
 
 @ManagedBean
 @ViewScoped

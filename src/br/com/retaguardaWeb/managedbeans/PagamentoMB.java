@@ -15,12 +15,12 @@ import br.com.retaguardaWeb.entidades.Pagamento;
 import br.com.retaguardaWeb.entidades.ParcelaPagamento;
 import br.com.retaguardaWeb.entidades.Periodicidade;
 import br.com.retaguardaWeb.entidades.TipoDePagamento;
-import br.com.retaguardaWeb.sessionbeans.ContaService;
-import br.com.retaguardaWeb.sessionbeans.DescricaoPagamentoService;
-import br.com.retaguardaWeb.sessionbeans.FormaPagamentoService;
-import br.com.retaguardaWeb.sessionbeans.ParcelaService;
-import br.com.retaguardaWeb.sessionbeans.PeriodicidadeService;
-import br.com.retaguardaWeb.sessionbeans.TipoDepagamentoService;
+import br.com.retaguardaWeb.services.ContaService;
+import br.com.retaguardaWeb.services.DescricaoPagamentoService;
+import br.com.retaguardaWeb.services.FormaPagamentoService;
+import br.com.retaguardaWeb.services.ParcelaService;
+import br.com.retaguardaWeb.services.PeriodicidadeService;
+import br.com.retaguardaWeb.services.TipoDepagamentoService;
 import br.com.retaguardaWeb.util.Conversoes;
 
 @ManagedBean

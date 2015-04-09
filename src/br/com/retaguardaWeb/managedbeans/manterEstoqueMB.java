@@ -16,9 +16,9 @@ import br.com.retaguardaWeb.entidades.Estoque;
 import br.com.retaguardaWeb.entidades.EstoqueAtual;
 import br.com.retaguardaWeb.entidades.Ingrediente;
 import br.com.retaguardaWeb.entidades.MinimoEstoque;
-import br.com.retaguardaWeb.sessionbeans.EstoqueAtualServices;
-import br.com.retaguardaWeb.sessionbeans.EstoqueServices;
-import br.com.retaguardaWeb.sessionbeans.IngredienteService;
+import br.com.retaguardaWeb.services.EstoqueAtualServices;
+import br.com.retaguardaWeb.services.EstoqueServices;
+import br.com.retaguardaWeb.services.IngredienteService;
 import br.com.retaguardaWeb.util.EstoqueAtualUtil;
 
 @ManagedBean

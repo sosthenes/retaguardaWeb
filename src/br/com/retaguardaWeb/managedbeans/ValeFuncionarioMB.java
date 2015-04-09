@@ -14,9 +14,9 @@ import br.com.retaguardaWeb.entidades.Caixa;
 import br.com.retaguardaWeb.entidades.Funcionario;
 import br.com.retaguardaWeb.entidades.Setor;
 import br.com.retaguardaWeb.entidades.Valefuncionario;
-import br.com.retaguardaWeb.sessionbeans.FuncionarioService;
-import br.com.retaguardaWeb.sessionbeans.RelatorioService;
-import br.com.retaguardaWeb.sessionbeans.ValeFuncionarioService;
+import br.com.retaguardaWeb.services.FuncionarioService;
+import br.com.retaguardaWeb.services.RelatorioService;
+import br.com.retaguardaWeb.services.ValeFuncionarioService;
 import br.com.retaguardaWeb.util.Conversoes;
 
 @ManagedBean
@@ -113,7 +113,7 @@ public class ValeFuncionarioMB extends BasicoMB{
 		if(valor_solicitado<=valor_disponivel){
 			return true;
 		}else{
-			retornaMensagemErro("O valor solicitado ultrapassa o valor pormitido por mês!");
+			retornaMensagemErro("O valor solicitado ultrapassa o valor pormitido por mï¿½s!");
 			return false;
 		}
 	}

@@ -8,8 +8,8 @@ import javax.faces.bean.ManagedBean;
 
 import br.com.retaguardaWeb.entidades.CategoriaProduto;
 import br.com.retaguardaWeb.entidades.Produto;
-import br.com.retaguardaWeb.sessionbeans.CategoriaService;
-import br.com.retaguardaWeb.sessionbeans.ProdutoService;
+import br.com.retaguardaWeb.services.CategoriaService;
+import br.com.retaguardaWeb.services.ProdutoService;
 
 @ManagedBean
 public class ProdutoMB {

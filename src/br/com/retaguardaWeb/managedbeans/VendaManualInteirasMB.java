@@ -19,11 +19,11 @@ import br.com.retaguardaWeb.entidades.MinimoEstoque;
 import br.com.retaguardaWeb.entidades.Produto;
 import br.com.retaguardaWeb.entidades.ReceitaProduto;
 import br.com.retaguardaWeb.entidades.RetiradaEstoque;
-import br.com.retaguardaWeb.sessionbeans.EstoqueAtualServices;
-import br.com.retaguardaWeb.sessionbeans.EstoqueServices;
-import br.com.retaguardaWeb.sessionbeans.IngredienteService;
-import br.com.retaguardaWeb.sessionbeans.ProdutoService;
-import br.com.retaguardaWeb.sessionbeans.ReceitasServices;
+import br.com.retaguardaWeb.services.EstoqueAtualServices;
+import br.com.retaguardaWeb.services.EstoqueServices;
+import br.com.retaguardaWeb.services.IngredienteService;
+import br.com.retaguardaWeb.services.ProdutoService;
+import br.com.retaguardaWeb.services.ReceitasServices;
 import br.com.retaguardaWeb.util.EstoqueAtualUtil;
 import br.com.retaguardaWeb.util.IngredienteQuantidade;
 

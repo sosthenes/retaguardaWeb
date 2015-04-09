@@ -8,7 +8,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
 import br.com.retaguardaWeb.entidades.Loja;
-import br.com.retaguardaWeb.sessionbeans.LojaService;
+import br.com.retaguardaWeb.services.LojaService;
 
 @ManagedBean
 @ViewScoped

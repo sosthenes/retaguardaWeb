@@ -8,7 +8,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
 import br.com.retaguardaWeb.entidades.TipoVenda;
-import br.com.retaguardaWeb.sessionbeans.TipoVendaService;
+import br.com.retaguardaWeb.services.TipoVendaService;
 
 @ManagedBean(name="tipoVendaMB")
 @ViewScoped

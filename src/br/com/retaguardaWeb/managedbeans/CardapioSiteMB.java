@@ -13,10 +13,10 @@ import br.com.retaguardaWeb.entidades.Pedido;
 import br.com.retaguardaWeb.entidades.PedidoProduto;
 import br.com.retaguardaWeb.entidades.Produto;
 import br.com.retaguardaWeb.entidades.TelefoneCliente;
+import br.com.retaguardaWeb.services.CategoriaService;
+import br.com.retaguardaWeb.services.ClienteService;
+import br.com.retaguardaWeb.services.ProdutoService;
 import br.com.retaguardaWeb.sessionbeans.CarrinhoBean;
-import br.com.retaguardaWeb.sessionbeans.CategoriaService;
-import br.com.retaguardaWeb.sessionbeans.ClienteService;
-import br.com.retaguardaWeb.sessionbeans.ProdutoService;
 
 @ManagedBean
 @SessionScoped

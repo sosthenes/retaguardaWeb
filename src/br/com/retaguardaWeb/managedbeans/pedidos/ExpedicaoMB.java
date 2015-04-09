@@ -19,10 +19,10 @@ import br.com.retaguardaWeb.entidades.Pedido;
 import br.com.retaguardaWeb.entidades.PeriodoTrabalho;
 import br.com.retaguardaWeb.managedbeans.BasicoMB;
 import br.com.retaguardaWeb.managedbeans.periodoTrabalho.PeriodoTrabalhoMB;
-import br.com.retaguardaWeb.sessionbeans.CaixaService;
-import br.com.retaguardaWeb.sessionbeans.ExpedicaoPedidoService;
-import br.com.retaguardaWeb.sessionbeans.FuncionarioService;
-import br.com.retaguardaWeb.sessionbeans.PedidoService;
+import br.com.retaguardaWeb.services.CaixaService;
+import br.com.retaguardaWeb.services.ExpedicaoPedidoService;
+import br.com.retaguardaWeb.services.FuncionarioService;
+import br.com.retaguardaWeb.services.PedidoService;
 
 @ViewScoped
 @ManagedBean(name="expedicaoMB")

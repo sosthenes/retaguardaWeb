@@ -15,9 +15,9 @@ import br.com.retaguardaWeb.entidades.Caixa;
 import br.com.retaguardaWeb.entidades.Funcionario;
 import br.com.retaguardaWeb.entidades.Setor;
 import br.com.retaguardaWeb.entidades.Diariafuncionario;
-import br.com.retaguardaWeb.sessionbeans.FuncionarioService;
-import br.com.retaguardaWeb.sessionbeans.RelatorioService;
-import br.com.retaguardaWeb.sessionbeans.DiariaFuncionarioService;
+import br.com.retaguardaWeb.services.DiariaFuncionarioService;
+import br.com.retaguardaWeb.services.FuncionarioService;
+import br.com.retaguardaWeb.services.RelatorioService;
 import br.com.retaguardaWeb.util.Conversoes;
 
 @ManagedBean

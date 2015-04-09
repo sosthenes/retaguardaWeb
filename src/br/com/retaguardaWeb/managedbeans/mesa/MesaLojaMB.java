@@ -11,7 +11,7 @@ import javax.faces.bean.ViewScoped;
 import br.com.retaguardaWeb.entidades.Loja;
 import br.com.retaguardaWeb.entidades.MesaLoja;
 import br.com.retaguardaWeb.managedbeans.BasicoMB;
-import br.com.retaguardaWeb.sessionbeans.MesaLojaEJB;
+import br.com.retaguardaWeb.services.MesaLojaEJB;
 
 @ViewScoped
 @ManagedBean(name="mesaLojaMB")

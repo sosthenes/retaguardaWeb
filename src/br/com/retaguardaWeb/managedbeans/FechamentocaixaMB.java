@@ -16,13 +16,13 @@ import br.com.retaguardaWeb.entidades.Funcionario;
 import br.com.retaguardaWeb.entidades.Loja;
 import br.com.retaguardaWeb.entidades.Setor;
 import br.com.retaguardaWeb.entidades.TipoGasto;
-import br.com.retaguardaWeb.sessionbeans.CaixaService;
-import br.com.retaguardaWeb.sessionbeans.FechamentoCaixaService;
-import br.com.retaguardaWeb.sessionbeans.FuncionarioService;
-import br.com.retaguardaWeb.sessionbeans.GastoService;
-import br.com.retaguardaWeb.sessionbeans.QuilometragemBoyService;
-import br.com.retaguardaWeb.sessionbeans.TipoGastoService;
-import br.com.retaguardaWeb.sessionbeans.ValeFuncionarioService;
+import br.com.retaguardaWeb.services.CaixaService;
+import br.com.retaguardaWeb.services.FechamentoCaixaService;
+import br.com.retaguardaWeb.services.FuncionarioService;
+import br.com.retaguardaWeb.services.GastoService;
+import br.com.retaguardaWeb.services.QuilometragemBoyService;
+import br.com.retaguardaWeb.services.TipoGastoService;
+import br.com.retaguardaWeb.services.ValeFuncionarioService;
 import br.com.retaguardaWeb.util.Conversoes;
 
 @ManagedBean

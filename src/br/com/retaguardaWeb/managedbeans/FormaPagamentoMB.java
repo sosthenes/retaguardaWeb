@@ -9,7 +9,7 @@ import javax.faces.bean.ViewScoped;
 
 import br.com.retaguardaWeb.entidades.FormaPagamento;
 import br.com.retaguardaWeb.entidades.FormaPagamento;
-import br.com.retaguardaWeb.sessionbeans.FormaPagamentoService;
+import br.com.retaguardaWeb.services.FormaPagamentoService;
 
 @ManagedBean(name="formaPagamentoMB")
 @ViewScoped

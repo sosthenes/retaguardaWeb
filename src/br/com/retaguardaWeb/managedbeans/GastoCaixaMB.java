@@ -15,10 +15,10 @@ import br.com.retaguardaWeb.entidades.Funcionario;
 import br.com.retaguardaWeb.entidades.GastoCaixa;
 import br.com.retaguardaWeb.entidades.Loja;
 import br.com.retaguardaWeb.entidades.TipoGasto;
-import br.com.retaguardaWeb.sessionbeans.CaixaService;
-import br.com.retaguardaWeb.sessionbeans.FuncionarioService;
-import br.com.retaguardaWeb.sessionbeans.GastoService;
-import br.com.retaguardaWeb.sessionbeans.TipoGastoService;
+import br.com.retaguardaWeb.services.CaixaService;
+import br.com.retaguardaWeb.services.FuncionarioService;
+import br.com.retaguardaWeb.services.GastoService;
+import br.com.retaguardaWeb.services.TipoGastoService;
 
 @ManagedBean
 @ViewScoped

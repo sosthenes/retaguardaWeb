@@ -9,10 +9,10 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
 import br.com.retaguardaWeb.entidades.CategoriaProduto;
+import br.com.retaguardaWeb.services.CategoriaService;
+import br.com.retaguardaWeb.services.ClienteService;
+import br.com.retaguardaWeb.services.ProdutoService;
 import br.com.retaguardaWeb.sessionbeans.CarrinhoBean;
-import br.com.retaguardaWeb.sessionbeans.CategoriaService;
-import br.com.retaguardaWeb.sessionbeans.ClienteService;
-import br.com.retaguardaWeb.sessionbeans.ProdutoService;
 
 @ManagedBean(name="panelCategoriasMB")
 @ViewScoped

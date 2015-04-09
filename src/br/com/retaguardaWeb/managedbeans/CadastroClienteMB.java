@@ -12,7 +12,7 @@ import javax.faces.context.FacesContext;
 import br.com.retaguardaWeb.entidades.Cliente;
 import br.com.retaguardaWeb.entidades.Endereco;
 import br.com.retaguardaWeb.entidades.TelefoneCliente;
-import br.com.retaguardaWeb.sessionbeans.ClienteService;
+import br.com.retaguardaWeb.services.ClienteService;
 import br.com.retaguardaWeb.util.Acao;
 
 @ManagedBean(name="cadastroClienteMB")

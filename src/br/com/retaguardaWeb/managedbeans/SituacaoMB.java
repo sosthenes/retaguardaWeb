@@ -9,7 +9,7 @@ import javax.faces.bean.ViewScoped;
 
 import br.com.retaguardaWeb.entidades.Loja;
 import br.com.retaguardaWeb.entidades.SituacaoFuncional;
-import br.com.retaguardaWeb.sessionbeans.SituacaoService;
+import br.com.retaguardaWeb.services.SituacaoService;
 
 @ManagedBean
 @ViewScoped

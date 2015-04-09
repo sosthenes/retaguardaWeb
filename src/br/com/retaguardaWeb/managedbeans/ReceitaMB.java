@@ -13,10 +13,10 @@ import br.com.retaguardaWeb.entidades.Ingrediente;
 import br.com.retaguardaWeb.entidades.Produto;
 import br.com.retaguardaWeb.entidades.ReceitaProduto;
 import br.com.retaguardaWeb.entidades.UnidadeMedida;
-import br.com.retaguardaWeb.sessionbeans.IngredienteService;
-import br.com.retaguardaWeb.sessionbeans.ProdutoService;
-import br.com.retaguardaWeb.sessionbeans.ReceitasServices;
-import br.com.retaguardaWeb.sessionbeans.UnidadeMedidaRepositorio;
+import br.com.retaguardaWeb.services.IngredienteService;
+import br.com.retaguardaWeb.services.ProdutoService;
+import br.com.retaguardaWeb.services.ReceitasServices;
+import br.com.retaguardaWeb.services.UnidadeMedidaRepositorio;
 
 @ManagedBean
 @ViewScoped

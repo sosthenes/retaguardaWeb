@@ -18,7 +18,7 @@ import br.com.retaguardaWeb.entidades.LinkPerfil;
 import br.com.retaguardaWeb.entidades.LinksMenu;
 import br.com.retaguardaWeb.entidades.Menu;
 import br.com.retaguardaWeb.entidades.Usuario;
-import br.com.retaguardaWeb.sessionbeans.LoginService;
+import br.com.retaguardaWeb.services.LoginService;
 
 @ManagedBean
 public class MenuMB extends BasicoMB{

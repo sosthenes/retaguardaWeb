@@ -17,7 +17,7 @@ import br.com.retaguardaWeb.entidades.PeriodoTrabalho;
 import br.com.retaguardaWeb.entidades.ValoresFechamentoCaixa;
 import br.com.retaguardaWeb.managedbeans.BasicoMB;
 import br.com.retaguardaWeb.managedbeans.periodoTrabalho.PeriodoTrabalhoMB;
-import br.com.retaguardaWeb.sessionbeans.CaixaService;
+import br.com.retaguardaWeb.services.CaixaService;
 
 @ViewScoped
 @ManagedBean(name="caixaMB")

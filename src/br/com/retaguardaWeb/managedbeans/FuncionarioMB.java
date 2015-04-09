@@ -13,10 +13,10 @@ import br.com.retaguardaWeb.entidades.Funcionario;
 import br.com.retaguardaWeb.entidades.Loja;
 import br.com.retaguardaWeb.entidades.Setor;
 import br.com.retaguardaWeb.entidades.SituacaoFuncional;
-import br.com.retaguardaWeb.sessionbeans.CargoService;
-import br.com.retaguardaWeb.sessionbeans.FuncionarioService;
-import br.com.retaguardaWeb.sessionbeans.SetorService;
-import br.com.retaguardaWeb.sessionbeans.SituacaoService;
+import br.com.retaguardaWeb.services.CargoService;
+import br.com.retaguardaWeb.services.FuncionarioService;
+import br.com.retaguardaWeb.services.SetorService;
+import br.com.retaguardaWeb.services.SituacaoService;
 
 @ManagedBean(name="funcionarioMB")
 @ViewScoped

@@ -26,16 +26,16 @@ import br.com.retaguardaWeb.entidades.GastoCaixa;
 import br.com.retaguardaWeb.entidades.Loja;
 import br.com.retaguardaWeb.entidades.QuilometroMotoBoy;
 import br.com.retaguardaWeb.entidades.Valefuncionario;
-import br.com.retaguardaWeb.sessionbeans.AdvertenciaService;
-import br.com.retaguardaWeb.sessionbeans.ContaService;
-import br.com.retaguardaWeb.sessionbeans.DiariaFuncionarioService;
-import br.com.retaguardaWeb.sessionbeans.EstoqueAtualServices;
-import br.com.retaguardaWeb.sessionbeans.FechamentoCaixaService;
-import br.com.retaguardaWeb.sessionbeans.FuncionarioService;
-import br.com.retaguardaWeb.sessionbeans.GastoService;
-import br.com.retaguardaWeb.sessionbeans.QuilometragemBoyService;
-import br.com.retaguardaWeb.sessionbeans.RelatorioService;
-import br.com.retaguardaWeb.sessionbeans.ValeFuncionarioService;
+import br.com.retaguardaWeb.services.AdvertenciaService;
+import br.com.retaguardaWeb.services.ContaService;
+import br.com.retaguardaWeb.services.DiariaFuncionarioService;
+import br.com.retaguardaWeb.services.EstoqueAtualServices;
+import br.com.retaguardaWeb.services.FechamentoCaixaService;
+import br.com.retaguardaWeb.services.FuncionarioService;
+import br.com.retaguardaWeb.services.GastoService;
+import br.com.retaguardaWeb.services.QuilometragemBoyService;
+import br.com.retaguardaWeb.services.RelatorioService;
+import br.com.retaguardaWeb.services.ValeFuncionarioService;
 import br.com.retaguardaWeb.util.Conversoes;
 import br.com.retaguardaWeb.vo.AdvertenciaVO;
 import br.com.retaguardaWeb.vo.CaixaConsolidadoVO;
@@ -131,7 +131,7 @@ public class RelatorioMB {
 			hm.put("dataEstoque",
 					formato.format(estadoEstoque.getDataEstoque()));
 			String jasper = "relatorioEstoqueAtual.jasper";
-			String titulo = "Relatório de Estoque Atual";
+			String titulo = "Relatï¿½rio de Estoque Atual";
 
 			relatorioService.pdf(jasper, titulo, "", "", listaEstoqueAtual, hm);
 		} catch (JRException e) {
@@ -143,7 +143,7 @@ public class RelatorioMB {
 
 	public void relatorioFuncionariosAtivos() {
 		String jasper = "relatorioFuncionarioAtivo.jasper";
-		String titulo = "Relatório de Funcionários Ativos";
+		String titulo = "Relatï¿½rio de Funcionï¿½rios Ativos";
 		HashMap<String, Object> hm = new HashMap<String, Object>();
 		try {
 			List<Funcionario> lista = new ArrayList<Funcionario>();
@@ -161,7 +161,7 @@ public class RelatorioMB {
 
 	public void relatorioGastosCaixa() {
 		String jasper = "relatorioGastosCaixa.jasper";
-		String titulo = "Relatório de Gasto dos Caixas";
+		String titulo = "Relatï¿½rio de Gasto dos Caixas";
 		HashMap<String, Object> hm = new HashMap<String, Object>();
 		hm.put("dataGastoCaixa", formato.format(new Date()));
 		try {
@@ -185,7 +185,7 @@ public class RelatorioMB {
 				"select x from Advertencia x where x.id=1", Advertencia.class);
 		adv = query.getSingleResult();
 		String jasper = "advertencia.jasper";
-		String titulo = "CARTA DE ADVERTÊNCIA DISCIPLINAR";
+		String titulo = "CARTA DE ADVERTï¿½NCIA DISCIPLINAR";
 		HashMap<String, Object> hm = new HashMap<String, Object>();
 		hm.put("adv", "");
 		try {
@@ -212,7 +212,7 @@ public class RelatorioMB {
 		String titulo = "GASTOS CONSOLIDADO";
 		HashMap<String, Object> hm = new HashMap<String, Object>();
 		
-		 String periodo = "De "+ formato.format(getDataInicio()) + " até " +
+		 String periodo = "De "+ formato.format(getDataInicio()) + " atï¿½ " +
 		 formato.format(getDataFim()); hm.put("periodo",periodo);
 		 hm.put("periodo", periodo);
 		try {
@@ -243,7 +243,7 @@ public class RelatorioMB {
 		String titulo = "GASTOS CONSOLIDADO";
 		HashMap<String, Object> hm = new HashMap<String, Object>();
 		
-		 String periodo = "De "+ formato.format(getDataInicio()) + " até " +
+		 String periodo = "De "+ formato.format(getDataInicio()) + " atï¿½ " +
 		 formato.format(getDataFim()); hm.put("periodo",periodo);
 		 hm.put("periodo", periodo);
 		try {
@@ -272,7 +272,7 @@ public class RelatorioMB {
 		String titulo = "FECHAMENTO CONSOLIDADO";
 		HashMap<String, Object> hm = new HashMap<String, Object>();
 		/*
-		 * String periodo = "De "+ formato.format(getDataInicio()) + " até " +
+		 * String periodo = "De "+ formato.format(getDataInicio()) + " atï¿½ " +
 		 * formato.format(getDataFim()); hm.put("periodo",periodo);
 		 */
 		try {
@@ -451,7 +451,7 @@ public class RelatorioMB {
 		String jasper = "";
 		String titulo ="";
 			jasper = "relatorioDeVales.jasper";
-			titulo = "Vales dos funcionários";
+			titulo = "Vales dos funcionï¿½rios";
 			HashMap<String, Object> hm = new HashMap<String, Object>();
 			try {
 				List<ValesFuncionariosVO> advVO = new ArrayList<ValesFuncionariosVO>();

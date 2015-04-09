@@ -13,8 +13,8 @@ import br.com.retaguardaWeb.entidades.Fornecedor;
 import br.com.retaguardaWeb.entidades.Ingrediente;
 import br.com.retaguardaWeb.entidades.ItemDeCompra;
 import br.com.retaguardaWeb.entidades.Loja;
-import br.com.retaguardaWeb.sessionbeans.FornecedorService;
-import br.com.retaguardaWeb.sessionbeans.IngredienteService;
+import br.com.retaguardaWeb.services.FornecedorService;
+import br.com.retaguardaWeb.services.IngredienteService;
 
 @ManagedBean
 @SessionScoped

@@ -10,7 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import br.com.retaguardaWeb.entidades.Funcionario;
 import br.com.retaguardaWeb.entidades.Usuario;
-import br.com.retaguardaWeb.sessionbeans.LoginService;
+import br.com.retaguardaWeb.services.LoginService;
 
 @ManagedBean
 public class LoginMB extends BasicoMB{
@@ -48,7 +48,7 @@ public class LoginMB extends BasicoMB{
 				e.printStackTrace();
 			}
 		}else{
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Login ou senha inválida","Login ou senha inválida"));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Login ou senha invï¿½lida","Login ou senha invï¿½lida"));
 		}
 	}
 	
