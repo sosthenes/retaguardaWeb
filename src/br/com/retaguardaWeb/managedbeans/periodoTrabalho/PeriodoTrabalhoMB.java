@@ -1,24 +1,30 @@
 package br.com.retaguardaWeb.managedbeans.periodoTrabalho;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.annotation.PostConstruct;
-import javax.ejb.EJB;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 
 import br.com.retaguardaWeb.entidades.PeriodoTrabalho;
 import br.com.retaguardaWeb.managedbeans.BasicoMB;
 import br.com.retaguardaWeb.services.PeriodoTrabalhoService;
 
+@Named
 @ViewScoped
-@ManagedBean(name="periodoTrabalhoMB")
-public class PeriodoTrabalhoMB extends BasicoMB{
+public class PeriodoTrabalhoMB extends BasicoMB implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	PeriodoTrabalho periodoTrabalho = new PeriodoTrabalho();
 	
-	@EJB
-	public PeriodoTrabalhoService periodoService;
+	@Inject
+	private PeriodoTrabalhoService periodoService;
 	
 	private PeriodoTrabalho periodo;
 	private boolean periodoAberto;

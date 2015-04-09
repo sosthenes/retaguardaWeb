@@ -1,9 +1,11 @@
 package br.com.retaguardaWeb.managedbeans.pedidos.components;
 
+import java.io.Serializable;
+
 import javax.ejb.EJB;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 
 import org.primefaces.context.RequestContext;
 
@@ -14,13 +16,17 @@ import br.com.retaguardaWeb.services.ClienteService;
 import br.com.retaguardaWeb.util.Acao;
 
 @ViewScoped
-@ManagedBean(name="selecionarEnderecoMB")
-public class SelecionarEnderecoMB {
+@Named
+public class SelecionarEnderecoMB implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Cliente cliente;
 	private Endereco enderecoSelecionado;
 	
-	@ManagedProperty("#{cadastroEnderecoMB}")
+	@Inject
 	private CadastroEnderecoMB cadastroEnderecoMB;
 	
 	@EJB

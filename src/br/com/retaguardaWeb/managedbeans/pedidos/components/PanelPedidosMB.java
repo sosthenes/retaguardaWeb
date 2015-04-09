@@ -1,12 +1,13 @@
 package br.com.retaguardaWeb.managedbeans.pedidos.components;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.inject.Named;
 
 import org.primefaces.context.RequestContext;
 
@@ -18,9 +19,9 @@ import br.com.retaguardaWeb.entidades.TipoVenda;
 import br.com.retaguardaWeb.services.PedidoService;
 import br.com.retaguardaWeb.sessionbeans.CarrinhoBean;
 
-@ManagedBean(name="panelPedidosMB")
+@Named
 @ViewScoped
-public class PanelPedidosMB {
+public class PanelPedidosMB implements Serializable {
 	
 	@EJB
 	private CarrinhoBean carrinhoBean;

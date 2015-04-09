@@ -1,14 +1,15 @@
 package br.com.retaguardaWeb.managedbeans.pedidos;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 
 import org.primefaces.context.RequestContext;
 
@@ -25,10 +26,13 @@ import br.com.retaguardaWeb.services.FuncionarioService;
 import br.com.retaguardaWeb.services.PedidoService;
 
 @ViewScoped
-@ManagedBean(name="expedicaoMB")
-public class ExpedicaoMB extends BasicoMB{
+@Named
+public class ExpedicaoMB  extends BasicoMB implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
-	
 	@EJB
 	private PedidoService pedidoService;
 	
@@ -48,7 +52,7 @@ public class ExpedicaoMB extends BasicoMB{
 	private Funcionario funcionario;
 	private CaixaPeriodoFuncionario caixaPeriodoFuncionario;
 	
-	@ManagedProperty("#{periodoTrabalhoMB}")
+	@Inject
 	private PeriodoTrabalhoMB periodoTrabalhoMB;
 	
 	@PostConstruct

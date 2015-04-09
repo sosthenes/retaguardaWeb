@@ -1,6 +1,5 @@
 package br.com.retaguardaWeb.managedbeans.mesa;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -15,7 +14,7 @@ import br.com.retaguardaWeb.services.MesaLojaEJB;
 
 @ViewScoped
 @ManagedBean(name="mesaLojaMB")
-public class MesaLojaMB extends BasicoMB{
+public class MesaLojaMB extends BasicoMB {
 
 	@EJB
 	private MesaLojaEJB repositorio ;

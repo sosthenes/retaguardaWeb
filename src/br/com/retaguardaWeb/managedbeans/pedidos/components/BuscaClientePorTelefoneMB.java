@@ -1,12 +1,13 @@
 package br.com.retaguardaWeb.managedbeans.pedidos.components;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 
 import org.primefaces.context.RequestContext;
 
@@ -16,9 +17,9 @@ import br.com.retaguardaWeb.managedbeans.CadastroClienteMB;
 import br.com.retaguardaWeb.services.ClienteService;
 import br.com.retaguardaWeb.util.Acao;
 
-@ManagedBean(name="buscaClientePorTelefoneMB")
+@Named
 @ViewScoped
-public class BuscaClientePorTelefoneMB {
+public class BuscaClientePorTelefoneMB implements Serializable {
 	
 	private Cliente clienteSelecionado;
 	@EJB
@@ -26,7 +27,7 @@ public class BuscaClientePorTelefoneMB {
 	private Boolean botaoInclusaoClienteVisivel;
 	private Acao<Cliente> callbackCarregarCliente;
 	
-	@ManagedProperty("#{cadastroClienteMB}")
+	@Inject
 	private CadastroClienteMB cadastroClienteMB;
 	
 	@PostConstruct

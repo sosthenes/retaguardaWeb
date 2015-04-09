@@ -1,5 +1,6 @@
 package br.com.retaguardaWeb.managedbeans;
 
+import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 
@@ -12,10 +13,15 @@ import br.com.retaguardaWeb.entidades.Loja;
 import br.com.retaguardaWeb.entidades.Usuario;
 
 
-public abstract class  BasicoMB {
+public abstract class  BasicoMB implements Serializable{
 
 
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private Usuario usuario = new Usuario();
 	public abstract void adiciona ();
 	public abstract void listar() ;
@@ -28,7 +34,7 @@ public abstract class  BasicoMB {
 	SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy"); 
 	DecimalFormat qtdeParser = new DecimalFormat( "0.00");
 	
-	public Loja loja ;
+	private Loja loja ;
 	
 	HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
 	
@@ -41,7 +47,7 @@ public abstract class  BasicoMB {
 	}
 	
 	public void retornaMensagemSucessoOperacao(){
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Operação realizada com sucesso","Operação realizada com sucesso"));
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Operaï¿½ï¿½o realizada com sucesso","Operaï¿½ï¿½o realizada com sucesso"));
 	}
 	
 	public void retornaMensagemErro(String mensagem){

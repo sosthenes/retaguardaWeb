@@ -1,6 +1,7 @@
 package br.com.retaguardaWeb.managedbeans.caixa;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -8,8 +9,8 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import javax.inject.Inject;
 
 import br.com.retaguardaWeb.entidades.Caixa;
 import br.com.retaguardaWeb.entidades.CaixaPeriodoFuncionario;
@@ -21,13 +22,18 @@ import br.com.retaguardaWeb.services.CaixaService;
 
 @ViewScoped
 @ManagedBean(name="caixaMB")
-public class CaixaMB extends BasicoMB{
+public class CaixaMB  extends BasicoMB implements Serializable{
 
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@EJB
 	private CaixaService caixaService;
 
-	@ManagedProperty("#{periodoTrabalhoMB}")
+	@Inject
 	private PeriodoTrabalhoMB periodoTrabalhoMB;
 	
 	

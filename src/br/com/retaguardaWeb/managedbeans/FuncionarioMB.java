@@ -107,7 +107,7 @@ public class FuncionarioMB extends BasicoMB{
 		getCargo().setId(getIdCargo());
 		getSetor().setId(getIdSetor());
 		getSituacao().setId(getIdSituacaoFuncional());
-		getFuncionario().setLoja(loja);
+		getFuncionario().setLoja(getLoja());
 		getFuncionario().setCargo(getCargo());
 		getFuncionario().setSetor(getSetor());
 		getFuncionario().setSituacaoFuncional(getSituacao());
@@ -223,7 +223,7 @@ public class FuncionarioMB extends BasicoMB{
 
 	private void listarCargos() {
 		
-		listaCargo = cargoService.listaCargoPorLoja(loja);
+		listaCargo = cargoService.listaCargoPorLoja(getLoja());
 		
 	}
 

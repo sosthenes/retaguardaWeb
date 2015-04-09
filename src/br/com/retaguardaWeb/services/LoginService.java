@@ -8,14 +8,12 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import javax.persistence.TypedQuery;
 
 import br.com.retaguardaWeb.entidades.Funcionario;
 import br.com.retaguardaWeb.entidades.LinkPerfil;
 import br.com.retaguardaWeb.entidades.LinksMenu;
 import br.com.retaguardaWeb.entidades.Loja;
 import br.com.retaguardaWeb.entidades.Menu;
-import br.com.retaguardaWeb.entidades.Pagamento;
 import br.com.retaguardaWeb.entidades.ParcelaPagamento;
 import br.com.retaguardaWeb.entidades.PerfilUsuario;
 import br.com.retaguardaWeb.entidades.Usuario;
@@ -97,11 +95,10 @@ public class LoginService {
 	}
 
 	public Funcionario validaFuncionario(Usuario usuario) {
-		Funcionario funcionario = crudService.findOneResultWithNamedQuery(
+		return crudService.findOneResultWithNamedQuery(
 				Funcionario.OBTER_USUARIO_POR_LOGIN_E_SENHA,
 				QueryParameter.with("login", usuario.getLogin())
 						.and("senha", usuario.getSenha()).parameters());
-		return funcionario;
 	}
 
 	public void excluirPerfil(PerfilUsuario perfilEdicao) {

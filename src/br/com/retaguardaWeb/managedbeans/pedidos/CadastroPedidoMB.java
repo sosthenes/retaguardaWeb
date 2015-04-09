@@ -1,14 +1,18 @@
 package br.com.retaguardaWeb.managedbeans.pedidos;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.faces.bean.ManagedBean;
+import javax.ejb.EJB;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.ViewScoped;
+import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 
 import org.primefaces.context.RequestContext;
 
@@ -22,40 +26,47 @@ import br.com.retaguardaWeb.entidades.TipoVenda;
 import br.com.retaguardaWeb.managedbeans.BasicoMB;
 import br.com.retaguardaWeb.managedbeans.FormaPagamentoMB;
 import br.com.retaguardaWeb.managedbeans.TipoVendaMB;
-import br.com.retaguardaWeb.managedbeans.caixa.CaixaAuxiliarMB;
 import br.com.retaguardaWeb.managedbeans.pedidos.components.BuscaClientePorTelefoneMB;
 import br.com.retaguardaWeb.managedbeans.pedidos.components.PanelPedidosMB;
 import br.com.retaguardaWeb.managedbeans.pedidos.components.SelecionarEnderecoMB;
 import br.com.retaguardaWeb.managedbeans.periodoTrabalho.PeriodoTrabalhoMB;
+import br.com.retaguardaWeb.services.CaixaService;
 import br.com.retaguardaWeb.util.Acao;
 
-@ManagedBean(name="cadastroPedidoMB")
+@Named
 @ViewScoped
-public class CadastroPedidoMB extends BasicoMB{
+public class CadastroPedidoMB extends BasicoMB implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+
+
 	private static final String ENDERECO_SALVO_COM_SUCESSO = "Endereco salvo com sucesso";
 	
+	@Inject
+	private CaixaService caixaService;
 
 	
-	@ManagedProperty("#{caixaAuxiliarMB}")
-	private CaixaAuxiliarMB caixaMB;
 	
-	@ManagedProperty("#{buscaClientePorTelefoneMB}")
+	@Inject
 	private BuscaClientePorTelefoneMB buscaClientePorTelefoneMB;
 	
-	@ManagedProperty("#{selecionarEnderecoMB}")
+	@Inject
 	private SelecionarEnderecoMB selecionarEnderecoMB;
 	
-	@ManagedProperty("#{panelPedidosMB}")
+	@Inject
 	private PanelPedidosMB panelPedidosMB;
 	
-	@ManagedProperty("#{tipoVendaMB}")
+	@Inject
 	private TipoVendaMB tipoVendaMB;
 	
-	@ManagedProperty("#{formaPagamentoMB}")
+	@Inject
 	private FormaPagamentoMB formaPagamentoMB;
 	
-	@ManagedProperty("#{periodoTrabalhoMB}")
+	@Inject
 	private PeriodoTrabalhoMB periodoTrabalhoMB;
 	
 	private Double valorPago;
@@ -70,7 +81,6 @@ public class CadastroPedidoMB extends BasicoMB{
 	private List<MesaPedido> listaMesasSelecionadas;
 	
 	
-	@PostConstruct
 	public void init() {
 		
 		
@@ -88,14 +98,14 @@ public class CadastroPedidoMB extends BasicoMB{
 			panelPedidosMB.getPedido();
 		}
 		
-		if(!caixaMB.getCaixaService().verificaCaixaAberto(getLoja(), periodo, getUsuario().getFuncionario())){
+		if(!caixaService.verificaCaixaAberto(getLoja(), periodo, getUsuario().getFuncionario())){
 			try {
 				context.redirect(context.getRequestContextPath() + "/admin/caixa/caixa.xhtml");
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}else{
-			caixaPeriodoFuncionario = caixaMB.getCaixaService().recuperaCaixaAberto(getLoja(), periodo, getUsuario().getFuncionario());
+			caixaPeriodoFuncionario = caixaService.recuperaCaixaAberto(getLoja(), periodo, getUsuario().getFuncionario());
 		}
 		
 		buscaClientePorTelefoneMB.setCallbackCarregarCliente(new Acao<Cliente>() {
@@ -109,16 +119,14 @@ public class CadastroPedidoMB extends BasicoMB{
 	}
 
 	public void adicionaMesas(MesaLoja[] lista){
-		
 		listaMesasSelecionadas = new ArrayList<MesaPedido>();
-		for(MesaLoja m : lista){
+		Arrays.asList(lista).forEach((m) -> {
 			MesaPedido mesa = new MesaPedido();
 			mesa.setIdMesaLoja(m);
 			mesa.setIdPedido(panelPedidosMB.getPedido());
 			listaMesasSelecionadas.add(mesa);
-		}
-		panelPedidosMB.getPedido().setMesas(new  ArrayList<MesaPedido>());
-		panelPedidosMB.getPedido().getMesas().addAll(listaMesasSelecionadas);
+		});
+		panelPedidosMB.getPedido().setMesas(listaMesasSelecionadas);
 		RequestContext.getCurrentInstance().execute("modalSelecionaMesa.hide()");
 		RequestContext.getCurrentInstance().update("principal:mesaSelecionada");
 		
@@ -291,20 +299,6 @@ public class CadastroPedidoMB extends BasicoMB{
 	public void setPeriodoTrabalhoMB(PeriodoTrabalhoMB periodoTrabalhoMB) {
 		this.periodoTrabalhoMB = periodoTrabalhoMB;
 	}
-
-
-
-	public CaixaAuxiliarMB getCaixaMB() {
-		return caixaMB;
-	}
-
-
-
-	public void setCaixaMB(CaixaAuxiliarMB caixaMB) {
-		this.caixaMB = caixaMB;
-	}
-
-
 
 	public CaixaPeriodoFuncionario getCaixaPeriodoFuncionario() {
 		return caixaPeriodoFuncionario;
