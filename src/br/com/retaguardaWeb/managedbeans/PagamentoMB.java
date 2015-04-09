@@ -1,5 +1,7 @@
 package br.com.retaguardaWeb.managedbeans;
 
+import javax.inject.Named;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -7,7 +9,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.view.ViewScoped;
 
 import br.com.retaguardaWeb.entidades.DescricaoPagamento;
 import br.com.retaguardaWeb.entidades.FormaPagamento;
@@ -23,9 +25,10 @@ import br.com.retaguardaWeb.services.PeriodicidadeService;
 import br.com.retaguardaWeb.services.TipoDepagamentoService;
 import br.com.retaguardaWeb.util.Conversoes;
 
-@ManagedBean
+@Named
 @ViewScoped
-public class PagamentoMB extends BasicoMB{
+public class PagamentoMB extends BasicoMB implements Serializable{
+private static final long serialVersionUID = 1L;
 
 	
 	private Long idTipoPagamento;

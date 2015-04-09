@@ -8,9 +8,9 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import br.com.retaguardaWeb.entidades.Caixa;
 import br.com.retaguardaWeb.entidades.CaixaPeriodoFuncionario;
@@ -21,7 +21,7 @@ import br.com.retaguardaWeb.managedbeans.periodoTrabalho.PeriodoTrabalhoMB;
 import br.com.retaguardaWeb.services.CaixaService;
 
 @ViewScoped
-@ManagedBean(name="caixaMB")
+@Named
 public class CaixaMB  extends BasicoMB implements Serializable{
 
 	

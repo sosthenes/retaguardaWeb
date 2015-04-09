@@ -1,17 +1,20 @@
 package br.com.retaguardaWeb.managedbeans;
 
+import javax.inject.Named;
+import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.view.ViewScoped;
 
 import br.com.retaguardaWeb.entidades.Cargo;
 import br.com.retaguardaWeb.entidades.Loja;
 import br.com.retaguardaWeb.entidades.Motivo;
 import br.com.retaguardaWeb.services.MotivoService;
 
-@ManagedBean
+@Named
 @ViewScoped
-public class MotivoMB extends BasicoMB{
+public class MotivoMB extends BasicoMB implements Serializable{
+private static final long serialVersionUID = 1L;
 
 	@EJB
 	private MotivoService motivoService;

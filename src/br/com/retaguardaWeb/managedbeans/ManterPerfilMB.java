@@ -1,11 +1,13 @@
 package br.com.retaguardaWeb.managedbeans;
 
+import javax.inject.Named;
+import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.view.ViewScoped;
 
 import br.com.retaguardaWeb.entidades.LinkPerfil;
 import br.com.retaguardaWeb.entidades.LinksMenu;
@@ -15,9 +17,10 @@ import br.com.retaguardaWeb.entidades.PerfilUsuario;
 import br.com.retaguardaWeb.services.FuncionarioService;
 import br.com.retaguardaWeb.services.LoginService;
 
-@ManagedBean
+@Named
 @ViewScoped
-public class ManterPerfilMB extends BasicoMB{
+public class ManterPerfilMB extends BasicoMB implements Serializable{
+private static final long serialVersionUID = 1L;
 
 	private List<PerfilUsuario> perfilUsuario;
 	

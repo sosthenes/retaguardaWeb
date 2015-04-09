@@ -1,11 +1,13 @@
 package br.com.retaguardaWeb.managedbeans;
 
+import javax.inject.Named;
+import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.view.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
@@ -17,9 +19,10 @@ import br.com.retaguardaWeb.services.FuncionarioService;
 import br.com.retaguardaWeb.services.LojaService;
 import br.com.retaguardaWeb.services.UsuarioService;
 
-@ManagedBean
+@Named
 @ViewScoped
-public class UsuarioMB extends BasicoMB{
+public class UsuarioMB extends BasicoMB implements Serializable{
+private static final long serialVersionUID = 1L;
 
 	@EJB
 	private UsuarioService usuarioService;

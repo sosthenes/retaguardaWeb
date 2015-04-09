@@ -1,11 +1,13 @@
 package br.com.retaguardaWeb.managedbeans.pedidos.components;
 
+import javax.inject.Named;
+import java.io.Serializable;
 import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.faces.bean.ViewScoped;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -20,6 +22,7 @@ import br.com.retaguardaWeb.util.Acao;
 @Named
 @ViewScoped
 public class BuscaClientePorTelefoneMB implements Serializable {
+private static final long serialVersionUID = 1L;
 	
 	private Cliente clienteSelecionado;
 	@EJB

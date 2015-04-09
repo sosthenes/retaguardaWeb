@@ -3,7 +3,7 @@ package br.com.retaguardaWeb.managedbeans.pedidos.components;
 import java.io.Serializable;
 
 import javax.ejb.EJB;
-import javax.faces.bean.ViewScoped;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -17,7 +17,7 @@ import br.com.retaguardaWeb.util.Acao;
 
 @ViewScoped
 @Named
-public class SelecionarEnderecoMB implements Serializable{
+public class SelecionarEnderecoMB  implements Serializable{
 
 	/**
 	 * 

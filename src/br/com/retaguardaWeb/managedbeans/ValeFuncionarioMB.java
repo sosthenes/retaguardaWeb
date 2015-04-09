@@ -1,5 +1,7 @@
 package br.com.retaguardaWeb.managedbeans;
 
+import javax.inject.Named;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -8,7 +10,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.view.ViewScoped;
 
 import br.com.retaguardaWeb.entidades.Caixa;
 import br.com.retaguardaWeb.entidades.Funcionario;
@@ -19,9 +21,10 @@ import br.com.retaguardaWeb.services.RelatorioService;
 import br.com.retaguardaWeb.services.ValeFuncionarioService;
 import br.com.retaguardaWeb.util.Conversoes;
 
-@ManagedBean
+@Named
 @ViewScoped
-public class ValeFuncionarioMB extends BasicoMB{
+public class ValeFuncionarioMB extends BasicoMB implements Serializable{
+private static final long serialVersionUID = 1L;
 
 	@EJB
 	private FuncionarioService funcionarioService;

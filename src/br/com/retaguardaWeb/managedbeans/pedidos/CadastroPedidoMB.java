@@ -1,5 +1,7 @@
 package br.com.retaguardaWeb.managedbeans.pedidos;
 
+import javax.inject.Named;
+import java.io.Serializable;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;

@@ -1,18 +1,21 @@
 package br.com.retaguardaWeb.managedbeans;
 
+import javax.inject.Named;
+import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.view.ViewScoped;
 
 import br.com.retaguardaWeb.entidades.TipoVenda;
 import br.com.retaguardaWeb.services.TipoVendaService;
 
-@ManagedBean(name="tipoVendaMB")
+@Named
 @ViewScoped
-public class TipoVendaMB extends BasicoMB{
+public class TipoVendaMB extends BasicoMB implements Serializable{
+private static final long serialVersionUID = 1L;
 	
 
 	private TipoVenda tipoVenda;

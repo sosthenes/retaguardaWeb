@@ -1,5 +1,7 @@
 package br.com.retaguardaWeb.managedbeans;
 
+import javax.inject.Named;
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -27,8 +29,9 @@ import br.com.retaguardaWeb.services.ReceitasServices;
 import br.com.retaguardaWeb.util.EstoqueAtualUtil;
 import br.com.retaguardaWeb.util.IngredienteQuantidade;
 
-@ManagedBean
-public class VendaManualInteirasMB {
+@Named
+public class VendaManualInteirasMB  implements Serializable{
+private static final long serialVersionUID = 1L;
 
 	@EJB
 	private ProdutoService produtoService;

@@ -1,36 +1,31 @@
 package br.com.retaguardaWeb.managedbeans;
 
-import java.io.IOException;
+import javax.inject.Named;
+import java.io.Serializable;
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 
 import javax.ejb.EJB;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
-import javax.persistence.TypedQuery;
+import javax.faces.view.ViewScoped;
+import javax.inject.Named;
 
-import net.sf.jasperreports.engine.JRException;
 import br.com.retaguardaWeb.entidades.Advertencia;
 import br.com.retaguardaWeb.entidades.AdvertenciaMotivo;
 import br.com.retaguardaWeb.entidades.Funcionario;
-import br.com.retaguardaWeb.entidades.GastoCaixa;
-import br.com.retaguardaWeb.entidades.Loja;
 import br.com.retaguardaWeb.entidades.Motivo;
-import br.com.retaguardaWeb.entidades.QuilometroMotoBoy;
 import br.com.retaguardaWeb.entidades.Setor;
 import br.com.retaguardaWeb.services.AdvertenciaService;
 import br.com.retaguardaWeb.services.FuncionarioService;
 import br.com.retaguardaWeb.services.MotivoService;
 import br.com.retaguardaWeb.services.RelatorioService;
-import br.com.retaguardaWeb.vo.AdvertenciaVO;
-import br.com.retaguardaWeb.vo.GastoCaixaVO;
 
-@ManagedBean
+@Named
 @ViewScoped
-public class AdvertenciaMB extends BasicoMB{
+public class AdvertenciaMB  extends BasicoMB implements Serializable{
+private static final long serialVersionUID = 1L;
 
 	@EJB
 	private FuncionarioService funcionarioService;

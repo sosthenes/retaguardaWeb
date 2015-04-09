@@ -1,5 +1,7 @@
 package br.com.retaguardaWeb.managedbeans;
 
+import javax.inject.Named;
+import java.io.Serializable;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -10,8 +12,9 @@ import br.com.retaguardaWeb.entidades.UnidadeMedida;
 import br.com.retaguardaWeb.services.IngredienteService;
 import br.com.retaguardaWeb.services.UnidadeMedidaRepositorio;
 
-@ManagedBean
-public class IngredienteMB {
+@Named
+public class IngredienteMB  implements Serializable {
+private static final long serialVersionUID = 1L;
 
 	@EJB
 	private IngredienteService repositorio ;

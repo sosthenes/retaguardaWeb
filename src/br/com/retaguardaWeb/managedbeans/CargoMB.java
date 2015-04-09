@@ -1,19 +1,22 @@
 package br.com.retaguardaWeb.managedbeans;
 
+import javax.inject.Named;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.view.ViewScoped;
 
 import br.com.retaguardaWeb.entidades.Cargo;
 import br.com.retaguardaWeb.services.CargoService;
 import br.com.retaguardaWeb.services.LojaService;
 
-@ManagedBean
+@Named
 @ViewScoped
-public class CargoMB extends BasicoMB{
+public class CargoMB extends BasicoMB implements Serializable{
+private static final long serialVersionUID = 1L;
 
 	@EJB
 	private CargoService cargoService;

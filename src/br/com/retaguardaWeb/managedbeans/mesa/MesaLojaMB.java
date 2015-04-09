@@ -1,11 +1,12 @@
 package br.com.retaguardaWeb.managedbeans.mesa;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.view.ViewScoped;
+import javax.inject.Named;
 
 import br.com.retaguardaWeb.entidades.Loja;
 import br.com.retaguardaWeb.entidades.MesaLoja;
@@ -13,8 +14,9 @@ import br.com.retaguardaWeb.managedbeans.BasicoMB;
 import br.com.retaguardaWeb.services.MesaLojaEJB;
 
 @ViewScoped
-@ManagedBean(name="mesaLojaMB")
-public class MesaLojaMB extends BasicoMB {
+@Named
+public class MesaLojaMB  extends BasicoMB implements Serializable{
+private static final long serialVersionUID = 1L;
 
 	@EJB
 	private MesaLojaEJB repositorio ;

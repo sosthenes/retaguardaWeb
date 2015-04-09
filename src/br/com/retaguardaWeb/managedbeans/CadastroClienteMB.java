@@ -1,13 +1,16 @@
 package br.com.retaguardaWeb.managedbeans;
 
+import javax.inject.Named;
+import java.io.Serializable;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.view.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.inject.Named;
 
 import br.com.retaguardaWeb.entidades.Cliente;
 import br.com.retaguardaWeb.entidades.Endereco;
@@ -15,9 +18,14 @@ import br.com.retaguardaWeb.entidades.TelefoneCliente;
 import br.com.retaguardaWeb.services.ClienteService;
 import br.com.retaguardaWeb.util.Acao;
 
-@ManagedBean(name="cadastroClienteMB")
+@Named
 @ViewScoped
-public class CadastroClienteMB {
+public class CadastroClienteMB implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private static final String CLIENTE_SALVO_COM_SUCESSO = "Cliente salvo com sucesso";
 
 	private Cliente cliente;

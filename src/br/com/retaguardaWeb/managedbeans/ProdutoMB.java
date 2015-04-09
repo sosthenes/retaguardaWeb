@@ -1,5 +1,7 @@
 package br.com.retaguardaWeb.managedbeans;
 
+import javax.inject.Named;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,8 +13,9 @@ import br.com.retaguardaWeb.entidades.Produto;
 import br.com.retaguardaWeb.services.CategoriaService;
 import br.com.retaguardaWeb.services.ProdutoService;
 
-@ManagedBean
-public class ProdutoMB {
+@Named
+public class ProdutoMB  implements Serializable{
+private static final long serialVersionUID = 1L;
 
 	@EJB
 	private ProdutoService produtoService;

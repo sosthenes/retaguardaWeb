@@ -1,20 +1,23 @@
 package br.com.retaguardaWeb.managedbeans;
 
+import javax.inject.Named;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.view.ViewScoped;
 
 import br.com.retaguardaWeb.entidades.Loja;
 import br.com.retaguardaWeb.entidades.Setor;
 import br.com.retaguardaWeb.services.SetorService;
 
-@ManagedBean
+@Named
 @ViewScoped
-public class SetorMB extends BasicoMB{
+public class SetorMB extends BasicoMB implements Serializable {
+private static final long serialVersionUID = 1L;
 
 	@EJB
 	private SetorService setorService;

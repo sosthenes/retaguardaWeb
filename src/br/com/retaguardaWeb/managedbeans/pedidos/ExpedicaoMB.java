@@ -1,5 +1,7 @@
 package br.com.retaguardaWeb.managedbeans.pedidos;
 
+import javax.inject.Named;
+import java.io.Serializable;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.Date;
@@ -7,7 +9,7 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.faces.bean.ViewScoped;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -27,7 +29,7 @@ import br.com.retaguardaWeb.services.PedidoService;
 
 @ViewScoped
 @Named
-public class ExpedicaoMB  extends BasicoMB implements Serializable{
+public class ExpedicaoMB extends BasicoMB implements Serializable{
 	/**
 	 * 
 	 */

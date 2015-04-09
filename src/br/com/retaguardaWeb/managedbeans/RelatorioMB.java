@@ -1,5 +1,7 @@
 package br.com.retaguardaWeb.managedbeans;
 
+import javax.inject.Named;
+import java.io.Serializable;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -46,8 +48,9 @@ import br.com.retaguardaWeb.vo.RelGastoVO;
 import br.com.retaguardaWeb.vo.ValefuncionarioVO;
 import br.com.retaguardaWeb.vo.ValesFuncionariosVO;
 
-@ManagedBean
-public class RelatorioMB {
+@Named
+public class RelatorioMB  implements Serializable {
+private static final long serialVersionUID = 1L;
 
 	@EJB
 	private FuncionarioService funcionarioService;

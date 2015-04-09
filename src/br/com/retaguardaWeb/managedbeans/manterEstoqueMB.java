@@ -1,5 +1,7 @@
 package br.com.retaguardaWeb.managedbeans;
 
+import javax.inject.Named;
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -7,7 +9,7 @@ import java.util.List;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.view.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 
@@ -21,9 +23,10 @@ import br.com.retaguardaWeb.services.EstoqueServices;
 import br.com.retaguardaWeb.services.IngredienteService;
 import br.com.retaguardaWeb.util.EstoqueAtualUtil;
 
-@ManagedBean
+@Named
 @ViewScoped
-public class manterEstoqueMB {
+public class manterEstoqueMB implements Serializable{
+private static final long serialVersionUID = 1L;
 
 	@EJB
 	private IngredienteService ingredienteService;

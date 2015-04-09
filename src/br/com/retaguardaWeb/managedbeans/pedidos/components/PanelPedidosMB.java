@@ -1,12 +1,14 @@
 package br.com.retaguardaWeb.managedbeans.pedidos.components;
 
+import javax.inject.Named;
+import java.io.Serializable;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.faces.bean.ViewScoped;
+import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
 import org.primefaces.context.RequestContext;
@@ -22,6 +24,7 @@ import br.com.retaguardaWeb.sessionbeans.CarrinhoBean;
 @Named
 @ViewScoped
 public class PanelPedidosMB implements Serializable {
+private static final long serialVersionUID = 1L;
 	
 	@EJB
 	private CarrinhoBean carrinhoBean;

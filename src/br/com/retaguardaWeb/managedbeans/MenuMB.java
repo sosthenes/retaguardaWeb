@@ -1,5 +1,7 @@
 package br.com.retaguardaWeb.managedbeans;
 
+import javax.inject.Named;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,8 +22,9 @@ import br.com.retaguardaWeb.entidades.Menu;
 import br.com.retaguardaWeb.entidades.Usuario;
 import br.com.retaguardaWeb.services.LoginService;
 
-@ManagedBean
-public class MenuMB extends BasicoMB{
+@Named
+public class MenuMB   extends BasicoMB implements Serializable{
+private static final long serialVersionUID = 1L;
 
 	@EJB
 	private LoginService loginService;

@@ -1,20 +1,24 @@
 package br.com.retaguardaWeb.managedbeans;
 
+import javax.inject.Named;
+import java.io.Serializable;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.view.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.inject.Named;
 
 import br.com.retaguardaWeb.entidades.Cliente;
 import br.com.retaguardaWeb.entidades.Endereco;
 import br.com.retaguardaWeb.services.ClienteService;
 import br.com.retaguardaWeb.util.Acao;
 
-@ManagedBean(name="cadastroEnderecoMB")
+@Named
 @ViewScoped
-public class CadastroEnderecoMB {
+public class CadastroEnderecoMB implements Serializable {
+private static final long serialVersionUID = 1L;
 	private static final String ENDERECO_SALVO_COM_SUCESSO = "Endereco salvo com sucesso";
 
 	private Endereco endereco;

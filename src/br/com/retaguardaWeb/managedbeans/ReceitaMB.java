@@ -1,12 +1,14 @@
 package br.com.retaguardaWeb.managedbeans;
 
+import javax.inject.Named;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.bean.ViewScoped;
+import javax.faces.view.ViewScoped;
 import javax.faces.event.ValueChangeEvent;
 
 import br.com.retaguardaWeb.entidades.Ingrediente;
@@ -18,9 +20,10 @@ import br.com.retaguardaWeb.services.ProdutoService;
 import br.com.retaguardaWeb.services.ReceitasServices;
 import br.com.retaguardaWeb.services.UnidadeMedidaRepositorio;
 
-@ManagedBean
+@Named
 @ViewScoped
-public class ReceitaMB {
+public class ReceitaMB implements Serializable{
+private static final long serialVersionUID = 1L;
 
 	@EJB
 	private ReceitasServices receitaService;

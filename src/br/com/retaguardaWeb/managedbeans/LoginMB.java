@@ -1,5 +1,7 @@
 package br.com.retaguardaWeb.managedbeans;
 
+import javax.inject.Named;
+import java.io.Serializable;
 import java.io.IOException;
 
 import javax.ejb.EJB;
@@ -12,8 +14,9 @@ import br.com.retaguardaWeb.entidades.Funcionario;
 import br.com.retaguardaWeb.entidades.Usuario;
 import br.com.retaguardaWeb.services.LoginService;
 
-@ManagedBean
-public class LoginMB extends BasicoMB{
+@Named
+public class LoginMB extends BasicoMB implements Serializable{
+private static final long serialVersionUID = 1L;
 
 	@EJB
 	private LoginService loginService;

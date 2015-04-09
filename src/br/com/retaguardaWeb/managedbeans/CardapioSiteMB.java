@@ -1,5 +1,7 @@
 package br.com.retaguardaWeb.managedbeans;
 
+import javax.inject.Named;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,9 +20,10 @@ import br.com.retaguardaWeb.services.ClienteService;
 import br.com.retaguardaWeb.services.ProdutoService;
 import br.com.retaguardaWeb.sessionbeans.CarrinhoBean;
 
-@ManagedBean
+@Named
 @SessionScoped
-public class CardapioSiteMB {
+public class CardapioSiteMB implements Serializable{
+private static final long serialVersionUID = 1L;
 
 	@EJB
 	private CarrinhoBean carrinhoBean;
