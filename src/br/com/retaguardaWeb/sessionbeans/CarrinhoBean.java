@@ -13,7 +13,6 @@ import javax.ejb.Stateful;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import br.com.retaguardaWeb.entidades.ExpedicaoPedido;
 import br.com.retaguardaWeb.entidades.Pedido;
 import br.com.retaguardaWeb.entidades.Produto;
 
@@ -114,15 +113,9 @@ public class CarrinhoBean  {
 		}
 	}
 
-
-	@PreDestroy
-	public void destruindo() {
-		System.out.println(" Mais um carrinho será destruído ... ");
-	}
-
 	@PrePassivate
 	public void passivando() {
-		System.out.println(" Mais um carrinho será passivado ... ");
+		System.out.println(" Mais um carrinho serï¿½ passivado ... ");
 	}
 
 	@PostActivate

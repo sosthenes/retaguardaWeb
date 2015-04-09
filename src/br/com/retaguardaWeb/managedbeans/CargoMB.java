@@ -7,9 +7,6 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
-import sun.net.www.content.audio.basic;
-import sun.security.action.GetLongAction;
-import br.com.retaguardaWeb.entidades.Loja;
 import br.com.retaguardaWeb.entidades.Cargo;
 import br.com.retaguardaWeb.sessionbeans.CargoService;
 import br.com.retaguardaWeb.sessionbeans.LojaService;

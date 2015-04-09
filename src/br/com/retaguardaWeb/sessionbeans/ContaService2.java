@@ -4,10 +4,9 @@ import java.util.Date;
 import java.util.List;
 
 import javax.ejb.Stateless;
-import javax.enterprise.inject.Default;
 import javax.inject.Inject;
 
-import br.com.retaguardaWeb.dao.ContaDAO;
+import br.com.retaguardaWeb.dao.ContaDAOImpl;
 import br.com.retaguardaWeb.entidades.Pagamento;
 import br.com.retaguardaWeb.entidades.ParcelaPagamento;
 import br.com.retaguardaWeb.entidades.TipoDePagamento;
@@ -17,7 +16,7 @@ public class ContaService2 {
 
 	
 	@Inject
-	private ContaDAO contaDAO;
+	private ContaDAOImpl contaDAO;
 
 	
 	public void adiciona(Pagamento pagamento) {

@@ -12,15 +12,13 @@ import br.com.retaguardaWeb.entidades.Pagamento;
 import br.com.retaguardaWeb.entidades.ParcelaPagamento;
 import br.com.retaguardaWeb.entidades.TipoDePagamento;
 
-public class ContaDAOImpl extends GenericDAOImpl<Pagamento> implements ContaDAO {
+public class ContaDAOImpl extends GenericDAOImpl<Pagamento> {
 	
-	@Override
 	public Pagamento recuperarPorId(Long id) {
 		return manager.getReference(Pagamento.class, id);
 	}
 
 	@SuppressWarnings("unchecked")
-	@Override
 	public List<Pagamento> pesquisar(Pagamento pagamento) {
 		StringBuilder jpql = new StringBuilder();
 		jpql.append("select e from Pagamento e ");
@@ -31,7 +29,6 @@ public class ContaDAOImpl extends GenericDAOImpl<Pagamento> implements ContaDAO 
 	}
 
 	@SuppressWarnings("unchecked")
-	@Override
 	public Pagamento recuperarPorNome(String nome) {
 		String jpql = "select te from Pagamento te "
 					+ "where te.nome = :nome ";
@@ -45,7 +42,6 @@ public class ContaDAOImpl extends GenericDAOImpl<Pagamento> implements ContaDAO 
 	}
 
 	@SuppressWarnings("unchecked")
-	@Override
 	public List<Pagamento> consultaPagamento(Pagamento pagamento) {
 		StringBuilder sql = new StringBuilder();
 		sql.append("select e from Pagamento e where 1 = 1");
@@ -76,7 +72,6 @@ public class ContaDAOImpl extends GenericDAOImpl<Pagamento> implements ContaDAO 
 		
 	}
 
-	@Override
 	public List<TipoDePagamento> getTipoDePagamentos() {
 		TypedQuery<TipoDePagamento> query = this.manager.createQuery(
 				"select x from TipoDePagamento x", TipoDePagamento.class);
@@ -84,7 +79,6 @@ public class ContaDAOImpl extends GenericDAOImpl<Pagamento> implements ContaDAO 
 		return query.getResultList();
 	}
 
-	@Override
 	public List<Pagamento> listar(Date dataInicio, Date dataFim) {
 		List<Pagamento> lista = new ArrayList<Pagamento>();
 		String lcQuery = "select x from Pagamento x where 1=1";
@@ -108,7 +102,6 @@ public class ContaDAOImpl extends GenericDAOImpl<Pagamento> implements ContaDAO 
 		return lista;
 	}
 
-	@Override
 	public ParcelaPagamento adicionaParcela(ParcelaPagamento parcela) {
 		return manager.merge(parcela);
 	}
