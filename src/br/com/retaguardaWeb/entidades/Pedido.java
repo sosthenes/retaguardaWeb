@@ -1,6 +1,7 @@
 package br.com.retaguardaWeb.entidades;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -11,12 +12,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.Transient;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 
 @Entity
@@ -32,7 +36,9 @@ public class Pedido  {
 	@JoinColumn(name="idPedido")
 	private List<PedidoProduto> pedidoProdutos = new ArrayList<PedidoProduto>();
 	
-	@Transient
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name="idPedido")
+	@Fetch(FetchMode.SUBSELECT)
 	private List<MesaPedido> mesas = new ArrayList<MesaPedido>();
 
 
@@ -58,11 +64,29 @@ public class Pedido  {
 	@JoinColumn(name="caixaPeriodoFuncionario")
 	private CaixaPeriodoFuncionario caixaPeriodoFuncionario;
 
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date dataHoraPagamento;
+	
+	private boolean pago;
 
 	private Double valorPago;
 	
 	private Double valorTroco;
 	
+	private boolean expedicao;
+	
+	@Transient
+	private ExpedicaoPedido expedicaoPedido;
+	
+	
+	public boolean isExpedicao() {
+		return expedicao;
+	}
+
+	public void setExpedicao(boolean expedicao) {
+		this.expedicao = expedicao;
+	}
+
 	public CaixaPeriodoFuncionario getCaixaPeriodoFuncionario() {
 		return caixaPeriodoFuncionario;
 	}
@@ -148,11 +172,41 @@ public class Pedido  {
 	}
 
 	public List<MesaPedido> getMesas() {
+		
 		return mesas;
 	}
 
 	public void setMesas(List<MesaPedido> mesas) {
 		this.mesas = mesas;
+	}
+
+	public Pedido() {
+		super();
+		mesas = new ArrayList<MesaPedido>();
+	}
+
+	public Date getDataHoraPagamento() {
+		return dataHoraPagamento;
+	}
+
+	public void setDataHoraPagamento(Date dataHoraPagamento) {
+		this.dataHoraPagamento = dataHoraPagamento;
+	}
+
+	public boolean isPago() {
+		return pago;
+	}
+
+	public void setPago(boolean pago) {
+		this.pago = pago;
+	}
+
+	public ExpedicaoPedido getExpedicaoPedido() {
+		return expedicaoPedido;
+	}
+
+	public void setExpedicaoPedido(ExpedicaoPedido expedicaoPedido) {
+		this.expedicaoPedido = expedicaoPedido;
 	}
 
 

@@ -16,8 +16,8 @@
  
 	 <h:form  id="principal">
 <h:messages />
-<p:panel header="Pedido" id="panelPedidos" style="width:100%;">
-	<p:dataTable style="width:100%;" value="#{cadastroPedidoMB.listaPedido}" var="p">
+<p:panel header="Pedidos para Expedição" id="panelPedidos" style="width:100%;">
+	<p:dataTable style="width:100%;" value="#{expedicaoMB.listaPedido}" var="p">
 		<p:column headerText="Cliente">
 			<h:outputText value="#{p.enderecoEntrega.cliente.nome}" />
 		</p:column>
@@ -27,23 +27,25 @@
 		<p:column headerText="Total do pedido">
 			<h:outputText value="#{p.totalPedido}" />
 		</p:column>
-		<p:column headerText="Total pago">
-			<h:outputText value="#{p.valorPago}" />
-		</p:column>
 		<p:column headerText="Troco">
 			<h:outputText value="#{p.valorTroco}" />
 		</p:column>
 		
 		<p:column headerText="Ação">
-			<p:commandButton value="Alterar"></p:commandButton>
-			<p:commandButton value="Excluir"></p:commandButton>
-			<p:commandButton value="Imprimir"></p:commandButton>
+				<p:commandButton actionListener="#{expedicaoMB.selecionaFuncionario(p)}" update=":principal:panelPedidos" immediate="true" ajax="true" value="  Sair para entrega  " rendered="#{p.expedicaoPedido.dataHoraSaida eq null}"/>
+			 	<h:outputLabel value="Saída para entrega: #{p.expedicaoPedido.dataHoraSaidaFormatada}" rendered="#{p.expedicaoPedido.dataHoraSaida != null}" />
+				<br />
+			 	<h:outputLabel value="#{p.expedicaoPedido.idFuncionario.nome}" rendered="#{p.expedicaoPedido.dataHoraSaida != null}" />
+				
 		</p:column>
 		
 
 	</p:dataTable>
 </p:panel>
 
+	<p:dialog id="modalSelecionaFuncionario" header="Selecionar funcionário" widgetVar="modalSelecionaFuncionario" modal="true" > 
+	    <ui:include src="/admin/expedicao/modalSelecionaFuncionario.xhtml" />
+	</p:dialog> 
 	 
 	 
 	</h:form>

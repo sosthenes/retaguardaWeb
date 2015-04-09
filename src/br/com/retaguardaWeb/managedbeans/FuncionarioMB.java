@@ -18,7 +18,7 @@ import br.com.retaguardaWeb.sessionbeans.FuncionarioService;
 import br.com.retaguardaWeb.sessionbeans.SetorService;
 import br.com.retaguardaWeb.sessionbeans.SituacaoService;
 
-@ManagedBean
+@ManagedBean(name="funcionarioMB")
 @ViewScoped
 public class FuncionarioMB extends BasicoMB{
 

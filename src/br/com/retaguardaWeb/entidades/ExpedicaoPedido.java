@@ -1,5 +1,6 @@
 package br.com.retaguardaWeb.entidades;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -60,6 +61,8 @@ public class ExpedicaoPedido extends EntidadeBase{
 	}
 
 	public Funcionario getIdFuncionario() {
+		if(idFuncionario==null)
+			idFuncionario = new Funcionario();
 		return idFuncionario;
 	}
 
@@ -69,6 +72,14 @@ public class ExpedicaoPedido extends EntidadeBase{
 
 	public Date getDataHoraSaida() {
 		return dataHoraSaida;
+	}
+	
+	public String getDataHoraSaidaFormatada() {
+		if(getDataHoraSaida()!=null){
+	        return new SimpleDateFormat("dd/MM/yyyy  HH:mm:ss").format(getDataHoraSaida());
+		}else{
+			return "";
+		}
 	}
 
 	public void setDataHoraSaida(Date dataHoraSaida) {

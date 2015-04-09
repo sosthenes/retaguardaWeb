@@ -1,12 +1,11 @@
 package br.com.retaguardaWeb.sessionbeans;
 
 import java.util.ArrayList;
-import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import javax.ejb.EJB;
 import javax.ejb.PostActivate;
 import javax.ejb.PrePassivate;
 import javax.ejb.Remove;
@@ -14,6 +13,7 @@ import javax.ejb.Stateful;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import br.com.retaguardaWeb.entidades.ExpedicaoPedido;
 import br.com.retaguardaWeb.entidades.Pedido;
 import br.com.retaguardaWeb.entidades.Produto;
 
@@ -24,6 +24,9 @@ public class CarrinhoBean  {
 	
 	@PersistenceContext
 	private EntityManager manager;
+	
+	@EJB
+	private ExpedicaoPedidoService expedicaoService;
 
 	private static int contadorTotal;
 	private static int contadorAtivos;

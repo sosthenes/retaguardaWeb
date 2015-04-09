@@ -2,6 +2,7 @@ package br.com.retaguardaWeb.managedbeans.pedidos;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -14,9 +15,10 @@ import org.primefaces.context.RequestContext;
 import br.com.retaguardaWeb.entidades.CaixaPeriodoFuncionario;
 import br.com.retaguardaWeb.entidades.Cliente;
 import br.com.retaguardaWeb.entidades.MesaLoja;
+import br.com.retaguardaWeb.entidades.MesaPedido;
 import br.com.retaguardaWeb.entidades.Pedido;
-import br.com.retaguardaWeb.entidades.PedidoProduto;
 import br.com.retaguardaWeb.entidades.PeriodoTrabalho;
+import br.com.retaguardaWeb.entidades.TipoVenda;
 import br.com.retaguardaWeb.managedbeans.BasicoMB;
 import br.com.retaguardaWeb.managedbeans.FormaPagamentoMB;
 import br.com.retaguardaWeb.managedbeans.TipoVendaMB;
@@ -65,10 +67,11 @@ public class CadastroPedidoMB extends BasicoMB{
 	private PeriodoTrabalho periodo;
 	private CaixaPeriodoFuncionario caixaPeriodoFuncionario;
 	private List<Pedido> listaPedido;
+	private List<MesaPedido> listaMesasSelecionadas;
 	
 	
 	@PostConstruct
-	public String init() {
+	public void init() {
 		
 		
 		if(!periodoTrabalhoMB.isPeriodoAberto()){
@@ -77,7 +80,7 @@ public class CadastroPedidoMB extends BasicoMB{
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			return null;
+			return ;
 		}else{
 			if(periodo==null){
 				periodo = periodoTrabalhoMB.getPeriodo();
@@ -103,10 +106,23 @@ public class CadastroPedidoMB extends BasicoMB{
 				RequestContext.getCurrentInstance().update("principal:panelSelecionarEndereco");
 			}
 		});
-		return null;
 	}
 
-	
+	public void adicionaMesas(MesaLoja[] lista){
+		
+		listaMesasSelecionadas = new ArrayList<MesaPedido>();
+		for(MesaLoja m : lista){
+			MesaPedido mesa = new MesaPedido();
+			mesa.setIdMesaLoja(m);
+			mesa.setIdPedido(panelPedidosMB.getPedido());
+			listaMesasSelecionadas.add(mesa);
+		}
+		panelPedidosMB.getPedido().setMesas(new  ArrayList<MesaPedido>());
+		panelPedidosMB.getPedido().getMesas().addAll(listaMesasSelecionadas);
+		RequestContext.getCurrentInstance().execute("modalSelecionaMesa.hide()");
+		RequestContext.getCurrentInstance().update("principal:mesaSelecionada");
+		
+	}
 	
 	public void setSelecionarEnderecoMB(SelecionarEnderecoMB selecionarEnderecoMB) {
 		this.selecionarEnderecoMB = selecionarEnderecoMB;
@@ -118,11 +134,16 @@ public class CadastroPedidoMB extends BasicoMB{
 	}
 	
 	
-	
+	public void removeMesaSelecionada(MesaPedido mesa){
+		listaMesasSelecionadas.remove(mesa);
+		retornaMensagemSucessoOperacao();
+		RequestContext.getCurrentInstance().update("principal:mesaSelecionada");
+	}
 	
 	
 	public void adicionaTipoVenda(){
 		panelPedidosMB.getPedido().setTipoPedido(tipoVendaMB.getTipoVenda());
+		panelPedidosMB.getPedido().setExpedicao(tipoVendaMB.isExpedicao());
 		RequestContext.getCurrentInstance().execute("modalTipoPedido.hide()");
 		RequestContext.getCurrentInstance().execute("modalFormaPagamento.show()");
 		
@@ -143,13 +164,30 @@ public class CadastroPedidoMB extends BasicoMB{
 			valorTroco = 0.00;
 			valorPago = panelPedidosMB.getPedido().getTotalPedido();
 		}
+		
 		panelPedidosMB.getPedido().setValorTroco(valorTroco);
 		RequestContext.getCurrentInstance().execute("modalTroco.hide()");
-		adiciona();
+		RequestContext.getCurrentInstance().execute("modalPago.show()");
 	}
 	
+	public void adicionaPagamento(boolean pago){
+		panelPedidosMB.getPedido().setPago(pago);
+		panelPedidosMB.getPedido().setDataHoraPagamento(pago?new Date():null);
+		adiciona();
+		RequestContext.getCurrentInstance().execute("modalPago.hide()");
+		RequestContext.getCurrentInstance().execute("modalFinal.show()");
+		RequestContext.getCurrentInstance().update("principal:panelPedidos");
+		listar();
+	}
 	
-	
+	public void finalizaPedido(){
+		limpar();
+		try {
+			context.redirect(context.getRequestContextPath() + "/admin/pedido/cadastroPedido.xhtml");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	public PanelPedidosMB getPanelPedidosMB() {
 		return panelPedidosMB;
@@ -177,35 +215,31 @@ public class CadastroPedidoMB extends BasicoMB{
 
 	@Override
 	public void adiciona() {
-		panelPedidosMB.getPedido().setEnderecoEntrega(selecionarEnderecoMB.getEnderecoSelecionado());
+		if(selecionarEnderecoMB.getEnderecoSelecionado()!=null)
+			panelPedidosMB.getPedido().setEnderecoEntrega(selecionarEnderecoMB.getEnderecoSelecionado());
 		panelPedidosMB.getPedido().setCaixaPeriodoFuncionario(caixaPeriodoFuncionario);
-		panelPedidosMB.getPedido().setIdCliente(panelPedidosMB.getPedido().getEnderecoEntrega().getCliente().getId());
+		if(panelPedidosMB.getPedido().getEnderecoEntrega()!=null && panelPedidosMB.getPedido().getIdCliente()==null)
+			panelPedidosMB.getPedido().setIdCliente(panelPedidosMB.getPedido().getEnderecoEntrega().getCliente().getId());
 		
-		System.out.println("Pedido");
-		System.out.println(panelPedidosMB.getPedido().getEnderecoEntrega().getCliente().getNome());
-		System.out.println(panelPedidosMB.getPedido().getEnderecoEntrega().getDescricao());
-		System.out.println(panelPedidosMB.getPedido().getTotalPedido());
-		System.out.println(panelPedidosMB.getPedido().getFormaPagamento().getDescricao());
-		System.out.println(panelPedidosMB.getPedido().getTipoPedido().getDescricao());
-		System.out.println(panelPedidosMB.getPedido().getValorPago());
-		System.out.println(panelPedidosMB.getPedido().getValorTroco());
-		for(PedidoProduto pedido : panelPedidosMB.getPedido().getPedidoProdutos()){
-			System.out.println(pedido.getProdutos().getDescricao());
-		}
-		System.out.println(panelPedidosMB.getPedido().getTotalPedido());
 		panelPedidosMB.cadastraPedido();
-		limpar();
 			panelPedidosMB.finalizaPedido();
 			retornaMensagemSucesso("Pedido registrato com sucesso!");
-			RequestContext.getCurrentInstance().update(":principal:panelSelecionarEndereco");
-			RequestContext.getCurrentInstance().update(":principal:panelProdutos");
 	}
 
 	@Override
 	public void listar() {
-		listaPedido = panelPedidosMB.listaPedidoPorCaixa(caixaPeriodoFuncionario);
+		listaPedido = panelPedidosMB.listaPedidoPorCaixa(caixaPeriodoFuncionario, null);
 	}
 
+	public List<Pedido> listaPedidoPorCaixaTipoVenda(CaixaPeriodoFuncionario caixaPeriodoFuncionario, TipoVenda tipoVenda){
+		return panelPedidosMB.listaPedidoPorCaixa(caixaPeriodoFuncionario, tipoVenda);
+	}
+	
+
+	public void listaPedidosPorTipo(TipoVenda tipoVenda){
+		listaPedido = listaPedidoPorCaixaTipoVenda(caixaPeriodoFuncionario, tipoVenda);
+	}
+	
 	@Override
 	public void remover() {
 		// TODO Auto-generated method stub
@@ -214,22 +248,31 @@ public class CadastroPedidoMB extends BasicoMB{
 
 	@Override
 	public void limpar() {
+		panelPedidosMB.setPedido(null);
 		valorPago = null;
 		valorTroco = null;
 		pedidoCliente = null;
 		periodo = null;
 		caixaPeriodoFuncionario=null;
-		panelPedidosMB.setPedido(null);
 		formaPagamentoMB.setFormaPagamento(null);
 		formaPagamentoMB.setFormaPagamento(null);
 		buscaClientePorTelefoneMB.setClienteSelecionado(null);
-		
+		selecionarEnderecoMB.setCliente(new Cliente());
+		listaMesasSelecionadas = new ArrayList<MesaPedido>();
+		listaPedido = new ArrayList<Pedido>();
 		
 	}
 
+	
+	public void recuperaPedido(Pedido pedido){
+		panelPedidosMB.setPedido(pedido);
+		RequestContext.getCurrentInstance().execute("modalPago.show()");
+	}
+	
+	
 	@Override
 	public void editar() {
-		// TODO Auto-generated method stub
+		
 		
 	}
 
@@ -299,6 +342,14 @@ public class CadastroPedidoMB extends BasicoMB{
 
 	public void setListaPedido(List<Pedido> listaPedido) {
 		this.listaPedido = listaPedido;
+	}
+
+	public List<MesaPedido> getListaMesasSelecionadas() {
+		return listaMesasSelecionadas;
+	}
+
+	public void setListaMesasSelecionadas(List<MesaPedido> listaMesasSelecionadas) {
+		this.listaMesasSelecionadas = listaMesasSelecionadas;
 	}
 
 

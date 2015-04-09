@@ -3,6 +3,7 @@ package br.com.retaguardaWeb.managedbeans.pedidos.components;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -13,6 +14,7 @@ import br.com.retaguardaWeb.entidades.CaixaPeriodoFuncionario;
 import br.com.retaguardaWeb.entidades.Pedido;
 import br.com.retaguardaWeb.entidades.PedidoProduto;
 import br.com.retaguardaWeb.entidades.Produto;
+import br.com.retaguardaWeb.entidades.TipoVenda;
 import br.com.retaguardaWeb.sessionbeans.CarrinhoBean;
 import br.com.retaguardaWeb.sessionbeans.PedidoService;
 
@@ -27,6 +29,12 @@ public class PanelPedidosMB {
 
 	
 	private Pedido pedido;
+	
+	@PostConstruct
+	public void init() {
+		if(pedido==null)
+			pedido = new Pedido();
+	}
 	
 
 	public List<Produto> getProdutos() {
@@ -61,7 +69,7 @@ public class PanelPedidosMB {
 
 	
 	public void recarregarPedido() {
-		pedido = new Pedido();
+		pedido.setPedidoProdutos(new ArrayList<PedidoProduto>());
 		boolean verifica = false;
 		double total = 0.0;
 		double parcial = 0.0;
@@ -117,14 +125,17 @@ public class PanelPedidosMB {
 
 	public void cadastraPedido() {
 		// TODO Auto-generated method stub
-		carrinhoBean.cadastraPedido(pedido);
+		try {
+			carrinhoBean.cadastraPedido(pedido);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 	}
 
-	public List<Pedido> listaPedidoPorCaixa(
-			CaixaPeriodoFuncionario caixaPeriodoFuncionario) {
-		// TODO Auto-generated method stub
-		return pedidoService.getPedidos(caixaPeriodoFuncionario, null);
+	public List<Pedido> listaPedidoPorCaixa(CaixaPeriodoFuncionario caixaPeriodoFuncionario, TipoVenda tipoVenda) {
+		return pedidoService.getPedidos(caixaPeriodoFuncionario, null, tipoVenda);
 	}
 
 	

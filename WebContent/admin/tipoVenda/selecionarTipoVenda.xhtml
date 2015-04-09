@@ -8,14 +8,26 @@
 	<p:panel header="Tipo de Venda" id="panelDadosTipoVenda">
 		<h:messages />
 		<h:panelGrid columns="2">
-		<p:outputLabel value=" Tipo de venda :" />
-		<h:selectOneMenu value="#{tipoVendaMB.tipoVenda}" id="tipoVenda">
-		<f:selectItem itemLabel="Selecione uma opção" />
-			<f:selectItems value="#{tipoVendaMB.listaTipoVenda}" var="cat" itemLabel="#{cat.descricao}" itemValue="#{cat}" />
-			 <p:ajax event="change" process="@this" update=":principal:tipoVenda" />
-		</h:selectOneMenu>
-	</h:panelGrid>
-		<p:commandButton value="Salvar Tipo de venda" process="panelDadosTipoVenda" update="panelDadosTipoVenda" actionListener="#{cadastroPedidoMB.adicionaTipoVenda()}" ajax="true"/>
+			<p:outputLabel value=" Tipo de venda :" />
+			<h:selectOneMenu value="#{tipoVendaMB.tipoVenda}" id="tipoVenda">
+				<f:selectItem itemLabel="Selecione uma opção" />
+				<f:selectItems value="#{tipoVendaMB.listaTipoVenda}" var="cat"
+					itemLabel="#{cat.descricao}" itemValue="#{cat}" />
+				<p:ajax event="change" process="@this" update=":principal:tipoVenda" />
+			</h:selectOneMenu>
+		</h:panelGrid>
+		<h:panelGrid columns="2">
+			<p:outputLabel value=" Expedição :" />
+		
+		<h:selectOneRadio value="#{tipoVendaMB.expedicao}">
+			<f:selectItem itemValue="true" itemLabel="Sim" />
+			<f:selectItem itemValue="false" itemLabel="Não" />
+		</h:selectOneRadio>
+		
+		</h:panelGrid>
+		<p:commandButton value="Salvar Tipo de venda"
+			process="panelDadosTipoVenda" update="panelDadosTipoVenda"
+			actionListener="#{cadastroPedidoMB.adicionaTipoVenda()}" ajax="true" />
 	</p:panel>
 
 </html>

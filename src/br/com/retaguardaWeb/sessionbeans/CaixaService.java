@@ -127,17 +127,22 @@ public class CaixaService {
 
 	public CaixaPeriodoFuncionario recuperaCaixaAberto(Loja loja, PeriodoTrabalho periodo, Funcionario funcionario) {
 		try {
+			String sql = "select x from CaixaPeriodoFuncionario x"
+					+ " where x.idLoja=:loja"
+					+ " and x.periodoTrabalho=:periodo";
+					if(funcionario!=null)
+						sql += " and x.funcionario = :funcionario";
+					
+					sql+= " and x.dataHoraAbertura IS NOT NULL"
+					+ " and x.dataHoraFechamento IS NULL"
+					+ " order by x.id desc";
+			
 			TypedQuery<CaixaPeriodoFuncionario> query = this.manager.createQuery(
-					"select x from CaixaPeriodoFuncionario x"
-							+ " where x.idLoja=:loja"
-							+ " and x.periodoTrabalho=:periodo"
-							+ " and x.funcionario = :funcionario"
-							+ " and x.dataHoraAbertura IS NOT NULL"
-							+ " and x.dataHoraFechamento IS NULL"
-							+ " order by x.id desc", CaixaPeriodoFuncionario.class);
+					sql, CaixaPeriodoFuncionario.class);
 			query.setParameter("loja", loja);
 			query.setParameter("periodo", periodo);
-			query.setParameter("funcionario", funcionario);
+			if(funcionario!=null)
+				query.setParameter("funcionario", funcionario);
 			return query.getSingleResult();
 			
 		} catch (Exception e) {

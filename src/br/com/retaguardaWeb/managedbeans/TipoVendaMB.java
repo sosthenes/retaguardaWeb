@@ -20,11 +20,25 @@ public class TipoVendaMB extends BasicoMB{
 	@EJB
 	private TipoVendaService tipoVendaService;
 	
+	private boolean expedicao;
+	
 	@PostConstruct
 	public void init() {
 		listar();
 	}
 	
+
+
+	public boolean isExpedicao() {
+		return expedicao;
+	}
+
+
+
+	public void setExpedicao(boolean expedicao) {
+		this.expedicao = expedicao;
+	}
+
 
 
 	public TipoVenda getTipoVenda() {

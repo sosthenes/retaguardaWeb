@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xml:lang="pt-BR" lang="pt-BR"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	<p:panel header="Pedido" id="panelSelecionaFunc">
+		<h:messages />
+		
+		<p:panelGrid columns="1" style="width:100%" >
+						
+						<p:outputLabel value=" Funcionários :" />
+
+						<p:selectOneMenu value="#{expedicaoMB.expedicao.idFuncionario}" id="idFuncionario">
+							<f:selectItem itemLabel="Selecione um Funcionário" />
+							<f:selectItems value="#{expedicaoMB.listaFuncionario}" var="prod" itemLabel="#{prod.nome}" itemValue="#{prod}" />
+							<p:ajax event="change" process="@this" update=":principal:panelSelecionaFunc" />
+						</p:selectOneMenu>
+						
+						
+					</p:panelGrid>
+		<p:commandButton value=" Finalizar expedição " process="panelSelecionaFunc"  actionListener="#{expedicaoMB.adiciona()}" ajax="true"/>
+	</p:panel>
+
+</html>
+

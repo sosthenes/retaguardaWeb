@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xml:lang="pt-BR" lang="pt-BR"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	<p:panel header="Pagamento" id="panelDadosPago">
+		<h:messages />
+		<h:panelGrid columns="2">
+		<p:outputLabel value=" O valor foi pago?" />
+	</h:panelGrid>
+		<p:commandButton value="Sim" process="panelDadosPago" update="panelDadosPago" actionListener="#{cadastroPedidoMB.adicionaPagamento(true)}" ajax="true"/>
+		
+		<p:commandButton value="Não" process="panelDadosPago" update="panelDadosPago" actionListener="#{cadastroPedidoMB.adicionaPagamento(false)}" ajax="true"/>
+	</p:panel>
+
+</html>
+

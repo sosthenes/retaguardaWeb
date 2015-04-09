@@ -23,13 +23,12 @@ public class MesaLojaMB extends BasicoMB{
 	private MesaLoja mesaLoja;
 	private List<MesaLoja> listaMesaLoja;
 	
-	private List<MesaLoja> mesaSelecionada;
+	private MesaLoja[] mesaSelecionada;
 	
 	
 	@PostConstruct
 	private void init() {
-		if(mesaSelecionada==null)
-			mesaSelecionada = new ArrayList<MesaLoja>();
+		
 		
 		if(mesaLoja==null){
 			mesaLoja = new MesaLoja();
@@ -103,13 +102,13 @@ public class MesaLojaMB extends BasicoMB{
 		this.listaMesaLoja = listaMesaLoja;
 	}
 	
-	public List<MesaLoja> getMesaSelecionada() {
+	public MesaLoja[] getMesaSelecionada() {
 		return mesaSelecionada;
 	}
 
 
 
-	public void setMesaSelecionada(List<MesaLoja> mesaSelecionada) {
+	public void setMesaSelecionada(MesaLoja[] mesaSelecionada) {
 		this.mesaSelecionada = mesaSelecionada;
 	}	
 

@@ -8,7 +8,23 @@
 
 <h:messages />
 <p:panel header="Pedido" id="panelPedidos" style="width:100%;">
-	<p:dataTable style="width:100%;" value="#{cadastroPedidoMB.listaPedido}" var="p">
+
+	<h:panelGrid columns="2" title="Tipo de venda">
+	<h:outputLabel value="Tipo de venda: " />
+		<ui:repeat varStatus="loop" var="tipoVenda"
+			value="#{tipoVendaMB.listaTipoVenda}">
+			<p:commandButton
+				actionListener="#{cadastroPedidoMB.listaPedidosPorTipo(tipoVenda)}"
+				update=":principal:listaTipoDeVenda" immediate="true" ajax="true"
+				value="  #{tipoVenda.descricao}  " />
+		</ui:repeat>
+	</h:panelGrid>
+
+
+	<p:dataTable style="width:100%;" value="#{cadastroPedidoMB.listaPedido}" var="p" id="listaTipoDeVenda" 	>
+		<p:column headerText="Tipo de venda" >
+			<h:outputText value="#{p.tipoPedido.descricao}" />
+		</p:column>
 		<p:column headerText="Cliente">
 			<h:outputText value="#{p.enderecoEntrega.cliente.nome}" />
 		</p:column>
@@ -25,8 +41,8 @@
 			<h:outputText value="#{p.valorTroco}" />
 		</p:column>
 		
-		<p:column headerText="Ação">
-			<p:commandButton value="Alterar"></p:commandButton>
+		<p:column headerText="Ação" style="#{p.pago eq false?'background-color: red':'background-color: blue'}" >
+			<p:commandButton actionListener="#{cadastroPedidoMB.recuperaPedido(p)}" update=":principal:listaTipoDeVenda" immediate="true" ajax="true" value="  Pagar  " rendered="#{p.pago eq false}"/>
 			<p:commandButton value="Excluir"></p:commandButton>
 			<p:commandButton value="Imprimir"></p:commandButton>
 		</p:column>
@@ -34,5 +50,7 @@
 
 	</p:dataTable>
 </p:panel>
-
+	<p:dialog id="modalPago" header="Relalizou o pagamento" widgetVar="modalPago" modal="true" > 
+	    <ui:include src="/admin/pedido/modalPago.xhtml" />
+	</p:dialog> 
 </html>

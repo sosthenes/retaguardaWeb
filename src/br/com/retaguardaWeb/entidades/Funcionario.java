@@ -123,7 +123,11 @@ public class Funcionario extends EntidadeBase{
 	}
 
 	public void setNome(String nome) {
-		this.nome = nome;
+		if(nome!=null && !nome.equals("")){
+			this.nome = nome.toUpperCase();
+		}else{
+			this.nome = nome;
+		}
 	}
 
 	public String getTelefone() {

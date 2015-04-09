@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xml:lang="pt-BR" lang="pt-BR"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:panelGroup id="mesaSelecionada">
+	<p:panel header="Mesas selecionadas para o pedido" rendered="#{!empty cadastroPedidoMB.listaMesasSelecionadas}" id="listaMesaSelecionada">
+		<h:column>
+			<p:dataTable var="mesa" value="#{cadastroPedidoMB.listaMesasSelecionadas}"  style="margin-bottom:0" >
+        <f:facet name="header">
+            Mesas
+        </f:facet>
+        <p:column headerText="Id">
+            <h:outputText value="#{mesa.idMesaLoja.id}" />
+        </p:column>
+        <p:column headerText="Descrção">
+            <h:outputText value="#{mesa.idMesaLoja.descricao}" />
+        </p:column>
+        <p:column headerText="Ação">
+           <p:commandButton actionListener="#{cadastroPedidoMB.removeMesaSelecionada(mesa)}" update=":principal:panelPedidos" immediate="true" ajax="true" value="  Remover  "/>
+        </p:column>
+       
+    </p:dataTable>		
+    
+		</h:column>
+
+	</p:panel>
+</h:panelGroup>
+</html>
+
