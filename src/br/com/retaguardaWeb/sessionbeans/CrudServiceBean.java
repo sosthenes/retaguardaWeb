@@ -28,12 +28,11 @@ public class CrudServiceBean<T> implements CrudService<T> {
 		return t;
 	}
 
-	@SuppressWarnings("unchecked")
-	public T find(Class type, Object id) {
+	public T find(Class<T> type, Object id) {
 		return (T) this.em.find(type, id);
 	}
 
-	public void delete(Class type, Object id) {
+	public void delete(Class<T> type, Object id) {
 		Object ref = this.em.getReference(type, id);
 		this.em.remove(ref);
 	}
@@ -42,23 +41,27 @@ public class CrudServiceBean<T> implements CrudService<T> {
 		return (T) this.em.merge(t);
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<T> findWithNamedQuery(String namedQueryName) {
 		return this.em.createNamedQuery(namedQueryName).getResultList();
 	}
 
-	public List<T> findWithNamedQuery(String namedQueryName, Map parameters) {
+	public List<T> findWithNamedQuery(String namedQueryName, Map<String,Object> parameters) {
 		return findWithNamedQuery(namedQueryName, parameters, 0);
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<T> findWithNamedQuery(String queryName, int resultLimit) {
 		return this.em.createNamedQuery(queryName).setMaxResults(resultLimit)
 				.getResultList();
 	}
 
-	public List<T> findByNativeQuery(String sql, Class type) {
+	@SuppressWarnings("unchecked")
+	public List<T> findByNativeQuery(String sql, Class<T> type) {
 		return this.em.createNativeQuery(sql, type).getResultList();
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<T> findWithNamedQuery(String namedQueryName, Map<String,Object> parameters,int resultLimit){
         Set<Entry<String, Object>> rawParameters = parameters.entrySet();
         Query query = this.em.createNamedQuery(namedQueryName);
