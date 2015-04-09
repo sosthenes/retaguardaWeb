@@ -6,13 +6,13 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpSession;
 
-import org.primefaces.component.menuitem.MenuItem;
-import org.primefaces.component.submenu.Submenu;
-import org.primefaces.model.DefaultMenuModel;
-import org.primefaces.model.MenuModel;
+import org.primefaces.model.menu.DefaultMenuItem;
+import org.primefaces.model.menu.DefaultMenuModel;
+import org.primefaces.model.menu.DefaultSubMenu;
+import org.primefaces.model.menu.MenuItem;
+import org.primefaces.model.menu.MenuModel;
+import org.primefaces.model.menu.Submenu;
 
 import br.com.retaguardaWeb.entidades.LinkPerfil;
 import br.com.retaguardaWeb.entidades.LinksMenu;
@@ -40,7 +40,7 @@ public class MenuMB extends BasicoMB{
 		if(session.getAttribute("menus")!=null){
 			model = new DefaultMenuModel();
 			model = (MenuModel) session.getAttribute("menus");  
-			if(model.getContents().isEmpty())
+			if(model.getElements().isEmpty())
 				criarMenu();
 		}else{
 			criarMenu();
@@ -50,7 +50,7 @@ public class MenuMB extends BasicoMB{
 	private List<LinkPerfil> listaLinks = new ArrayList<LinkPerfil>();
 
 	public void criarMenu() {
-		if (model == null || model.getContents().isEmpty()) {
+		if (model == null || model.getElements().isEmpty()) {
 			model = new DefaultMenuModel();
 
 			for (LinkPerfil lista : getListaLinks()) {
@@ -71,26 +71,21 @@ public class MenuMB extends BasicoMB{
 			}
 
 			for (Menu menu : getListaMenu()) {
-				Submenu submenu = new Submenu();
-				submenu.setLabel(menu.getDescricao());
+				Submenu submenu = new DefaultSubMenu(menu.getDescricao());
 				submenu.setId("menu_" + menu.getId().toString());
 
 				for (LinksMenu subMenu : menu.getLinksMenu()) {
-					MenuItem item = new MenuItem();
-					item.setValue(subMenu.getDescricao());
-					item.setUrl(subMenu.getPagina());
+					MenuItem item = new DefaultMenuItem(subMenu.getDescricao(),null,subMenu.getPagina());
 					item.setId("sid_" + subMenu.getId().toString());
-					submenu.getChildren().add(item);
+					submenu.getElements().add(item);
 				}
 
-				model.addSubmenu(submenu);
+				model.addElement(submenu);
 			}
-			MenuItem item = new MenuItem();
-			item.setValue("Sair");
+			MenuItem item = new DefaultMenuItem("Sair",null,"/index.xhtml");
 			item.setId("menu_Sair");
-			item.setUrl("/index.xhtml");
 			
-			model.addMenuItem(item);
+			model.addElement(item);
 			
 			session.setAttribute("menus", model);
 		}

@@ -1,7 +1,6 @@
 package br.com.retaguardaWeb.managedbeans;
 
 import java.sql.Timestamp;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -10,16 +9,10 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpSession;
-
-import org.primefaces.model.DefaultMenuModel;
-import org.primefaces.model.MenuModel;
 
 import br.com.retaguardaWeb.entidades.Caixa;
 import br.com.retaguardaWeb.entidades.Fechamentocaixa;
 import br.com.retaguardaWeb.entidades.Funcionario;
-import br.com.retaguardaWeb.entidades.GastoCaixa;
 import br.com.retaguardaWeb.entidades.Loja;
 import br.com.retaguardaWeb.entidades.Setor;
 import br.com.retaguardaWeb.entidades.TipoGasto;
@@ -110,7 +103,7 @@ public class FechamentocaixaMB extends BasicoMB{
 			listar();
 			limpar();
 		}else{
-			retornaMensagemErro("Já existe fechamento desse caixa!");
+			retornaMensagemErro("Jï¿½ existe fechamento desse caixa!");
 		}
 	 }
 	 
