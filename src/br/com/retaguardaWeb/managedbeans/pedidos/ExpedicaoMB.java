@@ -98,7 +98,7 @@ public class ExpedicaoMB extends BasicoMB implements Serializable{
 		getExpedicao().setDataHoraSaida(new Date());
 		expedicaoService.mantemExpedicao(getExpedicao());
 		listar();
-		RequestContext.getCurrentInstance().execute("modalSelecionaFuncionario.hide()");
+		RequestContext.getCurrentInstance().execute("PF('modalSelecionaFuncionario').hide()");
 		RequestContext.getCurrentInstance().update("principal:panelPedidos");
 		retornaMensagemSucessoOperacao();
 		limpar();

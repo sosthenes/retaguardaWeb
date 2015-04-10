@@ -121,8 +121,8 @@
 					<p:inputText value="#{pagamentoMB.descricaoPagamento.descricaogasto}" required="true" />
 					<br />
 					<br />
-					<p:commandButton id="confirm" value="Incluir" actionListener="#{pagamentoMB.adicionaDescriocaoGasto()}" update=":principal:idDescricaoConta" oncomplete="confirmation.hide()" />
-					<p:commandButton id="decline" value="Cancelar" onclick="confirmation.hide()" type="button" />
+					<p:commandButton id="confirm" value="Incluir" actionListener="#{pagamentoMB.adicionaDescriocaoGasto()}" update=":principal:idDescricaoConta" oncomplete="PF('confirmation').hide()" />
+					<p:commandButton id="decline" value="Cancelar" onclick="PF('confirmation').hide()" type="button" />
 				</p:dialog>
 			</h:form>		
 			

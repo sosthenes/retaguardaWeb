@@ -216,7 +216,7 @@
 					
 					<br />
 					<p:commandButton id="decline" value="Cancelar"
-						onclick="confirmation.hide()" type="button">
+						onclick="PF('confirmation').hide()" type="button">
 						<f:setPropertyActionListener target="#{pagamentoMB.carregaLista}"
 							value="false" />
 					</p:commandButton>
@@ -252,10 +252,10 @@
 					<p:commandButton id="confirm2" value="Pagar"
 						actionListener="#{pagamentoMB.pagarParcela()}"
 						update=":formParcelas:listaDetalhada"
-						oncomplete="confirmacao.hide()" />
+						oncomplete="PF('confirmacao').hide()" />
 
 					<p:commandButton id="decline2" value="Cancelar"
-						onclick="confirmacao.hide()" type="button" />
+						onclick="PF('confirmacao').hide()" type="button" />
 				</p:dialog>
 			</h:form>
 			
@@ -268,9 +268,9 @@
 					<h:outputText value="Você gostaria de Deletar o #{pagamentoMB.parcela.pagamento.descricaoPagamento.descricaogasto}?" />
 					<br />
 					<br />
-					<p:commandButton id="confirm" value="Sim" actionListener="#{pagamentoMB.remover()}" update=":principal:lista" oncomplete="confirmationExclusao.hide()" />
+					<p:commandButton id="confirm" value="Sim" actionListener="#{pagamentoMB.remover()}" update=":principal:lista" oncomplete="PF('confirmationExclusao').hide()" />
                  &nbsp;
-                <p:commandButton id="decline" value="Não" onclick="confirmationExclusao.hide()" type="button" />
+                <p:commandButton id="decline" value="Não" onclick="PF('confirmationExclusao').hide()" type="button" />
 
 				</p:dialog>
 

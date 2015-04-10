@@ -11,6 +11,7 @@ import javax.persistence.TypedQuery;
 import br.com.retaguardaWeb.entidades.Funcionario;
 import br.com.retaguardaWeb.entidades.Loja;
 import br.com.retaguardaWeb.entidades.PeriodoTrabalho;
+import br.com.retaguardaWeb.managedbeans.periodoTrabalho.PeriodoTrabalhoMB.Callback;
 
 @Stateless
 public class PeriodoTrabalhoService {
@@ -56,6 +57,17 @@ public class PeriodoTrabalhoService {
 		return null;
 		}
 		return periodoTrabalho;
+	}
+	
+	public void seUltimoPeriodoAberto(Loja loja,Callback callback) {
+		PeriodoTrabalho ultimoPeriodo = recuperaUltimoPeriodo(loja);
+		if(ultimoPeriodo !=null && ultimoPeriodo.getHoraFim()==null) {
+			callback.run(ultimoPeriodo);
+		}
+	}
+	
+	interface Callback {
+		void run(PeriodoTrabalho periodoTrabalho);
 	}
 
 	public boolean verificaCaixaAberto(Loja loja, PeriodoTrabalho periodo, Funcionario funcionario) {

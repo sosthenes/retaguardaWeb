@@ -57,10 +57,10 @@
 
 					<p:commandButton id="confirm" value="Sim"
 						actionListener="#{tipoGastoMB.remover()}"
-						update=":principal:tipogasto" oncomplete="confirmation.hide()" />
+						update=":principal:tipogasto" oncomplete="PF('confirmation').hide()" />
 
 					<p:commandButton id="decline" value="Não"
-						onclick="confirmation.hide()" type="button" />
+						onclick="PF('confirmation').hide()" type="button" />
 
 				</p:dialog>
 

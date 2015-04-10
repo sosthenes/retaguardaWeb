@@ -60,7 +60,7 @@ public class SelecionarEnderecoMB implements Serializable {
 			public void executar(Endereco endereco) {
 				setCliente(endereco.getCliente());
 				RequestContext.getCurrentInstance().execute(
-						"modalInclusaoEndereco.hide()");
+						"PF('modalInclusaoEndereco').hide()");
 				RequestContext.getCurrentInstance().update(
 						"principal:panelSelecionarEndereco");
 			}

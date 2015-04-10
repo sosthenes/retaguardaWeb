@@ -81,12 +81,12 @@
                 <p:commandButton id="confirm" value="Sim"
                         actionListener="#{valeFuncionarioMB.remover()}"
                         update=":principal:lista :principal:permitido :principal:utilizado :principal:disponivel"
-                        oncomplete="confirmation.hide()" />
+                        oncomplete="PF('confirmation').hide()" />
                 
                  &nbsp;
                  
                 <p:commandButton id="decline" value="Não"
-                        onclick="confirmation.hide()" type="button" />
+                        onclick="PF('confirmation').hide()" type="button" />
                         
             </p:dialog>
                 

@@ -159,6 +159,11 @@ public class CaixaService {
 			return false;
 		}
 	}
+	
+	private void seExisteCaixaAberto(Loja loja, PeriodoTrabalho periodo,
+			Funcionario funcionario) {
+		
+	}
 
 	public CaixaPeriodoFuncionario pegaValoresCaixa(
 			PeriodoTrabalho periodoTrabalhoAtual,
@@ -196,4 +201,7 @@ public class CaixaService {
 		return valor;
 	}
 
+	interface Callback {
+		void run(Caixa caixa);
+	}
 }

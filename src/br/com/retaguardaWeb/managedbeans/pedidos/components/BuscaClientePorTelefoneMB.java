@@ -38,7 +38,7 @@ public class BuscaClientePorTelefoneMB implements Serializable {
 			@Override
 			public void executar(Cliente cliente) {
 				RequestContext.getCurrentInstance().execute(
-						"modalInclusaoCliente.hide()");
+						"PF('modalInclusaoCliente').hide()");
 				setClienteSelecionado(cliente);
 				carregarCliente();
 			}

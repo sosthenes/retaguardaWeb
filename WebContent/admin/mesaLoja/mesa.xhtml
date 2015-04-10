@@ -63,10 +63,10 @@
                 <p:commandButton id="confirm" value="Sim"
                         actionListener="#{mesaLojaMB.remover()}"
                         update=":principal:listaMesa :principal:descricao"
-                        oncomplete="confirmation.hide()" />
+                        oncomplete="PF('confirmation').hide()" />
                  &nbsp;
                  
-                <p:commandButton id="decline" value="Não" onclick="confirmation.hide()" type="button" />
+                <p:commandButton id="decline" value="Não" onclick="PF('confirmation').hide()" type="button" />
                         
             </p:dialog>
                 

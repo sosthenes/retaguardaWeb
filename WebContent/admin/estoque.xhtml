@@ -77,12 +77,12 @@
                 <p:commandButton id="confirm" value="Sim"
                         actionListener="#{manterEstoqueMB.excluir()}"
                         update=":principal:listaIngrEstoque"
-                        oncomplete="confirmation.hide()" />
+                        oncomplete="PF('confirmation').hide()" />
                 
                  &nbsp;
                  
                 <p:commandButton id="decline" value="Não"
-                        onclick="confirmation.hide()" type="button" />
+                        onclick="PF('confirmation').hide()" type="button" />
                         
             </p:dialog>
                 

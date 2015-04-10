@@ -111,12 +111,12 @@
                 <p:commandButton id="confirm" value="Sim"
                         actionListener="#{advertenciaMB.remover()}"
                         update=":principal:listaAdver"
-                        oncomplete="confirmation.hide()" />
+                        oncomplete="PF('confirmation').hide()" />
                 
                  &nbsp;
                  
                 <p:commandButton id="decline" value="Não"
-                        onclick="confirmation.hide()" type="button" />
+                        onclick="PF('confirmation').hide()" type="button" />
                         
             </p:dialog>
                 

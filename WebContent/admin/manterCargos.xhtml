@@ -67,12 +67,12 @@
                 <p:commandButton id="confirm" value="Sim"
                         actionListener="#{cargoMB.remover()}"
                         update=":principal:listaCargo"
-                        oncomplete="confirmation.hide()" />
+                        oncomplete="PF('confirmation').hide()" />
                 
                  &nbsp;
                  
                 <p:commandButton id="decline" value="Não"
-                        onclick="confirmation.hide()" type="button" />
+                        onclick="PF('confirmation').hide()" type="button" />
                         
             </p:dialog>
                 

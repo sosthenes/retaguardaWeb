@@ -124,7 +124,7 @@ public class CadastroPedidoMB extends BasicoMB implements Serializable {
 		});
 		panelPedidosMB.getPedido().setMesas(listaMesasSelecionadas);
 		RequestContext.getCurrentInstance()
-				.execute("modalSelecionaMesa.hide()");
+				.execute("PF('modalSelecionaMesa').hide()");
 		RequestContext.getCurrentInstance().update("principal:mesaSelecionada");
 
 	}
@@ -138,7 +138,7 @@ public class CadastroPedidoMB extends BasicoMB implements Serializable {
 	public void adicionaTipoVenda() {
 		panelPedidosMB.getPedido().setTipoPedido(tipoVendaMB.getTipoVenda());
 		panelPedidosMB.getPedido().setExpedicao(tipoVendaMB.isExpedicao());
-		RequestContext.getCurrentInstance().execute("modalTipoPedido.hide()");
+		RequestContext.getCurrentInstance().execute("PF('modalTipoPedido').hide()");
 		RequestContext.getCurrentInstance().execute(
 				"PF('modalFormaPagamento').show()");
 
@@ -148,7 +148,7 @@ public class CadastroPedidoMB extends BasicoMB implements Serializable {
 		panelPedidosMB.getPedido().setFormaPagamento(
 				formaPagamentoMB.getFormaPagamento());
 		RequestContext.getCurrentInstance().execute(
-				"modalFormaPagamento.hide()");
+				"PF('modalFormaPagamento').hide()");
 		RequestContext.getCurrentInstance().execute("PF('modalTroco').show()");
 	}
 
@@ -163,7 +163,7 @@ public class CadastroPedidoMB extends BasicoMB implements Serializable {
 		}
 
 		panelPedidosMB.getPedido().setValorTroco(valorTroco);
-		RequestContext.getCurrentInstance().execute("modalTroco.hide()");
+		RequestContext.getCurrentInstance().execute("PF('modalTroco').hide()");
 		RequestContext.getCurrentInstance().execute("PF('modalPago').show()");
 	}
 
@@ -172,7 +172,7 @@ public class CadastroPedidoMB extends BasicoMB implements Serializable {
 		panelPedidosMB.getPedido().setDataHoraPagamento(
 				pago ? new Date() : null);
 		adiciona();
-		RequestContext.getCurrentInstance().execute("modalPago.hide()");
+		RequestContext.getCurrentInstance().execute("PF('modalPago').hide()");
 		RequestContext.getCurrentInstance().execute("PF('modalFinal').show()");
 		RequestContext.getCurrentInstance().update("principal:panelPedidos");
 		listar();
